@@ -1,0 +1,68 @@
+# Dressmaker · Mod Language Assistant
+
+[简体中文](README.zh-CN.md) · [English](README.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Español](README.es.md)
+
+An independent macOS companion that translates the Yuuma ModLoader interface and English mod display text. **Version 0.1.1 is an early release; integration inside the game has not been tested.**
+
+## Features
+
+- Separate language choices for the game target and assistant UI: Chinese, English, Japanese, Korean, French, German, and Spanish.
+- Offline dictionaries, manual corrections, and cached translations; optional Argos models for unfamiliar sentences.
+- Keyless MyMemory, an experimental Bing web adapter, or an available LibreTranslate instance.
+- Scan common JSON display fields from newly installed mods; collect unknown English displayed in the game.
+- Cache successful translations per language, prioritize manual corrections, and protect variables and rich-text tags.
+
+## For players
+
+1. Install [Yuuma ModLoader for Mac](https://www.nexusmods.com/dressmaker/mods/1?tab=files).
+2. Download **Dressmaker-Languages-Mac-0.1.1.zip** from the repository’s Releases and extract the complete folder. Python 3.9 or later is required.
+3. Double-click `Start.command` or `针影裁梦多语言助手.app`.
+4. Choose the assistant language, check the game folder and target language, save settings, install the patch, then restart the game.
+5. Scan after installing new mods, keep the assistant running for translation, and review or edit the results.
+
+See the [English user guide](docs/en.md) for model setup, uninstalling, and local data. GitHub’s Download ZIP is a source snapshot without the compiled plugin or `.app`; players should use the Release archive.
+
+## Coverage and verification
+
+The scanner recognizes common JSON fields such as `name`, `displayName`, `display_name`, `description`, `tooltip`, and `title`. Runtime hooks cover Unity Text / TextMeshPro in the loader UI or names discovered by scanning. Custom interfaces, image text, special binary content, and non-English sources are not guaranteed. This tool does not add fabric content or a complete new localization of the base game.
+
+The plugin compiled against ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1, and 25 automated tests passed. Local UI language switching was checked. Bing and MyMemory returned live translations, but free web adapters can fail because of network conditions, service limits, or page changes. Third-party fabric names, in-game layout, and font rendering still need verification.
+
+Online mode sends untranslated English display text to the selected provider. Translation requests are spaced at least 3 seconds apart; the default daily budget is 4,500 UTF-8 bytes. Failures retain the original text. MyMemory fallback is off by default; both attempts count toward the budget when enabled. Dictionaries and existing cache stay available offline.
+
+## Development and contributions
+
+Source is in `src/` and `assistant/`. The basic assistant uses only Python’s standard library. Run tests with:
+
+```sh
+python3 -m unittest discover -s tests -v
+```
+
+Building the plugin requires your own game and loader assemblies plus a .NET SDK; see the full guide. The assistant is 0.1.1; the unchanged game plugin retains internal version 0.1.0. GitHub Actions is configured but has not run remotely yet.
+
+Issues and pull requests for terminology, fonts, and compatibility are welcome. Include game, OS, and loader versions plus a shareable source-text example. Update all seven catalogs and guides when changing UI text. Do not commit saves, private mod files, or game assets.
+
+## Publishing your GitHub repository
+
+1. Create an empty **Public** repository. Do not generate another README or license; both are included here.
+2. Extract **Dressmaker-Languages-GitHub-0.1.1.zip** and upload its contents with `README.md` at the repository root. Include hidden `.github/`, `.gitignore`, and `.gitattributes` entries. Finder shows hidden files with `Command + Shift + .`. Uploading through Git preserves executable script permissions.
+3. Create a `v0.1.1` Release and attach the Mac archive. The source archive is for repository contents; the Mac archive is for players.
+4. Verify the patch in your own game before publishing and update the verification notes. Personal data, paths, tokens, and Git history are excluded from this archive. 
+
+`UPLOAD-MANIFEST.json` lists the exact upload files. GitHub’s official publishing documentation is linked below.
+
+Official GitHub instructions: [Create repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) · [Upload files](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository) · [Create Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
+
+## Credits and license
+
+Independently implemented from the public feature description of [SallyHCA’s tool](https://www.nexusmods.com/dressmaker/mods/339); its code, dictionaries, and assets are not included. Original code and authored dictionaries use the [MIT license](LICENSE), which grants no rights to game or reference-project assets. This project is not affiliated with the game, Nexus Mods, Microsoft, or Argos.
+
+## Acknowledgements
+
+Thank you to the authors and teams whose work made this project possible:
+
+- [Cozy Lives (developer) and Free Lives (publisher)](https://store.steampowered.com/app/4019220/Dressmaker/) — Thank you for creating and bringing us Dressmaker, where players can design, cut, and sew their own garments.
+- [Yuumeow — Yuuma’s Dressmaker ModLoader](https://www.nexusmods.com/dressmaker/mods/1) — Thank you for the loader and custom-content support that enable community fabrics and accessories.
+- [SallyHCA — Fully Automatic Chinese Localization Tool](https://www.nexusmods.com/dressmaker/mods/339) — Thank you for sharing the approach to translating the mod manager and content names. Your tool and public description inspired this project’s translation workflow.
+
+This is an independent implementation; acknowledgement does not imply endorsement. Their programs, dictionaries, game assets, and models are not redistributed in this package.

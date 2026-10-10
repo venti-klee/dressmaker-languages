@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dressmaker · Language Assistant</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:#342c28;background:#f5f1e9}*{box-sizing:border-box}body{max-width:1180px;margin:0 auto;padding:38px 24px}h1{font-size:30px;margin:8px 0 12px}h2{font-size:18px;margin:0 0 20px}.eyebrow{color:#807062;letter-spacing:2px;font-size:12px}p{line-height:1.7;color:#74665c}.grid{display:grid;grid-template-columns:330px 1fr;gap:20px;margin-top:30px}.card{padding:24px;border:1px solid #ded6c8;border-radius:18px;background:#fffdf8}label{display:block;font-size:13px;font-weight:600;margin:18px 0 8px}select,input[type=text],input[type=number]{width:100%;padding:11px;border:1px solid #d7ccbc;background:#fff;border-radius:8px;color:#342c28;font-size:14px}button{padding:10px 15px;border:1px solid #c7b8a2;background:#fcf9f2;color:#44392d;border-radius:9px;cursor:pointer;font-size:13px}.primary{background:#476952;color:white;border-color:#476952}.danger{color:#944633}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.switch{display:flex;align-items:center;gap:8px;line-height:1.5;font-weight:400}.hint{font-size:12px;margin:7px 0}.status{padding:15px 20px;background:#e5ece2;border-radius:12px;font-size:13px;line-height:1.7}.error{color:#934c2f;white-space:pre-wrap}.toolbar{display:flex;gap:10px;align-items:center;margin:18px 0}.toolbar input{flex:1}table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;color:#857467;padding:10px 6px;font-weight:500;border-bottom:1px solid #d7ccbc}td{border-bottom:1px solid #eee8de;padding:14px 6px;vertical-align:top;word-break:break-word}td:first-child{width:42%}textarea{width:100%;min-height:58px;padding:8px;border:1px solid #e3dace;border-radius:7px;resize:vertical;font:inherit;background:#fff}.badge{font-size:10px;color:#887868;margin-top:6px}.scroll{max-height:610px;overflow:auto}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:14px 22px;background:#342c28;color:white;border-radius:10px;display:none;max-width:90vw;z-index:9}.note{padding-top:22px;font-size:12px;color:#897969}button:disabled{opacity:.5;cursor:wait}@media(max-width:850px){.grid{grid-template-columns:1fr}body{padding:22px 14px}}
+</style>
+</head><body>
+<div class="eyebrow">DRESSMAKER · LANGUAGES</div>
+<div class="toolbar"><label for="ui-language" data-i18n="ui_language"></label><select id="ui-language" style="max-width:200px"></select><a id="guide" data-i18n="guide" target="_blank" rel="noopener"></a></div>
+<p class="hint" data-i18n="ui_hint"></p>
+<h1 data-i18n="headline"></h1><p data-i18n="intro"></p>
+<div class="status" id="status" data-i18n="connecting"></div>
+<div class="grid"><div class="card"><h2 data-i18n="settings_heading"></h2>
+<label for="language" data-i18n="target_language"></label><select id="language"></select>
+<label for="game" data-i18n="game_folder"></label><input id="game" type="text"><p class="hint" data-i18n="game_hint"></p>
+<label class="switch"><input type="checkbox" id="auto"><span data-i18n="auto"></span></label>
+<label class="switch"><input type="checkbox" id="offline_model"><span data-i18n="offline_model"></span></label>
+<label class="switch"><input type="checkbox" id="online"><span data-i18n="online"></span></label>
+<p class="hint" data-i18n="online_hint"></p>
+<label for="provider" data-i18n="provider"></label><select id="provider"><option value="mymemory" data-i18n="mymemory_option"></option><option value="bing" data-i18n="bing_option"></option><option value="libre" data-i18n="libre_option"></option></select>
+<p class="hint" data-i18n="bing_hint"></p>
+<label class="switch"><input type="checkbox" id="fallback"><span data-i18n="fallback"></span></label>
+<p class="hint" data-i18n="fallback_hint"></p>
+<label for="daily_bytes" data-i18n="budget"></label><input id="daily_bytes" type="number" min="0" max="50000" value="4500">
+<label for="libre_url" data-i18n="libre_url"></label><input id="libre_url" type="text" data-i18n-placeholder="libre_placeholder">
+<div class="buttons"><button class="primary" id="settings" data-i18n="save_settings"></button><button id="model" data-i18n="download_model"></button></div>
+<p class="hint" id="model-status"></p>
+<div class="buttons"><button id="install" data-i18n="install"></button><button class="danger" id="uninstall" data-i18n="uninstall"></button></div>
+<p class="hint" data-i18n="install_hint"></p>
+</div><div class="card"><h2 data-i18n="entries_heading"></h2>
+<div class="buttons"><button class="primary" id="scan" data-i18n="scan"></button><button id="translate" data-i18n="translate"></button><button id="refresh" data-i18n="refresh"></button></div>
+<p class="hint" data-i18n="scan_hint"></p>
+<div class="toolbar"><input id="query" type="text" data-i18n-placeholder="query_placeholder" data-i18n-aria="query_placeholder"><button id="search" data-i18n="search"></button></div>
+<div class="scroll"><table><thead><tr><th data-i18n="source_heading"></th><th data-i18n="translation_heading"></th><th></th></tr></thead><tbody id="entries"></tbody></table></div>
+<p class="hint" data-i18n="list_hint"></p><p id="error" class="error hint"></p>
+</div></div><div class="note"><span data-i18n="credits"></span><div class="buttons"><button id="shutdown" data-i18n="shutdown"></button></div></div><div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const catalogs=__I18N__,session='__SESSION__',$=id=>document.getElementById(id);
+const nativeNames={'zh-CN':'简体中文',en:'English',ja:'日本語',ko:'한국어',fr:'Français',de:'Deutsch',es:'Español'};
+function normalizeLocale(value){if(!value)return 'en';value=value.toLowerCase();if(value.startsWith('zh'))return 'zh-CN';const base=value.split('-')[0];return catalogs[base]?base:'en';}
+let storedLocale=null;try{storedLocale=localStorage.getItem('dressmaker-ui-language');}catch(e){}
+let uiLocale=normalizeLocale(storedLocale||navigator.language),ready=false,lastStatus=null,lastEntries=[],lastEntriesLanguage=null,stopped=false,pollTimer=null;
+const drafts=new Map();let currentToast=null,toastTimer=null;
+function t(key,params={}){const text=catalogs[uiLocale]?.[key]??catalogs.en[key]??key;return text.replace(/\{(\w+)\}/g,(match,name)=>String(params[name]??match));}
+function errorText(info,raw=''){return info?t(info.key,info.params||{}):raw?t('error_generic',{detail:raw}):'';}
+function gameLabel(language){return language==='en'?t('english_original'):(nativeNames[language]||language);}
+function renderStatus(){if(stopped){$('status').textContent=t('stopped');return;}if(!lastStatus){$('status').textContent=t('connecting');return;}const j=lastStatus,number=new Intl.NumberFormat(uiLocale);$('status').textContent=t(j.installed?'installed':'not_installed')+' · '+gameLabel(j.config.language)+' · '+t('status_counts',{dictionary:number.format(j.dictionary),cached:number.format(j.cached),pending:number.format(j.pending)});$('error').textContent=errorText(j.error_info,j.error);$('model-status').textContent=t('model_'+(j.model?.state||'idle'),{detail:j.model?.detail||''});$('model').disabled=!!j.model?.running;}
+function renderEntries(){const active=document.activeElement,activeSource=active?.dataset?.source,selection=activeSource?[active.selectionStart,active.selectionEnd]:null;$('entries').replaceChildren();for(const item of lastEntries){const tr=document.createElement('tr'),src=document.createElement('td'),dst=document.createElement('td'),action=document.createElement('td');src.textContent=item.source;const input=document.createElement('textarea'),draftKey=JSON.stringify([lastEntriesLanguage,item.source]);input.value=drafts.get(draftKey)??item.value;input.dataset.source=item.source;input.setAttribute('aria-label',t('translation_aria',{source:item.source}));input.oninput=()=>drafts.set(draftKey,input.value);const badge=document.createElement('div');badge.className='badge';const badgeKey={'dictionary':'badge_dictionary','dictionary-composed':'badge_composed','manual':'badge_manual','argos-offline':'badge_offline','bing':'badge_bing','mymemory':'badge_online','libre':'badge_online'}[item.provider]||'badge_pending';badge.textContent=t(badgeKey)+' · '+t('kind_'+item.kind);dst.append(input,badge);const save=document.createElement('button');save.textContent=t('save');save.onclick=()=>run(async()=>{await api('save',{source:item.source,value:input.value});drafts.delete(draftKey);},'toast_saved');action.append(save);tr.append(src,dst,action);$('entries').append(tr);if(activeSource===item.source){input.focus();if(selection)input.setSelectionRange(...selection);}}}
+function renderLocale(){document.documentElement.lang=uiLocale;document.title=t('title');for(const e of document.querySelectorAll('[data-i18n]'))e.textContent=t(e.dataset.i18n);for(const e of document.querySelectorAll('[data-i18n-placeholder]'))e.placeholder=t(e.dataset.i18nPlaceholder);for(const e of document.querySelectorAll('[data-i18n-aria]'))e.setAttribute('aria-label',t(e.dataset.i18nAria));$('ui-language').value=uiLocale;$('guide').href='/docs/'+uiLocale+'.md';for(const option of $('language').options)option.textContent=gameLabel(option.value);renderStatus();renderEntries();if(currentToast)$('toast').textContent=t(currentToast.key,currentToast.params);}
+async function api(path,data){const r=await fetch('/api/'+path,{method:data===undefined?'GET':'POST',headers:{'X-Session':session,'Content-Type':'application/json'},body:data===undefined?undefined:JSON.stringify(data)});const j=await r.json();if(!r.ok){const e=Error(j.error||'HTTP '+r.status);e.info=j.error_info;throw e;}return j;}
+function toast(key,params={}){currentToast={key,params};$('toast').textContent=t(key,params);$('toast').style.display='block';clearTimeout(toastTimer);toastTimer=setTimeout(()=>{$('toast').style.display='none';currentToast=null;},4500);}
+function showError(error){const info=error.info||{key:'error_generic',params:{detail:error.message}};toast(info.key,info.params);}
+async function status(){try{const j=await api('status');lastStatus=j;if(!ready){for(const value of Object.keys(nativeNames))$('language').add(new Option(gameLabel(value),value));for(const key of ['language','game','provider','libre_url','daily_bytes'])$(key).value=j.config[key]??'';for(const key of ['auto','online','offline_model','fallback'])$(key).checked=j.config[key];ready=true;}renderStatus();}catch(e){$('error').textContent=errorText(e.info,e.message);}}
+async function entries(){const j=await api('entries?q='+encodeURIComponent($('query').value));lastEntries=j.entries;lastEntriesLanguage=lastStatus?.config.language||$('language').value;renderEntries();}
+async function run(fn,key){try{await fn();toast(key);await status();await entries();}catch(e){showError(e);}}
+for(const [value,label] of Object.entries(nativeNames))$('ui-language').add(new Option(label,value));
+$('ui-language').onchange=()=>{uiLocale=normalizeLocale($('ui-language').value);try{localStorage.setItem('dressmaker-ui-language',uiLocale);}catch(e){}renderLocale();};
+$('settings').onclick=()=>run(()=>api('settings',{language:$('language').value,game:$('game').value,provider:$('provider').value,libre_url:$('libre_url').value.trim(),daily_bytes:Number($('daily_bytes').value),auto:$('auto').checked,online:$('online').checked,offline_model:$('offline_model').checked,fallback:$('fallback').checked}),'toast_settings');
+for(const id of ['scan','translate','install','uninstall'])$(id).onclick=()=>run(()=>api(id,{}),'toast_'+id);
+$('refresh').onclick=$('search').onclick=()=>run(entries,'toast_refresh');$('query').onkeydown=e=>{if(e.key==='Enter')entries().catch(showError);};$('model').onclick=()=>run(()=>api('model',{language:$('language').value}),'toast_model');$('shutdown').onclick=async()=>{try{await api('shutdown',{});stopped=true;clearInterval(pollTimer);renderStatus();}catch(e){showError(e);}};
+history.replaceState(null,'','/');renderLocale();status().then(entries).catch(showError);pollTimer=setInterval(status,4000);
+</script></body></html>

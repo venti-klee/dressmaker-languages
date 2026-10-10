@@ -1,0 +1,27 @@
+# Personal runtime data, paths, session URLs, dictionaries and translations
+data/
+**/session.json
+**/translations.sqlite3*
+**/pending.jsonl
+**/known-sources.json
+**/runtime.json
+**/translations.*.json
+# Optional downloaded environments / models
+.venv/
+models/
+# Local artifacts and dependencies
+work/
+outputs/
+*.zip
+*.log
+__pycache__/
+*.py[cod]
+.DS_Store
+**/.DS_Store
+.env
+.env.*
+# Compiled launcher and plugin belong in release archives, not source history
+*.app/
+BepInEx/
+
+dist/

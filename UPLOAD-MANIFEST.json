@@ -1,0 +1,197 @@
+{
+  "version": "0.1.1",
+  "archive_kind": "source",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 123,
+      "sha256": "a2cc4252ab3d90e1acb617887b9210944cd620bc59b9aeea276a4a3b3dc56859"
+    },
+    {
+      "path": ".github/workflows/tests.yml",
+      "bytes": 555,
+      "sha256": "07481cd5cfe2bec69651144cd4b80f8335c8acd6ef6392c9b52b332a4b8d3068"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 481,
+      "sha256": "88be664cad3e912c9f9d7f2afed05e7f5622376360fb9a8eac17c25cec74cdc0"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1090,
+      "sha256": "687c6b0c54b39c79be588c8444dfaeffcd4ba1a2b04eb6999093f463225bce77"
+    },
+    {
+      "path": "README.de.md",
+      "bytes": 6467,
+      "sha256": "40efa4c5a176e50bd6bb8b5ee01e545e4026490a0d747bdeeb46931f5c3329fc"
+    },
+    {
+      "path": "README.es.md",
+      "bytes": 6099,
+      "sha256": "dfed04f3a15be32faf6518cc7c85a2da6e7bd0148d7fe7004efcbc1b2b98c012"
+    },
+    {
+      "path": "README.fr.md",
+      "bytes": 6491,
+      "sha256": "7a2407f128eb7713ae60b1ec78f88d24a1b84d9bc6e0e9678992de965f53cceb"
+    },
+    {
+      "path": "README.ja.md",
+      "bytes": 7119,
+      "sha256": "2fe87dde7b970d247ef4c9466ffc8652b3a52ba9b48cb6493c6a33182e9d36b7"
+    },
+    {
+      "path": "README.ko.md",
+      "bytes": 6822,
+      "sha256": "f0b830a2c2005ea295c24c95077be36d7e29ef6cb69c5c612b64577b671bc4b8"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6376,
+      "sha256": "450f4e2f5d122dfa8e046299ae24e3113a38e00ee5162119ce56e64d827ef1ac"
+    },
+    {
+      "path": "README.zh-CN.md",
+      "bytes": 5865,
+      "sha256": "51035b83a4108d54b14c253cfba26fd3fa9f2fe017e39dc632d442a0a1f82ba5"
+    },
+    {
+      "path": "Start.command",
+      "bytes": 594,
+      "sha256": "71b12f1d96741961c23c0cc60108792b02c707398598152d9f611a2f140bc8a9"
+    },
+    {
+      "path": "VERSION",
+      "bytes": 6,
+      "sha256": "80447316529fc62014fbaa047fb67c51ac30e32830cda370405349d8d66d196c"
+    },
+    {
+      "path": "assistant/core.py",
+      "bytes": 24356,
+      "sha256": "b64f05058cc29a239fe3b318acb3329cc9d7b04617fa92db6ca253a0250176a1"
+    },
+    {
+      "path": "assistant/dictionary.json",
+      "bytes": 17925,
+      "sha256": "0ffee377820521b0d7785e72e7161259a4a1edf6ac6537695d72ff05f4c9bd9e"
+    },
+    {
+      "path": "assistant/i18n.py",
+      "bytes": 2531,
+      "sha256": "8866e00e63cc675fe6618fbb75f1cdc944e7a6592af57d3f0905a6797d0177ad"
+    },
+    {
+      "path": "assistant/index.html",
+      "bytes": 12121,
+      "sha256": "f96d602f0b0aebb91b8c6c4f2bbefeb832a67eb7826afa4079a19921a29c744e"
+    },
+    {
+      "path": "assistant/install_model.py",
+      "bytes": 729,
+      "sha256": "989b7417a2a29d77d22e64e92f773d3579703ac1a3da59584cc151330b322d09"
+    },
+    {
+      "path": "assistant/locales.json",
+      "bytes": 53894,
+      "sha256": "2dcae8f34d45ee3827be988f75aa8e45b6404c9b5a0dcf13552e435ffe5fecb1"
+    },
+    {
+      "path": "assistant/providers.py",
+      "bytes": 3922,
+      "sha256": "ca592082db2cb26af911cc9cb14825ebc4460b20261933ec7343ed82c93be287"
+    },
+    {
+      "path": "assistant/server.py",
+      "bytes": 9535,
+      "sha256": "1c5075f34b1ab249df01170dcdd24b58af6acb3265a58269e804fff994e71615"
+    },
+    {
+      "path": "docs/de.md",
+      "bytes": 11879,
+      "sha256": "1cef5a80908cc5ffc4e1e23939370a8f14dc76554df1845c5b458ff85a8da1bb"
+    },
+    {
+      "path": "docs/en.md",
+      "bytes": 10587,
+      "sha256": "3ed3f55366a64e13571800128fd7bc6cde4096104dcb38083d4004f3dbc1aa10"
+    },
+    {
+      "path": "docs/es.md",
+      "bytes": 11550,
+      "sha256": "0ed53333acd9e990a3c84a1e42ec9f58169b19f71c8904e9813759c57f3ef7a6"
+    },
+    {
+      "path": "docs/fr.md",
+      "bytes": 12319,
+      "sha256": "2f5b05314a711b534241c02c046d35c953efc340b0da028c2c611ffd4a774895"
+    },
+    {
+      "path": "docs/ja.md",
+      "bytes": 12491,
+      "sha256": "123c5dbae9191950fae0f8823d1c6b780327d16889b1a9d8821c3849e36ddf7d"
+    },
+    {
+      "path": "docs/ko.md",
+      "bytes": 12032,
+      "sha256": "8a729fb2781394f68aaf1c76c6b7acbae16e5c484c961a25c6c6e3f903f6e5d3"
+    },
+    {
+      "path": "docs/zh-CN.md",
+      "bytes": 10314,
+      "sha256": "00c636f287f66b1aa136e84331df0e47e74e839c1095978c89c15ce837c3e0ff"
+    },
+    {
+      "path": "scripts/package.py",
+      "bytes": 3522,
+      "sha256": "1a0cee363aa2fd1bd0d05f161726e33c005ad9496b692f03d4bbc354b5de0b46"
+    },
+    {
+      "path": "src/DressmakerLanguages.cs",
+      "bytes": 10360,
+      "sha256": "657de613f8c528ce4ac8e375ded666cb60e15f92c76ae5888dcf59a5d0d0edf7"
+    },
+    {
+      "path": "src/build.py",
+      "bytes": 1413,
+      "sha256": "d0e683b8e271df6e0727df4f4a84a296e86c79417ed4ae5c0bb94c2d125263c8"
+    },
+    {
+      "path": "tests/test_i18n.py",
+      "bytes": 3072,
+      "sha256": "30a2b2d16a493abf4a6ee13be8ade2984fddc4ec9c173cba064035d2a0a72111"
+    },
+    {
+      "path": "tests/test_providers.py",
+      "bytes": 5255,
+      "sha256": "e36608e5a0ba5d162b516a62e3daa4769b2daa4979ae2a679dd65d42198b91b3"
+    },
+    {
+      "path": "tests/test_translation.py",
+      "bytes": 6507,
+      "sha256": "6edbbaf437850fadf49cd4833d3851db5e077826adc49f56d1120e234252a53b"
+    },
+    {
+      "path": "使用说明.md",
+      "bytes": 10341,
+      "sha256": "775ba3e6706e9e4791b40da78a4a792e72706c17f55b5a6eb2b3bf93cab03648"
+    },
+    {
+      "path": "启动翻译助手.command",
+      "bytes": 601,
+      "sha256": "9da0651a91da66d9df96fe3a5aa8a7a6226b781c2162b5e8b34c4735b7507794"
+    }
+  ],
+  "excluded": [
+    "data/",
+    ".venv/",
+    "models/",
+    "work/",
+    ".git/",
+    "game assets",
+    "official localization tables",
+    "personal settings, paths, logs and session tokens"
+  ],
+  "manifest_note": "UPLOAD-MANIFEST.json is generated at archive creation and is not self-hashed."
+}

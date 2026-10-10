@@ -1,0 +1,68 @@
+# Dressmaker · Mod 多言語アシスタント
+
+[简体中文](README.zh-CN.md) · [English](README.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Español](README.es.md)
+
+Yuuma ModLoader の画面と Mod の英語表示を翻訳する、独立した macOS ツールです。**0.1.1 は初期版で、ゲーム内での動作は未検証です。**
+
+## 機能
+
+- ゲームの翻訳先とアシスタント画面を別々に設定。中国語・英語・日本語・韓国語・フランス語・ドイツ語・スペイン語に対応。
+- 辞書、手動修正、キャッシュはオフラインで使用可能。未知の文章には任意の Argos モデルを利用。
+- キー不要の MyMemory、試験的な Bing Web 連携、利用可能な LibreTranslate インスタンスを選択。
+- 新しい Mod の一般的な JSON 表示項目をスキャンし、ゲーム内の未知の英語も収集。
+- 対象言語ごとに翻訳を保存し、手動修正を優先。変数とリッチテキストタグを保護。
+
+## プレイヤー向け
+
+1. [Yuuma ModLoader の Mac 版](https://www.nexusmods.com/dressmaker/mods/1?tab=files)を先に導入します。
+2. リポジトリの Releases から **Dressmaker-Languages-Mac-0.1.1.zip** を取得し、フォルダ全体を展開します。Python 3.9 以降が必要です。
+3. `Start.command` または `针影裁梦多语言助手.app` を開きます。
+4. 画面の言語、ゲームフォルダ、翻訳先を確認し、設定を保存してパッチを導入し、ゲームを再起動します。
+5. 新しい Mod を導入したらスキャンし、翻訳中はアシスタントを開いたままにします。結果は手動で修正できます。
+
+詳しい操作、モデル、削除方法は[日本語の説明書](docs/ja.md)へ。GitHub の Download ZIP はソースであり、コンパイル済みプラグインと `.app` は含みません。プレイヤーは Release の配布版を使ってください。
+
+## 対応範囲と検証
+
+`name`、`displayName`、`display_name`、`description`、`tooltip`、`title` などの JSON 項目を読み取ります。実行時は ModLoader の Unity Text / TextMeshPro と、スキャンで見つかった名前を対象にします。独自画面、画像文字、特殊なバイナリ形式、英語以外の原文には対応を保証しません。布地の追加やゲーム本体の完全な新規翻訳は行いません。
+
+ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1 に対してビルドし、25件の自動テストを通過しました。ローカル画面の言語切り替えを確認し、Bing と MyMemory から実際の翻訳を取得しました。Web 連携はネットワーク、制限、ページ変更で失敗する場合があります。第三者の布地名、ゲーム内の配置とフォントは未検証です。
+
+オンラインでは未翻訳の英語表示を選択したサービスに送ります。間隔は最低3秒、既定の1日上限は UTF-8 で4,500バイトです。失敗時は原文を保持します。MyMemory への代替は既定で無効で、有効時は両方の試行を上限に計上します。辞書と既存キャッシュはオフラインで使えます。
+
+## 開発と貢献
+
+ソースは `src/` と `assistant/`。基本機能は Python 標準ライブラリのみを使います。
+
+```sh
+python3 -m unittest discover -s tests -v
+```
+
+プラグインのビルドには、自分のゲームと ModLoader のアセンブリ、.NET SDK が必要です。アシスタントは0.1.1で、変更していないゲームプラグインの内部版は0.1.0です。GitHub Actions は設定済みですが、リモートではまだ実行していません。
+
+用語、フォント、互換性の Issue / Pull Request を歓迎します。ゲーム、OS、ModLoader の版と公開できる原文例を添えてください。画面文言を変える場合は7言語の辞書と説明書を更新し、セーブ、非公開の Mod、ゲーム素材を投稿しないでください。
+
+## GitHub への公開
+
+1. 空の **Public** リポジトリを作ります。README とライセンスは同梱済みなので新規生成しません。
+2. **Dressmaker-Languages-GitHub-0.1.1.zip** を展開し、中身をアップロードします。`README.md` をルートに置き、`.github/`、`.gitignore`、`.gitattributes` も含めます。Finder の `Command + Shift + .` で隠しファイルを表示できます。Git を使うと起動スクリプトの実行権限を保持できます。
+3. `v0.1.1` の Release を作り、Mac 配布版を添付します。ソースはリポジトリ用、Mac 版はプレイヤー用です。
+4. 公開前に自分のゲームで動作を確認し、検証結果を更新してください。このパッケージには個人データ、パス、トークン、Git 履歴を含みません。
+
+対象ファイルは `UPLOAD-MANIFEST.json` に記載しています。下に GitHub 公式の公開手順へのリンクがあります。
+
+GitHub 公式手順: [Create repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) · [Upload files](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository) · [Create Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
+
+## 出典とライセンス
+
+[SallyHCA のツールの公開機能](https://www.nexusmods.com/dressmaker/mods/339)を参考に独立実装しました。同プロジェクトのコード、辞書、素材は含みません。独自コードと作成した辞書は [MIT](LICENSE) です。ゲームや参考プロジェクトの素材への権利は与えません。ゲーム、Nexus Mods、Microsoft、Argos とは無関係のプロジェクトです。
+
+## 謝辞
+
+本プロジェクトの基盤となった作者とチームに感謝します。
+
+- [Cozy Lives（開発）と Free Lives（販売）](https://store.steampowered.com/app/4019220/Dressmaker/) — 衣服を自分で設計し、裁断し、縫える Dressmaker を制作し届けてくださり、ありがとうございます。
+- [Yuumeow — Yuuma’s Dressmaker ModLoader](https://www.nexusmods.com/dressmaker/mods/1) — コミュニティが布地やアクセサリーを作れるよう、ローダーと独自コンテンツの仕組みを提供してくださり、ありがとうございます。
+- [SallyHCA — 全自動中国語翻訳ツール](https://www.nexusmods.com/dressmaker/mods/339) — Mod 管理画面と内容名の翻訳方法を公開してくださり、ありがとうございます。ツールと公開説明が本プロジェクトの翻訳処理の参考になりました。
+
+本プロジェクトは独立実装であり、謝辞は作者による承認を意味しません。同作者のプログラム、辞書、ゲーム素材、モデルは再配布していません。
