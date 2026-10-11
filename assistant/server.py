@@ -145,9 +145,12 @@ def main():
                     raise ValueError("请求内容过大")
                 data = json.loads(self.rfile.read(length) or b"{}")
                 if self.path == "/api/settings":
-                    store.save_config(data)
-                    worker.last_model_attempt.clear()
-                    worker.cooldown = 0
+                    worker.apply_settings(data)
+                elif self.path == "/api/switch-provider":
+                    changes = {"provider": data.get("provider"), "online": True}
+                    if "libre_url" in data:
+                        changes["libre_url"] = data["libre_url"]
+                    worker.apply_settings(changes, resume=True)
                 elif self.path == "/api/scan":
                     store.scan()
                 elif self.path == "/api/translate":

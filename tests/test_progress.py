@@ -58,7 +58,7 @@ class ProgressTests(unittest.TestCase):
         result = self.worker.progress.snapshot()
         self.assertEqual((result['total'], result['processed']), (3, 3))
         self.assertEqual((result['translated'], result['untranslated'], result['failed']), (1, 1, 1))
-        self.assertEqual(result['recent'][0]['error_info']['key'], 'error_network')
+        self.assertEqual(result['recent'][0]['error_info']['key'], 'error_timeout')
         self.assertFalse(result['active'])
 
     def test_current_word_visible_while_offline_model_is_blocked(self):
@@ -259,6 +259,95 @@ class ProgressTests(unittest.TestCase):
         self.assertEqual((result['processed'], result['translated'], result['failed']), (2, 1, 1))
         self.assertEqual(self.worker.cooldown, 0)
         self.assertIsNone(self.worker.deferred_batch)
+
+    def test_switch_service_resumes_manual_scope_and_retries_failed_word_without_auto(self):
+        self.store.save_config({'online': True, 'provider': 'google', 'auto': False})
+        for source in ['Quux Alpha', 'Quux Bravo', 'Quux Charlie']:
+            self.store.add_pending(source, 'loader')
+        self.store.cache_put('Quux Alpha', 'zh-CN', '已保存', 'google')
+        with patch.object(self.store.google, 'translate', side_effect=TimeoutError('timed out')):
+            self.worker.process_batch(self.store.config.copy(), all_candidates=True)
+        self.worker.apply_settings({'provider': 'bing'}, resume=True)
+        self.assertEqual(self.worker.cooldown, 0)
+        self.assertTrue(self.worker.wake.is_set())
+        self.assertTrue(self.worker.requested_scope)
+        attempts = []
+        def translate(source, language):
+            attempts.append(source)
+            return '必应译文'
+        with patch.object(self.store.bing, 'translate', side_effect=translate), patch('core.time.sleep'), patch.object(self.worker.stop, 'wait'):
+            self.worker.process_batch(self.store.config.copy(), self.worker.requested_scope)
+        self.assertEqual(attempts, ['Quux Bravo', 'Quux Charlie'])
+        self.assertEqual(self.store.cache_get('Quux Alpha', 'zh-CN'), ('已保存', 'google'))
+        self.assertEqual(self.store.cache_get('Quux Bravo', 'zh-CN')[1], 'bing')
+
+    def test_settings_service_change_also_resumes_original_display_only_scope(self):
+        self.store.save_config({'online': True, 'provider': 'google'})
+        self.add('Quux Alpha')
+        self.store.add_pending('Quux Loader', 'loader')
+        with patch.object(self.store.google, 'translate', side_effect=TimeoutError('timed out')):
+            self.worker.process_batch(self.store.config.copy())
+        self.worker.apply_settings({'provider': 'bing'})
+        self.assertTrue(self.worker.wake.is_set())
+        self.assertFalse(self.worker.requested_scope)
+        with patch.object(self.store.bing, 'translate', return_value='必应译文'), patch.object(self.worker.stop, 'wait'):
+            self.worker.process_batch(self.store.config.copy(), self.worker.requested_scope)
+        self.assertIsNone(self.store.cache_get('Quux Loader', 'zh-CN'))
+
+    def test_same_service_switch_does_not_bypass_cooldown(self):
+        self.store.save_config({'online': True, 'provider': 'google'})
+        self.add('Quux Alpha')
+        with patch.object(self.store.google, 'translate', side_effect=TimeoutError('timed out')):
+            self.worker.process_batch(self.store.config.copy())
+        deadline = self.worker.cooldown
+        self.worker.apply_settings({'provider': 'google'}, resume=True)
+        self.assertEqual(self.worker.cooldown, deadline)
+        self.assertFalse(self.worker.wake.is_set())
+
+    def test_switch_during_inflight_failure_keeps_new_service_queue(self):
+        self.store.save_config({'online': True, 'provider': 'google'})
+        self.store.add_pending('Quux Alpha', 'loader')
+        started, release = threading.Event(), threading.Event()
+        def blocked(source, language):
+            started.set()
+            self.assertTrue(release.wait(3))
+            raise TimeoutError('old service timed out')
+        with patch.object(self.store.google, 'translate', side_effect=blocked):
+            thread = threading.Thread(target=self.worker.process_batch, args=(self.store.config.copy(), True))
+            thread.start()
+            try:
+                self.assertTrue(started.wait(1))
+                self.worker.apply_settings({'provider': 'bing'}, resume=True)
+            finally:
+                release.set()
+                thread.join(3)
+        self.assertFalse(thread.is_alive())
+        self.assertEqual(self.worker.cooldown, 0)
+        self.assertIsNone(self.worker.deferred_batch)
+        self.assertTrue(self.worker.wake.is_set())
+        self.assertEqual(self.worker.progress.snapshot()['failed'], 0)
+        with patch.object(self.store.bing, 'translate', return_value='续译'), patch('core.time.sleep'), patch.object(self.worker.stop, 'wait'):
+            self.worker.process_batch(self.store.config.copy(), self.worker.requested_scope)
+        self.assertEqual(self.store.cache_get('Quux Alpha', 'zh-CN'), ('续译', 'bing'))
+
+    def test_switch_with_new_language_does_not_resume_old_scope(self):
+        self.store.save_config({'online': True, 'provider': 'google'})
+        self.add('Quux Alpha')
+        with patch.object(self.store.google, 'translate', side_effect=TimeoutError('timed out')):
+            self.worker.process_batch(self.store.config.copy(), True)
+        self.worker.apply_settings({'language': 'fr', 'provider': 'bing'})
+        self.assertIsNone(self.worker.deferred_batch)
+        self.assertFalse(self.worker.wake.is_set())
+
+    def test_empty_libre_switch_preserves_original_service_and_retry(self):
+        self.store.save_config({'online': True, 'provider': 'google'})
+        self.add('Quux Alpha')
+        with patch.object(self.store.google, 'translate', side_effect=TimeoutError('timed out')):
+            self.worker.process_batch(self.store.config.copy(), True)
+        with self.assertRaises(ValueError):
+            self.worker.apply_settings({'provider': 'libre', 'libre_url': ''}, resume=True)
+        self.assertEqual(self.store.config['provider'], 'google')
+        self.assertIsNotNone(self.worker.deferred_batch)
 
 
 if __name__ == '__main__':

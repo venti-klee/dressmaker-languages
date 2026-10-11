@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-CN.md) · [English](README.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Español](README.es.md)
 
-Una herramienta independiente para macOS que traduce Yuuma ModLoader y los textos ingleses de los mods. **0.1.5 es una versión inicial; la integración dentro del juego aún no se ha probado.**
+Una herramienta independiente para macOS que traduce Yuuma ModLoader y los textos ingleses de los mods. **0.1.6 es una versión inicial; la integración dentro del juego aún no se ha probado.**
 
 ## Funciones
 
@@ -15,7 +15,7 @@ Una herramienta independiente para macOS que traduce Yuuma ModLoader y los texto
 ## Para jugadores
 
 1. Instala [Yuuma ModLoader para Mac](https://www.nexusmods.com/dressmaker/mods/1?tab=files).
-2. Descarga **Dressmaker-Languages-Mac-0.1.5.zip** de Releases y extrae toda la carpeta. Se necesita Python 3.9 o posterior.
+2. Descarga **Dressmaker-Languages-Mac-0.1.6.zip** de Releases y extrae toda la carpeta. Se necesita Python 3.9 o posterior.
 3. Abre `Start.command` o `针影裁梦多语言助手.app`.
 4. Elige el idioma de la interfaz, comprueba la carpeta y el idioma del juego, guarda, instala el parche y reinicia el juego.
 5. Analiza después de instalar mods nuevos y mantén abierto el asistente para traducir. Puedes corregir los resultados.
@@ -26,7 +26,7 @@ La [guía española](docs/es.md) explica modelos, desinstalación y datos. Downl
 
 Se leen campos JSON como `name`, `displayName`, `display_name`, `description`, `tooltip` y `title`. Los hooks cubren Unity Text / TextMeshPro en el loader o nombres detectados. No se garantizan interfaces propias, textos en imágenes, formatos binarios especiales ni fuentes no inglesas. La herramienta no añade telas ni una localización completa del juego base.
 
-El plugin se compiló para ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1. Pasaron las 66 pruebas automatizadas. Se comprobó el cambio de idioma local y Bing y MyMemory devolvieron traducciones reales. La red, los límites o cambios de página pueden interrumpir los adaptadores web. Faltan pruebas de nombres de telas de terceros, disposición y fuentes en el juego.
+El plugin se compiló para ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1. Pasaron las 72 pruebas automatizadas. Se comprobó el cambio de idioma local y Bing y MyMemory devolvieron traducciones reales. La red, los límites o cambios de página pueden interrumpir los adaptadores web. Faltan pruebas de nombres de telas de terceros, disposición y fuentes en el juego.
 
 El modo en línea envía textos ingleses desconocidos al servicio elegido. Las solicitudes se separan al menos 3 segundos y el presupuesto predeterminado es de 4.500 bytes UTF-8 diarios. Los fallos conservan el original. La alternativa MyMemory está desactivada por defecto; al activarla ambos intentos cuentan. El diccionario y la caché funcionan sin conexión.
 
@@ -38,15 +38,15 @@ Fuentes en `src/` y `assistant/`. El asistente básico utiliza solo la bibliotec
 python3 -m unittest discover -s tests -v
 ```
 
-Para compilar necesitas tus ensamblados del juego y del loader y un SDK .NET. El asistente es 0.1.5; el plugin sin cambios conserva la versión interna 0.1.0. Las comprobaciones de GitHub Actions están activadas; consulta los resultados en la página Actions del repositorio.
+Para compilar necesitas tus ensamblados del juego y del loader y un SDK .NET. El asistente es 0.1.6; el plugin sin cambios conserva la versión interna 0.1.0. Las comprobaciones de GitHub Actions están activadas; consulta los resultados en la página Actions del repositorio.
 
 Se aceptan Issues y Pull Requests sobre terminología, fuentes y compatibilidad. Incluye versiones de juego, sistema y loader y un ejemplo publicable. Actualiza los siete catálogos y guías al cambiar textos. No subas partidas, mods privados ni recursos del juego.
 
 ## Publicación en GitHub
 
 1. Crea un repositorio **Public** vacío. Ya se incluyen README y licencia; no generes otros.
-2. Extrae **Dressmaker-Languages-GitHub-0.1.5.zip** y sube su contenido con `README.md` en la raíz. Incluye `.github/`, `.gitignore` y `.gitattributes`. Finder muestra archivos ocultos con `Command + Shift + .`. Git conserva los permisos ejecutables de los scripts.
-3. Crea la Release `v0.1.5` y adjunta el archivo Mac. Las fuentes son para el repositorio; el archivo Mac es para jugadores.
+2. Extrae **Dressmaker-Languages-GitHub-0.1.6.zip** y sube su contenido con `README.md` en la raíz. Incluye `.github/`, `.gitignore` y `.gitattributes`. Finder muestra archivos ocultos con `Command + Shift + .`. Git conserva los permisos ejecutables de los scripts.
+3. Crea la Release `v0.1.6` y adjunta el archivo Mac. Las fuentes son para el repositorio; el archivo Mac es para jugadores.
 4. Verifica el parche en tu juego antes de publicarlo y actualiza los resultados. Se excluyen datos personales, rutas, tokens e historial Git. 
 
 `UPLOAD-MANIFEST.json` enumera los archivos exactos. Las instrucciones oficiales de GitHub aparecen abajo.
@@ -100,6 +100,11 @@ Los filtros solo afectan a la lista; la traducción de textos pendientes procesa
 
 El recuento separa textos visibles del juego, contenido de mods, candidatos del gestor y entradas solo del diccionario/caché. El análisis puede recoger formatos internos, errores y textos sin usar; los candidatos no son un recuento de omisiones visibles. El modo automático procesa textos visibles y mods. Filtra Sin traducir + Textos visibles en el juego para revisar lo recopilado; abre las pantallas no visitadas para recogerlas.
 
-Un fallo del servicio pausa el lote y deja el resto sin procesar. Tras la espera se reintentan las tareas incompletas con el mismo idioma y alcance, incluidos candidatos iniciados manualmente. Volver a pulsar no evita la espera ni reinicia el progreso. Cambiar los ajustes cancela el reintento anterior. Solo las traducciones guardadas correctamente reducen el recuento.
+Un fallo del servicio pausa el lote y deja el resto sin procesar. Tras la espera se reintentan las tareas incompletas con el mismo idioma y alcance, incluidos candidatos iniciados manualmente. Volver a pulsar no evita la espera ni reinicia el progreso. Cambiar el idioma de destino o la carpeta del juego cancela la tarea anterior. Cambiar de servicio conserva el alcance y continúa las entradas pendientes. Solo las traducciones guardadas correctamente reducen el recuento.
 
 Se corrigió el tratamiento de espacios iniciales y finales de Google: se envía el cuerpo, se verifica completo y se restauran los espacios. Ya no se rechazan respuestas correctas por recortar los bordes; etiquetas, variables e integridad siguen protegidas.
+
+
+Cambiar y continuar (0.1.6)
+
+Reintenta las entradas fallidas y pendientes sin perder traducciones guardadas. Cambiar el servicio en ajustes también retoma el alcance original. Una solicitud en curso puede tardar unos 15 segundos. Se mantienen la espera y el presupuesto diario del mismo servicio.

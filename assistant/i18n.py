@@ -1,5 +1,6 @@
 """Stable error codes keep dynamic UI messages independent of the target game language."""
 import urllib.error
+import socket
 
 ERROR_CODES = {
     "无效的词典筛选条件": "error_filter",
@@ -41,6 +42,10 @@ def error_info(error):
         return None
     if isinstance(error, PermissionError) or "Permission denied" in message or "Operation not permitted" in message:
         return {"key": "error_permission", "params": {}}
+    if isinstance(error, urllib.error.HTTPError) and error.code == 429:
+        return {"key": "error_rate_limit", "params": {}}
+    if isinstance(error, (TimeoutError, socket.timeout)) or isinstance(error, urllib.error.URLError) and isinstance(error.reason, (TimeoutError, socket.timeout)):
+        return {"key": "error_timeout", "params": {}}
     if isinstance(error, (urllib.error.URLError, TimeoutError)) or message.startswith("<urlopen error"):
         return {"key": "error_network", "params": {}}
     prefix = "离线模型未能翻译此条文本："

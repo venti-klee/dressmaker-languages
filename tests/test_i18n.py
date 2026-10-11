@@ -40,7 +40,7 @@ class LocalizationTests(unittest.TestCase):
             for catalog in self.catalogs.values():
                 self.assertIn(key, catalog)
         self.assertEqual(error_info(PermissionError("denied"))["key"], "error_permission")
-        self.assertEqual(error_info(TimeoutError("timed out"))["key"], "error_network")
+        self.assertEqual(error_info(TimeoutError("timed out"))["key"], "error_timeout")
         self.assertIsNone(error_info(""))
 
     def test_guides_exist_and_all_local_links_resolve(self):

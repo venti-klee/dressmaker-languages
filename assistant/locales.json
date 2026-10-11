@@ -168,7 +168,13 @@
     "error_save_language": "游戏目标语言已改变，请刷新词典列表后再保存。",
     "filter_stored": "仅词典 / 缓存",
     "missing_breakdown": "待译来源：实际显示 {display} · 模组内容 {content} · 管理器候选 {loader} · 仅词典/缓存 {stored}",
-    "candidate_hint": "管理器候选来自程序扫描，不表示已在游戏中出现。自动补译只处理实际显示文字与模组内容；候选须手动开始补译。"
+    "candidate_hint": "管理器候选来自程序扫描，不表示已在游戏中出现。自动补译只处理实际显示文字与模组内容；候选须手动开始补译。",
+    "resume_provider": "续译接口",
+    "switch_resume": "切换并继续",
+    "switch_resume_hint": "切换后重试失败和未完成的词条，已保存的译文不会丢失。也可在设置区换接口后保存，继续原任务。当前请求结束或超时后交接（单次请求约 15 秒）；同一接口仍遵守冷却和每日预算。",
+    "toast_switch_resume": "已切换接口并安排续译。",
+    "error_timeout": "接口请求超时，可在下方切换接口继续。已保存的译文仍可离线使用。",
+    "error_rate_limit": "接口正在限流，请等待冷却，或切换其他接口继续。"
   },
   "en": {
     "title": "Dressmaker · Language Assistant",
@@ -339,7 +345,13 @@
     "error_save_language": "The game target language changed. Refresh the dictionary before saving.",
     "filter_stored": "Dictionary / cache only",
     "missing_breakdown": "Untranslated sources: displayed {display} · mod content {content} · manager candidates {loader} · dictionary/cache only {stored}",
-    "candidate_hint": "Manager candidates come from program scanning and may never appear in game. Automatic translation processes displayed text and mod content; start translation manually to include candidates."
+    "candidate_hint": "Manager candidates come from program scanning and may never appear in game. Automatic translation processes displayed text and mod content; start translation manually to include candidates.",
+    "resume_provider": "Service for remaining entries",
+    "switch_resume": "Switch and continue",
+    "switch_resume_hint": "Retry failed and unfinished entries without losing saved translations. Saving a different service in Settings also resumes the original scope. An in-flight request can take about 15 seconds to finish; the same service keeps its cooldown and daily budget.",
+    "toast_switch_resume": "Service changed; remaining entries queued.",
+    "error_timeout": "The translation request timed out. Switch services below to continue. Saved translations remain available offline.",
+    "error_rate_limit": "The service is rate-limiting requests. Wait for the cooldown or switch services."
   },
   "ja": {
     "title": "Dressmaker · 多言語アシスタント",
@@ -510,7 +522,13 @@
     "error_save_language": "ゲームの翻訳先言語が変わりました。保存前に辞書一覧を更新してください。",
     "filter_stored": "辞書 / キャッシュのみ",
     "missing_breakdown": "未翻訳の取得元：表示文字 {display} · Mod内容 {content} · 管理ツール候補 {loader} · 辞書/キャッシュのみ {stored}",
-    "candidate_hint": "候補はプログラムのスキャン結果で、ゲームに表示されるとは限りません。自動翻訳は表示文字とMod内容を処理します。候補を含める場合は手動で翻訳を開始してください。"
+    "candidate_hint": "候補はプログラムのスキャン結果で、ゲームに表示されるとは限りません。自動翻訳は表示文字とMod内容を処理します。候補を含める場合は手動で翻訳を開始してください。",
+    "resume_provider": "続きに使うサービス",
+    "switch_resume": "切り替えて続行",
+    "switch_resume_hint": "保存済みの訳文を保ち、失敗・未完了の項目を再試行します。設定でサービスを変更して保存しても元の範囲を続行します。処理中のリクエストは約15秒かかる場合があります。同じサービスの待機時間と日次上限は維持されます。",
+    "toast_switch_resume": "サービスを変更し、続行を予約しました。",
+    "error_timeout": "翻訳リクエストがタイムアウトしました。下でサービスを切り替えて続行できます。保存済みの訳文はオフラインで使えます。",
+    "error_rate_limit": "サービスがリクエストを制限しています。待機するか、別のサービスに切り替えてください。"
   },
   "ko": {
     "title": "Dressmaker · 다국어 도우미",
@@ -681,7 +699,13 @@
     "error_save_language": "게임의 번역 대상 언어가 바뀌었습니다. 저장하기 전에 사전 목록을 새로고침하세요.",
     "filter_stored": "사전 / 캐시만",
     "missing_breakdown": "미번역 출처: 표시 텍스트 {display} · Mod 콘텐츠 {content} · 관리자 후보 {loader} · 사전/캐시만 {stored}",
-    "candidate_hint": "관리자 후보는 프로그램 스캔 결과이며 게임에 표시되지 않을 수도 있습니다. 자동 번역은 표시 텍스트와 Mod 콘텐츠를 처리합니다. 후보를 포함하려면 수동으로 번역을 시작하세요."
+    "candidate_hint": "관리자 후보는 프로그램 스캔 결과이며 게임에 표시되지 않을 수도 있습니다. 자동 번역은 표시 텍스트와 Mod 콘텐츠를 처리합니다. 후보를 포함하려면 수동으로 번역을 시작하세요.",
+    "resume_provider": "계속 번역할 서비스",
+    "switch_resume": "전환하고 계속",
+    "switch_resume_hint": "저장된 번역을 유지하고 실패하거나 완료되지 않은 항목을 다시 시도합니다. 설정에서 서비스를 바꾸고 저장해도 기존 범위를 이어갑니다. 진행 중인 요청은 약 15초가 걸릴 수 있습니다. 같은 서비스의 대기 시간과 일일 예산은 유지됩니다.",
+    "toast_switch_resume": "서비스를 변경하고 남은 번역을 예약했습니다.",
+    "error_timeout": "번역 요청 시간이 초과되었습니다. 아래에서 서비스를 바꿔 계속할 수 있습니다. 저장된 번역은 오프라인에서도 사용할 수 있습니다.",
+    "error_rate_limit": "서비스가 요청을 제한하고 있습니다. 대기하거나 다른 서비스로 전환하세요."
   },
   "fr": {
     "title": "Dressmaker · Assistant multilingue",
@@ -852,7 +876,13 @@
     "error_save_language": "La langue cible du jeu a changé. Actualisez le dictionnaire avant d’enregistrer.",
     "filter_stored": "Dictionnaire / cache uniquement",
     "missing_breakdown": "Origines non traduites : affichées {display} · mods {content} · candidats du gestionnaire {loader} · dictionnaire/cache seuls {stored}",
-    "candidate_hint": "Les candidats proviennent de l’analyse du programme et peuvent ne jamais apparaître en jeu. Le mode automatique traite les textes affichés et les mods ; lancez la traduction manuellement pour inclure les candidats."
+    "candidate_hint": "Les candidats proviennent de l’analyse du programme et peuvent ne jamais apparaître en jeu. Le mode automatique traite les textes affichés et les mods ; lancez la traduction manuellement pour inclure les candidats.",
+    "resume_provider": "Service pour la suite",
+    "switch_resume": "Changer et continuer",
+    "switch_resume_hint": "Réessayez les entrées en échec et restantes sans perdre les traductions enregistrées. Changer le service dans les paramètres reprend aussi la portée initiale. Une requête en cours peut prendre environ 15 secondes. Le délai et le budget quotidien du même service restent applicables.",
+    "toast_switch_resume": "Service changé ; la suite est programmée.",
+    "error_timeout": "La requête de traduction a expiré. Changez de service ci-dessous pour continuer. Les traductions enregistrées restent disponibles hors ligne.",
+    "error_rate_limit": "Le service limite les requêtes. Attendez ou changez de service."
   },
   "de": {
     "title": "Dressmaker · Sprachassistent",
@@ -1023,7 +1053,13 @@
     "error_save_language": "Die Zielsprache des Spiels hat sich geändert. Das Wörterbuch vor dem Speichern aktualisieren.",
     "filter_stored": "Nur Wörterbuch / Cache",
     "missing_breakdown": "Unübersetzte Quellen: angezeigt {display} · Mods {content} · Manager-Kandidaten {loader} · nur Wörterbuch/Cache {stored}",
-    "candidate_hint": "Manager-Kandidaten stammen aus dem Programm und erscheinen möglicherweise nie im Spiel. Automatisch werden angezeigte Texte und Mod-Inhalte übersetzt; Kandidaten müssen manuell gestartet werden."
+    "candidate_hint": "Manager-Kandidaten stammen aus dem Programm und erscheinen möglicherweise nie im Spiel. Automatisch werden angezeigte Texte und Mod-Inhalte übersetzt; Kandidaten müssen manuell gestartet werden.",
+    "resume_provider": "Dienst für die Fortsetzung",
+    "switch_resume": "Wechseln und fortsetzen",
+    "switch_resume_hint": "Fehlgeschlagene und offene Einträge erneut versuchen, ohne gespeicherte Übersetzungen zu verlieren. Ein Dienstwechsel in den Einstellungen setzt ebenfalls den ursprünglichen Umfang fort. Eine laufende Anfrage kann etwa 15 Sekunden benötigen. Wartezeit und Tagesbudget desselben Dienstes gelten weiterhin.",
+    "toast_switch_resume": "Dienst gewechselt; Fortsetzung eingeplant.",
+    "error_timeout": "Die Übersetzungsanfrage hat das Zeitlimit überschritten. Wechseln Sie unten den Dienst. Gespeicherte Übersetzungen bleiben offline verfügbar.",
+    "error_rate_limit": "Der Dienst begrenzt Anfragen. Warten Sie oder wechseln Sie den Dienst."
   },
   "es": {
     "title": "Dressmaker · Asistente multilingüe",
@@ -1194,6 +1230,12 @@
     "error_save_language": "El idioma de destino del juego ha cambiado. Actualiza el diccionario antes de guardar.",
     "filter_stored": "Solo diccionario / caché",
     "missing_breakdown": "Orígenes sin traducir: visibles {display} · mods {content} · candidatos del gestor {loader} · solo diccionario/caché {stored}",
-    "candidate_hint": "Los candidatos proceden del análisis del programa y pueden no aparecer nunca en el juego. El modo automático procesa textos visibles y mods; inicia la traducción manualmente para incluir candidatos."
+    "candidate_hint": "Los candidatos proceden del análisis del programa y pueden no aparecer nunca en el juego. El modo automático procesa textos visibles y mods; inicia la traducción manualmente para incluir candidatos.",
+    "resume_provider": "Servicio para continuar",
+    "switch_resume": "Cambiar y continuar",
+    "switch_resume_hint": "Reintenta las entradas fallidas y pendientes sin perder traducciones guardadas. Cambiar el servicio en ajustes también retoma el alcance original. Una solicitud en curso puede tardar unos 15 segundos. Se mantienen la espera y el presupuesto diario del mismo servicio.",
+    "toast_switch_resume": "Servicio cambiado; continuación programada.",
+    "error_timeout": "La solicitud de traducción agotó el tiempo. Cambia de servicio abajo para continuar. Las traducciones guardadas siguen disponibles sin conexión.",
+    "error_rate_limit": "El servicio limita las solicitudes. Espera o cambia de servicio."
   }
 }

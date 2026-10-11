@@ -550,6 +550,9 @@ class Worker:
         self.path = None
         self.cooldown = 0
         self.deferred_batch = None
+        self.batch_all_candidates = False
+        self.requested_scope = True
+        self.control_lock = threading.RLock()
         self.last_model_attempt = {}
         self.progress = TranslationProgress()
 
@@ -564,9 +567,47 @@ class Worker:
         if self.progress.queue(config["language"]):
             self.last_model_attempt.clear()
             self.deferred_batch = None
+            self.requested_scope = True
             self.wake.set()
 
+    def apply_settings(self, changes, resume=False):
+        """Transfer an unfinished batch when its transport changes, preserving scope."""
+        with self.control_lock:
+            with self.store.lock:
+                previous = self.store.config.copy()
+            snapshot = self.progress.snapshot()
+            pending = snapshot["active"] or self.deferred_batch is not None
+            scope = self.deferred_batch[1] if self.deferred_batch else self.batch_all_candidates
+            if resume and changes.get("provider") == "libre" and not changes.get("libre_url", previous["libre_url"]):
+                raise ValueError("请填写你可使用的 LibreTranslate HTTPS 地址")
+            self.store.save_config(changes)
+            with self.store.lock:
+                current = self.store.config.copy()
+            same_target = all(previous[k] == current[k] for k in ("language", "game"))
+            transport_changed = any(previous[k] != current[k] for k in
+                                    ("provider", "libre_url", "fallback", "online", "offline_model"))
+            if not same_target:
+                self.deferred_batch = None
+                self.cooldown = 0
+                self.last_model_attempt.clear()
+                return
+            if transport_changed:
+                self.deferred_batch = None
+                self.cooldown = 0
+                self.last_model_attempt.clear()
+                self.store.error = ""
+            if same_target and ((transport_changed and pending) or resume):
+                # Re-select only missing records; successful translations remain cached.
+                if transport_changed:
+                    self.requested_scope = scope if pending else True
+                    if not snapshot["active"]:
+                        self.progress.queue(current["language"])
+                    self.wake.set()
+                else:
+                    self.request_translation()  # Keep the existing service cooldown.
+
     def process_batch(self, config, all_candidates=False):
+        self.batch_all_candidates = all_candidates
         now = time.monotonic()
         candidates = [item for item in self.store.entries(limit=10000)
                       if not item["value"] and (all_candidates or item["kind"] != "loader")]
@@ -603,14 +644,23 @@ class Worker:
                 attempt["online"] = False
             self.progress.current(source)
             try:
-                value, provider = self.store.translate(source, attempt, on_progress=self.progress.stage)
+                def stage(phase, provider, wait_until=0):
+                    with self.store.lock:
+                        if config != self.store.config or self.stop.is_set():
+                            raise RuntimeError("Translation request superseded")
+                    self.progress.stage(phase, provider, wait_until)
+                value, provider = self.store.translate(source, attempt, on_progress=stage)
             except Exception as error:
-                self.store.error = str(error)
-                self.progress.record(source, "", self.progress.snapshot()["provider"], "failed", error)
-                if attempt.get("online") and error_info(error)["key"] not in {"error_format", "error_value", "error_length"}:
-                    self.cooldown = time.monotonic() + 300
-                    self.deferred_batch = (config.copy(), all_candidates)
-                    break  # Leave the rest unprocessed; do not report skipped entries as handled.
+                with self.control_lock, self.store.lock:
+                    if config != self.store.config or self.stop.is_set():
+                        interrupted = True
+                        break  # Never replace a newly queued service with the old failure.
+                    self.store.error = str(error)
+                    self.progress.record(source, "", self.progress.snapshot()["provider"], "failed", error)
+                    if attempt.get("online") and error_info(error)["key"] not in {"error_format", "error_value", "error_length"}:
+                        self.cooldown = time.monotonic() + 300
+                        self.deferred_batch = (config.copy(), all_candidates)
+                        break  # Leave the rest unprocessed; do not report skipped entries as handled.
                 continue
             outcome = "untranslated" if provider == "untranslated" or value == source else "success"
             self.progress.record(source, value, provider, outcome)
@@ -624,7 +674,8 @@ class Worker:
                         # must not be reported as a translation failure or disable the API.
                         self.store.error = str(error)
             if provider in {"mymemory", "libre", "bing", "google"}:
-                self.stop.wait(1.5)
+                if not self.wake.is_set():
+                    self.stop.wait(1.5)
         if interrupted:
             self.progress.finish("interrupted")
         elif time.monotonic() < self.cooldown:
@@ -663,7 +714,7 @@ class Worker:
                     self.progress.finish("interrupted")
                 retry_ready = self.deferred_batch and time.monotonic() >= self.cooldown
                 if (config.get("auto") and not self.deferred_batch) or self.wake.is_set() or retry_ready:
-                    all_candidates = self.wake.is_set() or bool(retry_ready and self.deferred_batch[1])
+                    all_candidates = self.requested_scope if self.wake.is_set() else bool(retry_ready and self.deferred_batch[1])
                     self.wake.clear()
                     self.process_batch(config, all_candidates)
             except Exception as error:
