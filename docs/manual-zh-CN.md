@@ -29,4 +29,4 @@
 
 本地导出的包可能包含你自己的 Mod 名称、人工译文和本机游戏已有译文，请自行保存；公开发布使用项目打包脚本生成的基础手动包。
 
-0.1.2 为早期版本，实际游戏内显示与字体尚未验证。完整说明及作者致谢见 [GitHub 项目](https://github.com/venti-klee/dressmaker-languages)。
+0.1.3 为早期版本，实际游戏内显示与字体尚未验证。完整说明及作者致谢见 [GitHub 项目](https://github.com/venti-klee/dressmaker-languages)。

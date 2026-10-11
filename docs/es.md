@@ -1,4 +1,4 @@
-# Asistente multilingüe de Dressmaker 0.1.2
+# Asistente multilingüe de Dressmaker 0.1.3
 
 [简体中文](zh-CN.md) · [English](en.md) · [日本語](ja.md) · [한국어](ko.md) · [Français](fr.md) · [Deutsch](de.md) · **Español**
 
@@ -51,7 +51,7 @@ La opción de recurrir a MyMemory está desactivada por defecto. Hace un único 
 
 La sesión de Bing permanece en memoria. No se inicia sesión, no se guardan cuentas, no se rotan proxies ni se evitan CAPTCHA. Los resultados válidos se guardan por idioma de destino y las correcciones manuales tienen prioridad.
 
-Pasaron las 36 pruebas automatizadas: sesión, código del chino, respuestas inválidas, caché sin conexión, alternativa y presupuesto. Bing devolvió traducciones reales en chino, japonés, coreano, francés, alemán y español. Se comprobaron la caché sin conexión y la conservación de `{0}`. También hubo errores de conexión y tiempos de espera agotados; el adaptador sigue siendo experimental.
+Pasaron las 45 pruebas automatizadas: sesión, código del chino, respuestas inválidas, caché sin conexión, alternativa y presupuesto. Bing devolvió traducciones reales en chino, japonés, coreano, francés, alemán y español. Se comprobaron la caché sin conexión y la conservación de `{0}`. También hubo errores de conexión y tiempos de espera agotados; el adaptador sigue siendo experimental.
 
 ## Corrección y desinstalación
 
@@ -74,7 +74,7 @@ La página solo escucha en el ordenador local y protege las operaciones de escri
 
 ## Verificación y limitaciones
 
-El plugin se compiló con ModLoader 0.7.3, BepInEx 5.4.23.5 y Unity 6000.3.4f1. Pasaron once pruebas del núcleo de traducción. Las solicitudes reales a MyMemory devolvieron traducciones en chino, japonés, coreano y francés. La localización de la interfaz y las guías se añadió en 0.1.2.
+El plugin se compiló con ModLoader 0.7.3, BepInEx 5.4.23.5 y Unity 6000.3.4f1. Pasaron once pruebas del núcleo de traducción. Las solicitudes reales a MyMemory devolvieron traducciones en chino, japonés, coreano y francés. La localización de la interfaz y las guías se añadió en 0.1.3.
 
 **La integración dentro del juego aún no se ha probado.** Quedan por comprobar la cobertura, la disposición, las fuentes japonesas y coreanas y los nombres de telas de terceros. No había paquetes de contenido instalados en este ordenador durante el desarrollo.
 
@@ -109,3 +109,11 @@ Exporta el plugin, el diccionario y las traducciones del idioma del juego guarda
 ## Progreso de traducción
 
 Se actualiza cada segundo. El progreso cuenta textos procesados; originales conservados y fallos no son traducciones correctas. La lista se actualiza conservando las ediciones sin guardar.
+
+## Google web y traducciones guardadas
+
+Las solicitudes web de Google no necesitan clave. La disponibilidad depende de la red; los cambios o límites pueden causar fallos. Las solicitudes se espacian al menos 3 segundos.
+
+Ejemplo: Hoy (UTC): 4,498 / 4,500 bytes usados · 2 restantes. Es un presupuesto local; aumentarlo no aumenta la cuota del servicio.
+
+Las traducciones se guardan localmente y se reutilizan sin conexión. Conserva la carpeta data al actualizar; se mantienen las cachés por idioma y las correcciones.

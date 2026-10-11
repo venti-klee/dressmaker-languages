@@ -1,4 +1,4 @@
-# Assistant multilingue Dressmaker 0.1.2
+# Assistant multilingue Dressmaker 0.1.3
 
 [简体中文](zh-CN.md) · [English](en.md) · [日本語](ja.md) · [한국어](ko.md) · **Français** · [Deutsch](de.md) · [Español](es.md)
 
@@ -51,7 +51,7 @@ L’option de repli vers MyMemory est désactivée par défaut. Elle effectue un
 
 La session Bing reste en mémoire. Aucune connexion à un compte, conservation de compte, rotation de proxy ou résolution de CAPTCHA n’est utilisée. Les résultats valides sont conservés par langue cible ; les corrections manuelles restent prioritaires.
 
-Les 36 tests automatisés ont réussi : session, code du chinois, réponses invalides, cache hors ligne, repli et budget. Bing a fourni des traductions réelles en chinois, japonais, coréen, français, allemand et espagnol. Le cache hors ligne et la conservation de `{0}` ont été vérifiés. Des erreurs de connexion et délais dépassés ont aussi eu lieu ; l’adaptateur reste expérimental.
+Les 45 tests automatisés ont réussi : session, code du chinois, réponses invalides, cache hors ligne, repli et budget. Bing a fourni des traductions réelles en chinois, japonais, coréen, français, allemand et espagnol. Le cache hors ligne et la conservation de `{0}` ont été vérifiés. Des erreurs de connexion et délais dépassés ont aussi eu lieu ; l’adaptateur reste expérimental.
 
 ## Correction et désinstallation
 
@@ -74,7 +74,7 @@ La page est accessible uniquement sur l’ordinateur local. Un jeton de session 
 
 ## Vérification et limites
 
-Le plugin a été compilé avec ModLoader 0.7.3, BepInEx 5.4.23.5 et Unity 6000.3.4f1. Onze tests du moteur de traduction ont réussi. Des requêtes réelles à MyMemory ont renvoyé des traductions chinoises, japonaises, coréennes et françaises. La localisation de l’interface et des guides a été ajoutée en version 0.1.2.
+Le plugin a été compilé avec ModLoader 0.7.3, BepInEx 5.4.23.5 et Unity 6000.3.4f1. Onze tests du moteur de traduction ont réussi. Des requêtes réelles à MyMemory ont renvoyé des traductions chinoises, japonaises, coréennes et françaises. La localisation de l’interface et des guides a été ajoutée en version 0.1.3.
 
 **L’intégration dans le jeu n’a pas encore été testée.** La couverture des textes, la disposition, les polices japonaises et coréennes et les noms de tissus tiers restent à vérifier. Aucun paquet de contenu n’était installé sur cet ordinateur pendant le développement.
 
@@ -109,3 +109,11 @@ Exportez le plugin, le dictionnaire et les traductions de la langue de jeu enreg
 ## Progression des traductions
 
 Mise à jour chaque seconde. La progression compte les textes traités ; originaux conservés et échecs ne sont pas des traductions réussies. La liste se met à jour et conserve les modifications non enregistrées.
+
+## Google web et traductions enregistrées
+
+Les requêtes web Google ne nécessitent aucune clé. La disponibilité dépend du réseau ; des modifications de page ou des limites peuvent entraîner des échecs. Les requêtes sont espacées d’au moins 3 secondes.
+
+Exemple : Aujourd’hui (UTC) : 4,498 / 4,500 octets utilisés · 2 restants. Il s’agit du budget local ; l’augmenter ne relève pas le quota du service.
+
+Les traductions sont enregistrées localement et réutilisables hors ligne. Conservez le dossier data lors des mises à jour ; les caches par langue et les corrections restent enregistrés.

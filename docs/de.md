@@ -1,4 +1,4 @@
-# Dressmaker Sprachassistent 0.1.2
+# Dressmaker Sprachassistent 0.1.3
 
 [简体中文](zh-CN.md) · [English](en.md) · [日本語](ja.md) · [한국어](ko.md) · [Français](fr.md) · **Deutsch** · [Español](es.md)
 
@@ -51,7 +51,7 @@ Die Ersatzoption mit MyMemory ist standardmäßig deaktiviert. Bei Netzwerk- ode
 
 Die Bing-Sitzung bleibt im Arbeitsspeicher. Es gibt keine Anmeldung, Kontospeicherung, Proxyrotation oder CAPTCHA-Umgehung. Gültige Ergebnisse werden je Zielsprache gespeichert; manuelle Korrekturen behalten Vorrang.
 
-Alle 36 automatisierten Tests bestanden: Sitzung, chinesischer Sprachcode, ungültige Antworten, Offline-Cache, Ersatzdienst und Budget. Bing lieferte reale chinesische, japanische, koreanische, französische, deutsche und spanische Übersetzungen. Offline-Cache und Erhalt von `{0}` wurden geprüft. Es gab auch Verbindungsfehler und Zeitüberschreitungen; die Anbindung bleibt experimentell.
+Alle 45 automatisierten Tests bestanden: Sitzung, chinesischer Sprachcode, ungültige Antworten, Offline-Cache, Ersatzdienst und Budget. Bing lieferte reale chinesische, japanische, koreanische, französische, deutsche und spanische Übersetzungen. Offline-Cache und Erhalt von `{0}` wurden geprüft. Es gab auch Verbindungsfehler und Zeitüberschreitungen; die Anbindung bleibt experimentell.
 
 ## Korrekturen und Deinstallation
 
@@ -74,7 +74,7 @@ Die Seite ist nur auf dem lokalen Computer erreichbar. Ein zufälliges Sitzungst
 
 ## Prüfung und Grenzen
 
-Das Plugin wurde mit ModLoader 0.7.3, BepInEx 5.4.23.5 und Unity 6000.3.4f1 kompiliert. Elf Tests des Übersetzungskerns bestanden. Reale MyMemory-Anfragen lieferten chinesische, japanische, koreanische und französische Übersetzungen. Die Übersetzung der Oberfläche und Anleitungen wurde in 0.1.2 ergänzt.
+Das Plugin wurde mit ModLoader 0.7.3, BepInEx 5.4.23.5 und Unity 6000.3.4f1 kompiliert. Elf Tests des Übersetzungskerns bestanden. Reale MyMemory-Anfragen lieferten chinesische, japanische, koreanische und französische Übersetzungen. Die Übersetzung der Oberfläche und Anleitungen wurde in 0.1.3 ergänzt.
 
 **Die Integration im Spiel wurde noch nicht getestet.** Textabdeckung, Layout, japanische und koreanische Schriften und Namen externer Stoff-Mods müssen noch im Spiel geprüft werden. Bei der Entwicklung waren auf diesem Computer keine Inhaltspakete installiert.
 
@@ -109,3 +109,11 @@ Exportiert Plugin, Wörterbuch und gespeicherte Übersetzungen für die gespeich
 ## Übersetzungsfortschritt
 
 Aktualisierung jede Sekunde. Der Fortschritt zählt bearbeitete Einträge; beibehaltene Originale und Fehler gelten nicht als erfolgreiche Übersetzungen. Die Liste aktualisiert sich und behält ungespeicherte Änderungen.
+
+## Google-Web und gespeicherte Übersetzungen
+
+Google-Webanfragen benötigen keinen Schlüssel. Die Verfügbarkeit hängt vom Netzwerk ab; Änderungen oder Beschränkungen können Fehler verursachen. Anfragen erfolgen im Abstand von mindestens 3 Sekunden.
+
+Beispiel: Heute (UTC): 4,498 / 4,500 Bytes genutzt · 2 übrig. Dies ist das lokale Budget; ein höherer Wert erhöht nicht das Kontingent des Dienstes.
+
+Übersetzungen werden lokal gespeichert und sind offline wiederverwendbar. Bei Updates den Ordner data behalten; Sprachcaches und manuelle Korrekturen bleiben erhalten.

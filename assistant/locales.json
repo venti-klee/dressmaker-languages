@@ -19,7 +19,7 @@
     "provider": "免费翻译资源",
     "mymemory_option": "MyMemory · 无需密钥，有每日限额",
     "libre_option": "LibreTranslate · 自填可用实例",
-    "budget": "每日联网文本预算（字节）",
+    "budget": "每日本地联网预算（字节）",
     "libre_url": "LibreTranslate 地址（可选）",
     "libre_placeholder": "https://你的实例",
     "save_settings": "保存设置",
@@ -121,7 +121,14 @@
     "progress_cooldown_wait": "联网补译将在约 {seconds} 秒后恢复；离线词典与缓存仍可使用。",
     "progress_result_success": "已翻译",
     "progress_result_untranslated": "保留原文",
-    "progress_result_failed": "失败"
+    "progress_result_failed": "失败",
+    "google_option": "Google · 网页接口（实验性，免密钥）",
+    "google_hint": "Google 网页请求无需密钥；能否使用取决于当前网络，网页变化或限流可能导致失败。每次请求至少间隔 3 秒。",
+    "badge_google": "Google 网页",
+    "error_google": "Google 网页接口已变化或暂不可用。可切换必应，或使用离线模型。",
+    "budget_status": "今日（UTC）已用 {used} / {limit} 字节 · 剩余 {remaining} 字节。这是本地预算，调高不会增加远端服务的额度。",
+    "cache_hint": "译文自动保存在本机，可以离线复用。更新助手请保留 data 文件夹；各语言缓存与人工修正会保留。",
+    "web_storage_heading": "Google 网页与译文保存"
   },
   "en": {
     "title": "Dressmaker · Language Assistant",
@@ -143,7 +150,7 @@
     "provider": "Free translation service",
     "mymemory_option": "MyMemory · No key, daily limits",
     "libre_option": "LibreTranslate · Your available instance",
-    "budget": "Daily online text budget (bytes)",
+    "budget": "Daily local online budget (bytes)",
     "libre_url": "LibreTranslate URL (optional)",
     "libre_placeholder": "https://your-instance",
     "save_settings": "Save settings",
@@ -245,7 +252,14 @@
     "progress_cooldown_wait": "Online translation resumes in about {seconds} s; offline dictionaries and cache remain available.",
     "progress_result_success": "Translated",
     "progress_result_untranslated": "Original kept",
-    "progress_result_failed": "Failed"
+    "progress_result_failed": "Failed",
+    "google_option": "Google · experimental web adapter, no key",
+    "google_hint": "Google web requests need no key. Availability depends on your network; page changes or rate limits can cause failures. Requests are spaced at least 3 seconds apart.",
+    "badge_google": "Google web",
+    "error_google": "Google web translation changed or is unavailable. Try Bing or an offline model.",
+    "budget_status": "Today (UTC): {used} / {limit} bytes used · {remaining} remaining. This is a local budget; increasing it does not increase the service’s quota.",
+    "cache_hint": "Translations are saved locally and reusable offline. Keep the data folder when updating; language caches and manual corrections are preserved.",
+    "web_storage_heading": "Google web and saved translations"
   },
   "ja": {
     "title": "Dressmaker · 多言語アシスタント",
@@ -267,7 +281,7 @@
     "provider": "無料翻訳サービス",
     "mymemory_option": "MyMemory · キー不要、日次上限あり",
     "libre_option": "LibreTranslate · 利用可能なインスタンスを指定",
-    "budget": "オンライン翻訳の日次上限（バイト）",
+    "budget": "1日のローカル通信予算（バイト）",
     "libre_url": "LibreTranslate URL（任意）",
     "libre_placeholder": "https://your-instance",
     "save_settings": "設定を保存",
@@ -369,7 +383,14 @@
     "progress_cooldown_wait": "オンライン翻訳は約 {seconds} 秒後に再開します。オフライン辞書とキャッシュは引き続き使えます。",
     "progress_result_success": "翻訳済み",
     "progress_result_untranslated": "原文維持",
-    "progress_result_failed": "失敗"
+    "progress_result_failed": "失敗",
+    "google_option": "Google · Web翻訳（試験的・キー不要）",
+    "google_hint": "GoogleへのWebリクエストはキー不要です。接続環境、ページ変更、利用制限により失敗する場合があります。リクエストの間隔は3秒以上です。",
+    "badge_google": "Google Web",
+    "error_google": "Google Web翻訳が変更されたか利用できません。Bingまたはオフラインモデルをお試しください。",
+    "budget_status": "今日（UTC）：{used} / {limit} バイト使用・残り {remaining} バイト。これはローカル予算で、増やしてもサービスの上限は増えません。",
+    "cache_hint": "訳文はローカルに保存され、オフラインでも再利用できます。更新時は data フォルダーを残してください。言語別キャッシュと手動修正は保持されます。",
+    "web_storage_heading": "Google Webと訳文の保存"
   },
   "ko": {
     "title": "Dressmaker · 다국어 도우미",
@@ -391,7 +412,7 @@
     "provider": "무료 번역 서비스",
     "mymemory_option": "MyMemory · 키 불필요, 일일 제한 있음",
     "libre_option": "LibreTranslate · 사용 가능한 인스턴스 지정",
-    "budget": "일일 온라인 텍스트 예산 (바이트)",
+    "budget": "일일 로컬 온라인 예산(바이트)",
     "libre_url": "LibreTranslate 주소 (선택 사항)",
     "libre_placeholder": "https://your-instance",
     "save_settings": "설정 저장",
@@ -493,7 +514,14 @@
     "progress_cooldown_wait": "약 {seconds}초 뒤 온라인 번역이 재개됩니다. 오프라인 사전과 캐시는 계속 사용할 수 있습니다.",
     "progress_result_success": "번역 완료",
     "progress_result_untranslated": "원문 유지",
-    "progress_result_failed": "실패"
+    "progress_result_failed": "실패",
+    "google_option": "Google · 웹 번역（실험적, 키 불필요）",
+    "google_hint": "Google 웹 요청은 키가 필요 없습니다. 네트워크, 페이지 변경, 요청 제한에 따라 실패할 수 있습니다. 요청 간격은 최소 3초입니다.",
+    "badge_google": "Google 웹",
+    "error_google": "Google 웹 번역이 변경되었거나 사용할 수 없습니다. Bing 또는 오프라인 모델을 사용하세요.",
+    "budget_status": "오늘(UTC): {used} / {limit}바이트 사용 · {remaining}바이트 남음. 로컬 예산이며 높여도 서비스 한도는 늘어나지 않습니다.",
+    "cache_hint": "번역은 로컬에 저장되어 오프라인에서도 재사용할 수 있습니다. 업데이트 시 data 폴더를 유지하세요. 언어별 캐시와 수동 수정은 보존됩니다.",
+    "web_storage_heading": "Google 웹 및 번역 저장"
   },
   "fr": {
     "title": "Dressmaker · Assistant multilingue",
@@ -515,7 +543,7 @@
     "provider": "Service de traduction gratuit",
     "mymemory_option": "MyMemory · Sans clé, quota quotidien",
     "libre_option": "LibreTranslate · Votre instance disponible",
-    "budget": "Budget quotidien de texte en ligne (octets)",
+    "budget": "Budget quotidien local en ligne (octets)",
     "libre_url": "Adresse LibreTranslate (facultative)",
     "libre_placeholder": "https://votre-instance",
     "save_settings": "Enregistrer les paramètres",
@@ -617,7 +645,14 @@
     "progress_cooldown_wait": "La traduction en ligne reprend dans environ {seconds} s ; dictionnaires et cache hors ligne restent disponibles.",
     "progress_result_success": "Traduit",
     "progress_result_untranslated": "Original conservé",
-    "progress_result_failed": "Échec"
+    "progress_result_failed": "Échec",
+    "google_option": "Google · adaptateur web expérimental, sans clé",
+    "google_hint": "Les requêtes web Google ne nécessitent aucune clé. La disponibilité dépend du réseau ; des modifications de page ou des limites peuvent entraîner des échecs. Les requêtes sont espacées d’au moins 3 secondes.",
+    "badge_google": "Google web",
+    "error_google": "La traduction web Google a changé ou est indisponible. Essayez Bing ou un modèle hors ligne.",
+    "budget_status": "Aujourd’hui (UTC) : {used} / {limit} octets utilisés · {remaining} restants. Il s’agit du budget local ; l’augmenter ne relève pas le quota du service.",
+    "cache_hint": "Les traductions sont enregistrées localement et réutilisables hors ligne. Conservez le dossier data lors des mises à jour ; les caches par langue et les corrections restent enregistrés.",
+    "web_storage_heading": "Google web et traductions enregistrées"
   },
   "de": {
     "title": "Dressmaker · Sprachassistent",
@@ -639,7 +674,7 @@
     "provider": "Kostenloser Übersetzungsdienst",
     "mymemory_option": "MyMemory · Ohne Schlüssel, tägliches Limit",
     "libre_option": "LibreTranslate · Eigene verfügbare Instanz",
-    "budget": "Tägliches Online-Textbudget (Bytes)",
+    "budget": "Tägliches lokales Online-Budget (Bytes)",
     "libre_url": "LibreTranslate-Adresse (optional)",
     "libre_placeholder": "https://deine-instanz",
     "save_settings": "Einstellungen speichern",
@@ -741,7 +776,14 @@
     "progress_cooldown_wait": "Online-Übersetzung wird in etwa {seconds} s fortgesetzt; Offline-Wörterbücher und Cache bleiben verfügbar.",
     "progress_result_success": "Übersetzt",
     "progress_result_untranslated": "Original behalten",
-    "progress_result_failed": "Fehlgeschlagen"
+    "progress_result_failed": "Fehlgeschlagen",
+    "google_option": "Google · experimentelles Web, ohne Schlüssel",
+    "google_hint": "Google-Webanfragen benötigen keinen Schlüssel. Die Verfügbarkeit hängt vom Netzwerk ab; Änderungen oder Beschränkungen können Fehler verursachen. Anfragen erfolgen im Abstand von mindestens 3 Sekunden.",
+    "badge_google": "Google-Web",
+    "error_google": "Google-Webübersetzung wurde geändert oder ist nicht verfügbar. Bing oder ein Offline-Modell ausprobieren.",
+    "budget_status": "Heute (UTC): {used} / {limit} Bytes genutzt · {remaining} übrig. Dies ist das lokale Budget; ein höherer Wert erhöht nicht das Kontingent des Dienstes.",
+    "cache_hint": "Übersetzungen werden lokal gespeichert und sind offline wiederverwendbar. Bei Updates den Ordner data behalten; Sprachcaches und manuelle Korrekturen bleiben erhalten.",
+    "web_storage_heading": "Google-Web und gespeicherte Übersetzungen"
   },
   "es": {
     "title": "Dressmaker · Asistente multilingüe",
@@ -763,7 +805,7 @@
     "provider": "Servicio gratuito de traducción",
     "mymemory_option": "MyMemory · Sin clave, con límite diario",
     "libre_option": "LibreTranslate · Tu instancia disponible",
-    "budget": "Presupuesto diario de texto en línea (bytes)",
+    "budget": "Presupuesto diario local en línea (bytes)",
     "libre_url": "Dirección de LibreTranslate (opcional)",
     "libre_placeholder": "https://tu-instancia",
     "save_settings": "Guardar ajustes",
@@ -865,6 +907,13 @@
     "progress_cooldown_wait": "La traducción en línea se reanuda en unos {seconds} s; diccionarios y caché sin conexión siguen disponibles.",
     "progress_result_success": "Traducido",
     "progress_result_untranslated": "Original conservado",
-    "progress_result_failed": "Fallo"
+    "progress_result_failed": "Fallo",
+    "google_option": "Google · adaptador web experimental, sin clave",
+    "google_hint": "Las solicitudes web de Google no necesitan clave. La disponibilidad depende de la red; los cambios o límites pueden causar fallos. Las solicitudes se espacian al menos 3 segundos.",
+    "badge_google": "Google web",
+    "error_google": "La traducción web de Google ha cambiado o no está disponible. Prueba Bing o un modelo sin conexión.",
+    "budget_status": "Hoy (UTC): {used} / {limit} bytes usados · {remaining} restantes. Es un presupuesto local; aumentarlo no aumenta la cuota del servicio.",
+    "cache_hint": "Las traducciones se guardan localmente y se reutilizan sin conexión. Conserva la carpeta data al actualizar; se mantienen las cachés por idioma y las correcciones.",
+    "web_storage_heading": "Google web y traducciones guardadas"
   }
 }

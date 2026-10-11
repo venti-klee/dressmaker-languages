@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-CN.md) · [English](README.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Español](README.es.md)
 
-Ein unabhängiges macOS-Werkzeug zur Übersetzung der Yuuma-ModLoader-Oberfläche und englischer Mod-Texte. **0.1.2 ist eine frühe Version; die Integration im Spiel wurde noch nicht getestet.**
+Ein unabhängiges macOS-Werkzeug zur Übersetzung der Yuuma-ModLoader-Oberfläche und englischer Mod-Texte. **0.1.3 ist eine frühe Version; die Integration im Spiel wurde noch nicht getestet.**
 
 ## Funktionen
 
@@ -15,7 +15,7 @@ Ein unabhängiges macOS-Werkzeug zur Übersetzung der Yuuma-ModLoader-Oberfläch
 ## Für Spieler
 
 1. Installieren Sie [Yuuma ModLoader für Mac](https://www.nexusmods.com/dressmaker/mods/1?tab=files).
-2. Laden Sie **Dressmaker-Languages-Mac-0.1.2.zip** aus den Releases und entpacken Sie den gesamten Ordner. Python 3.9 oder neuer ist nötig.
+2. Laden Sie **Dressmaker-Languages-Mac-0.1.3.zip** aus den Releases und entpacken Sie den gesamten Ordner. Python 3.9 oder neuer ist nötig.
 3. Öffnen Sie `Start.command` oder `针影裁梦多语言助手.app`.
 4. Wählen Sie die Oberflächensprache, prüfen Sie Spielordner und Zielsprache, speichern Sie, installieren Sie das Plugin und starten Sie das Spiel neu.
 5. Nach neuen Mods scannen und den Assistenten für Übersetzungen offen lassen. Ergebnisse lassen sich korrigieren.
@@ -26,7 +26,7 @@ Details zu Modellen, Deinstallation und Daten stehen in der [deutschen Anleitung
 
 Der Scanner liest JSON-Felder wie `name`, `displayName`, `display_name`, `description`, `tooltip` und `title`. Laufzeit-Hooks betreffen Unity Text / TextMeshPro in der Loader-Oberfläche oder gescannte Namen. Eigene Oberflächen, Bildtext, besondere Binärformate und nicht englische Quellen sind nicht garantiert. Das Werkzeug fügt keine Stoffe hinzu und übersetzt das Basisspiel nicht vollständig in neue Sprachen.
 
-Das Plugin wurde für ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1 gebaut. Alle 36 automatisierten Tests bestanden. Die lokale Sprachumschaltung wurde geprüft; Bing und MyMemory lieferten reale Übersetzungen. Web-Anbindungen können durch Netzwerk, Limits oder Seitenänderungen ausfallen. Stoffnamen anderer Anbieter, Layout und Schrift im Spiel bleiben zu prüfen.
+Das Plugin wurde für ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1 gebaut. Alle 45 automatisierten Tests bestanden. Die lokale Sprachumschaltung wurde geprüft; Bing und MyMemory lieferten reale Übersetzungen. Web-Anbindungen können durch Netzwerk, Limits oder Seitenänderungen ausfallen. Stoffnamen anderer Anbieter, Layout und Schrift im Spiel bleiben zu prüfen.
 
 Online werden unbekannte englische Anzeigetexte an den gewählten Dienst gesendet. Anfragen haben mindestens 3 Sekunden Abstand; das Tagesbudget beträgt standardmäßig 4.500 UTF-8-Bytes. Bei Fehlern bleibt der Originaltext erhalten. Der MyMemory-Ersatz ist zunächst ausgeschaltet; aktiv zählen beide Versuche zum Budget. Wörterbuch und Cache bleiben offline nutzbar.
 
@@ -38,15 +38,15 @@ Quellen liegen in `src/` und `assistant/`. Der Basisassistent nutzt nur die Pyth
 python3 -m unittest discover -s tests -v
 ```
 
-Zum Bauen werden eigene Spiel- und Loader-Assemblies sowie ein .NET SDK benötigt. Der Assistent ist 0.1.2; das unveränderte Spielplugin bleibt intern bei 0.1.0. GitHub Actions-Prüfungen sind aktiviert. Ergebnisse stehen auf der Actions-Seite des Repositorys.
+Zum Bauen werden eigene Spiel- und Loader-Assemblies sowie ein .NET SDK benötigt. Der Assistent ist 0.1.3; das unveränderte Spielplugin bleibt intern bei 0.1.0. GitHub Actions-Prüfungen sind aktiviert. Ergebnisse stehen auf der Actions-Seite des Repositorys.
 
 Issues und Pull Requests zu Begriffen, Schriften und Kompatibilität sind willkommen. Geben Sie Spiel-, OS- und Loader-Versionen sowie einen öffentlich teilbaren Text an. Aktualisieren Sie bei Textänderungen alle sieben Kataloge und Anleitungen. Keine Spielstände, privaten Mods oder Spielressourcen hochladen.
 
 ## Auf GitHub veröffentlichen
 
 1. Erstellen Sie ein leeres **Public**-Repository. README und Lizenz sind vorhanden; keine zusätzlichen erzeugen.
-2. Entpacken Sie **Dressmaker-Languages-GitHub-0.1.2.zip** und laden Sie den Inhalt mit `README.md` im Stammverzeichnis hoch. `.github/`, `.gitignore` und `.gitattributes` gehören dazu. Finder zeigt versteckte Dateien mit `Command + Shift + .`. Git erhält die Ausführungsrechte der Startskripte.
-3. Erstellen Sie Release `v0.1.2` und hängen Sie das Mac-Archiv an. Quellen gehören ins Repository, das Mac-Paket ist für Spieler.
+2. Entpacken Sie **Dressmaker-Languages-GitHub-0.1.3.zip** und laden Sie den Inhalt mit `README.md` im Stammverzeichnis hoch. `.github/`, `.gitignore` und `.gitattributes` gehören dazu. Finder zeigt versteckte Dateien mit `Command + Shift + .`. Git erhält die Ausführungsrechte der Startskripte.
+3. Erstellen Sie Release `v0.1.3` und hängen Sie das Mac-Archiv an. Quellen gehören ins Repository, das Mac-Paket ist für Spieler.
 4. Prüfen Sie das Plugin vor Veröffentlichung im eigenen Spiel und aktualisieren Sie die Ergebnisse. Persönliche Daten, Pfade, Tokens und Git-Verlauf sind ausgeschlossen. 
 
 Die genaue Liste steht in `UPLOAD-MANIFEST.json`. Offizielle GitHub-Anleitungen sind unten verlinkt.
@@ -76,3 +76,11 @@ Exportiert Plugin, Wörterbuch und gespeicherte Übersetzungen für die gespeich
 ## Übersetzungsfortschritt
 
 Aktualisierung jede Sekunde. Der Fortschritt zählt bearbeitete Einträge; beibehaltene Originale und Fehler gelten nicht als erfolgreiche Übersetzungen. Die Liste aktualisiert sich und behält ungespeicherte Änderungen.
+
+## Google-Web und gespeicherte Übersetzungen
+
+Google-Webanfragen benötigen keinen Schlüssel. Die Verfügbarkeit hängt vom Netzwerk ab; Änderungen oder Beschränkungen können Fehler verursachen. Anfragen erfolgen im Abstand von mindestens 3 Sekunden.
+
+Beispiel: Heute (UTC): 4,498 / 4,500 Bytes genutzt · 2 übrig. Dies ist das lokale Budget; ein höherer Wert erhöht nicht das Kontingent des Dienstes.
+
+Übersetzungen werden lokal gespeichert und sind offline wiederverwendbar. Bei Updates den Ordner data behalten; Sprachcaches und manuelle Korrekturen bleiben erhalten.

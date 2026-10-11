@@ -29,6 +29,22 @@ class ProgressTests(unittest.TestCase):
         for source in sources:
             self.store.add_pending(source)
 
+    def test_bad_format_rejects_one_translation_without_blocking_other_words(self):
+        self.add('Quux Alpha', 'Quux Bravo')
+        self.store.save_config({'online': True})
+        attempts = []
+        def translate(source, config, on_progress=None):
+            attempts.append(config['online'])
+            if source.endswith('Alpha'):
+                raise ValueError('译文破坏了标签或变量，已拒绝写入')
+            return '有效译文', 'google'
+        with patch.object(self.store, 'translate', side_effect=translate), patch.object(self.worker.stop, 'wait'):
+            self.worker.process_batch(self.store.config.copy())
+        self.assertEqual(attempts, [True, True])
+        self.assertEqual(self.worker.cooldown, 0)
+        result = self.worker.progress.snapshot()
+        self.assertEqual((result['failed'], result['translated']), (1, 1))
+
     def test_outcomes_distinguish_failures_from_kept_originals(self):
         self.add('Quux Alpha', 'Quux Bravo', 'Quux Charlie')
         def translate(source, config, on_progress=None):

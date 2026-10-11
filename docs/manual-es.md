@@ -27,4 +27,4 @@ Para desinstalar, cierra el juego y retira solo las dos carpetas `DressmakerLang
 
 Un ZIP local puede contener tus nombres de mods, correcciones y traducciones existentes del juego. Para distribuir públicamente, usa el paquete básico generado por el script del proyecto.
 
-0.1.2 es una versión inicial; faltan verificar textos y fuentes en el juego. [Guías y agradecimientos](https://github.com/venti-klee/dressmaker-languages).
+0.1.3 es una versión inicial; faltan verificar textos y fuentes en el juego. [Guías y agradecimientos](https://github.com/venti-klee/dressmaker-languages).

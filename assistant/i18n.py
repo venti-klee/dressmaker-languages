@@ -21,6 +21,7 @@ ERROR_CODES = {
     "请填写你可使用的 LibreTranslate HTTPS 地址": "error_libre",
     "免费接口限额或暂不可用": "error_service",
     "必应网页接口已变化或暂不可用": "error_bing",
+    "Google 网页接口已变化或暂不可用": "error_google",
     "缺少已编译的游戏插件": "error_plugin",
     "请使用启动助手打开的链接": "error_session",
     "会话无效": "error_session",

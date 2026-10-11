@@ -1,4 +1,4 @@
-"""Optional public Bing webpage adapter. No login, proxy rotation or challenge bypass."""
+"""Optional public webpage adapters. No login, proxy rotation or challenge bypass."""
 import http.cookiejar
 import json
 import re
@@ -9,7 +9,46 @@ import urllib.request
 
 SERVICE_ERROR = "免费接口限额或暂不可用"
 BING_PAGE_ERROR = "必应网页接口已变化或暂不可用"
+GOOGLE_PAGE_ERROR = "Google 网页接口已变化或暂不可用"
 MAX_RESPONSE = 2 * 1024 * 1024
+
+
+class GoogleWeb:
+    """Experimental public web endpoint. No accounts, keys or challenge bypass."""
+    ENDPOINT = "https://translate.googleapis.com/translate_a/single"
+
+    def read(self, request):
+        with urllib.request.urlopen(request, timeout=15) as response:
+            if urllib.parse.urlparse(response.url).hostname != "translate.googleapis.com":
+                raise ValueError(GOOGLE_PAGE_ERROR)
+            raw = response.read(MAX_RESPONSE + 1)
+            if len(raw) > MAX_RESPONSE:
+                raise ValueError("接口返回内容过大")
+            return raw.decode("utf-8")
+
+    def translate(self, text, language):
+        query = urllib.parse.urlencode({"client": "gtx", "sl": "en", "tl": language,
+                                       "dt": "t", "q": text})
+        request = urllib.request.Request(self.ENDPOINT + "?" + query, headers={
+            "User-Agent": "Mozilla/5.0 (compatible; DressmakerLanguages/0.1.3)",
+            "Accept": "application/json", "Referer": "https://translate.google.com/"})
+        try:
+            reply = json.loads(self.read(request))
+            if not isinstance(reply, list) or not reply or not isinstance(reply[0], list) or not reply[0]:
+                raise ValueError()
+            parts = reply[0]
+            if any(not isinstance(part, list) or len(part) < 2 or not isinstance(part[0], str)
+                   or not isinstance(part[1], str) for part in parts):
+                raise ValueError()
+            # Reject partial replies instead of caching a truncated translation.
+            if "".join(part[1] for part in parts) != text:
+                raise ValueError()
+            translated = "".join(part[0] for part in parts)
+            if not translated.strip():
+                raise ValueError()
+            return translated
+        except (ValueError, KeyError, IndexError, TypeError):
+            raise ValueError(GOOGLE_PAGE_ERROR) from None
 
 
 class BingWeb:
@@ -49,7 +88,7 @@ class BingWeb:
 
     def translate(self, text, language):
         target = "zh-Hans" if language == "zh-CN" else language
-        headers = {"User-Agent": "Mozilla/5.0 (compatible; DressmakerLanguages/0.1.1)",
+        headers = {"User-Agent": "Mozilla/5.0 (compatible; DressmakerLanguages/0.1.3)",
                    "Accept": "text/html"}
         with self.lock:
             if not self.session or time.monotonic() >= self.expires:

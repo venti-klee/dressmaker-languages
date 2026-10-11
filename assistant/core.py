@@ -17,13 +17,15 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import zipfile
-from providers import BingWeb
+from providers import BingWeb, GoogleWeb, GOOGLE_PAGE_ERROR
 from progress import TranslationProgress
+from i18n import error_info
 
 LANGUAGES = {"zh-CN": "简体中文", "ja": "日本語", "ko": "한국어", "fr": "Français", "de": "Deutsch", "es": "Español", "en": "English（原文）"}
 ARGOS_CODES = {"zh-CN": "zh", "ja": "ja", "ko": "ko", "fr": "fr", "de": "de", "es": "es"}
 GAME_DEFAULT = Path.home() / "Library/Application Support/Steam/steamapps/common/Dressmaker"
-PROTECTED = re.compile(r"<[^>\n]+>|\{[^{}\n]*\}|\[\$?[^\[\]\n]+\]|%(?:\d+\$)?[-+\d.]*[sdfi]|\\[nrt]|\r?\n")
+PROTECTED = re.compile(r"(?<!\w)(?:[A-Za-z]:[\\/]|~[\\/]|\.{1,2}[\\/]|/(?:[^/\r\n<>\"'{}]+/)+)[^\r\n<>\"'{}]*|\b[A-Za-z0-9_][A-Za-z0-9_.-]*\.(?:zip|dll|json|png|jpg|jpeg|txt|log|save|argosmodel)\b|https?://[^\s<>\"']+|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}|\b\d+(?:[.,]\d+)?\s*(?:[KMGT]i?B|[kMG]?Hz|FPS|ms|dpi|px|cm|mm)\b|\b(?:GPU|CPU|VSync|MSAA)\b|<[^>\n]+>|\{[^{}\n]*\}|\[\$?[^\[\]\n]+\]|%(?:\d+\$)?[-+\d.]*[sdfi]|\\[nrt]|\r?\n")
+DISPLAY_VALUE = re.compile(r"(?:\d+(?:[.,]\d+)?\s*(?:[KMGT]i?B|[kMG]?Hz|FPS|ms|dpi|px|cm|mm)|\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}\s*[·-]\s*\d+\s*[KMGT]i?B|[^/\\\r\n]+\.(?:zip|dll|json|png|jpg|jpeg|txt|log|save|argosmodel))", re.IGNORECASE)
 
 def atomic_json(path, value):
     path = Path(path)
@@ -170,6 +172,7 @@ class Store:
         defaults = {"language": "zh-CN", "online": True, "offline_model": True, "provider": "mymemory", "daily_bytes": 4500, "libre_url": "", "game": str(GAME_DEFAULT), "auto": True, "fallback": False}
         self.config = dict(defaults, **read_json(self.root / "settings.json", {}))
         self.bing = BingWeb()
+        self.google = GoogleWeb()
         self.network_lock = threading.Lock()
         self.next_request = 0
         self.error = ""
@@ -195,7 +198,7 @@ class Store:
                     if value not in LANGUAGES:
                         raise ValueError("暂不支持此语言")
                 elif key == "provider":
-                    if value not in {"mymemory", "libre", "bing"}:
+                    if value not in {"mymemory", "libre", "bing", "google"}:
                         raise ValueError("未知翻译服务")
                 elif key == "libre_url":
                     parsed = urllib.parse.urlparse(value)
@@ -314,7 +317,7 @@ class Store:
                 return self.network_once(source, language, config, on_progress)
             except (ValueError, urllib.error.URLError, TimeoutError) as error:
                 # Budget, input and format errors must never trigger another request.
-                if not config.get("fallback") or config["provider"] == "mymemory" or isinstance(error, ValueError) and str(error) not in {"免费接口限额或暂不可用", "必应网页接口已变化或暂不可用"}:
+                if not config.get("fallback") or config["provider"] == "mymemory" or isinstance(error, ValueError) and str(error) not in {"免费接口限额或暂不可用", "必应网页接口已变化或暂不可用", GOOGLE_PAGE_ERROR}:
                     raise
                 fallback = dict(config, provider="mymemory", fallback=False)
                 return self.network_once(source, language, fallback, on_progress)
@@ -345,6 +348,8 @@ class Store:
             on_progress("online", config["provider"])
         if config["provider"] == "bing":
             result = self.bing.translate(masked, language)
+        elif config["provider"] == "google":
+            result = self.google.translate(masked, language)
         elif config["provider"] == "libre":
             reply = request_json(config["libre_url"].rstrip("/") + "/translate", {"q": masked, "source": "en", "target": ARGOS_CODES.get(language, language), "format": "text"})
             result = reply.get("translatedText", "")
@@ -369,6 +374,11 @@ class Store:
             composed = self.compose(source) if language == self.config["language"] else None
         if language == "en":
             return source, "original"
+        # Measurements and timestamps need no machine translation. Preserve them,
+        # including when an older machine result misinterpreted a capacity value.
+        if DISPLAY_VALUE.fullmatch(source.strip()):
+            self.cache_put(source, language, source, "original")
+            return source, "untranslated"
         if dictionary_value:
             return dictionary_value, "dictionary"
         if cached:
@@ -376,6 +386,8 @@ class Store:
         if composed:
             self.cache_put(source, language, composed, "dictionary-composed")
             return composed, "dictionary-composed"
+        if not re.search(r"[A-Za-z]", PROTECTED.sub("", source)):
+            return source, "untranslated"
         if config.get("offline_model"):
             if on_progress:
                 on_progress("offline", "argos-offline")
@@ -465,7 +477,12 @@ class Store:
             language = self.config["language"]
             total = self.db.execute("SELECT COUNT(*) FROM pending").fetchone()[0]
             cached = self.db.execute("SELECT COUNT(*) FROM translations WHERE language=?", (language,)).fetchone()[0]
-            return {"config": self.config, "languages": LANGUAGES, "installed": self.installed, "pending": total, "cached": cached, "dictionary": len(self.dictionary), "error": self.error}
+            day = datetime.datetime.utcnow().date().isoformat()
+            row = self.db.execute("SELECT bytes FROM budget WHERE day=?", (day,)).fetchone()
+            used = row[0] if row else 0
+            budget = {"day": day, "used": used, "limit": self.config["daily_bytes"],
+                      "remaining": max(0, self.config["daily_bytes"] - used)}
+            return {"config": self.config.copy(), "languages": LANGUAGES, "installed": self.installed, "pending": total, "cached": cached, "dictionary": len(self.dictionary), "error": self.error, "budget": budget}
 
 class Worker:
     def __init__(self, store):
@@ -515,7 +532,7 @@ class Worker:
             except Exception as error:
                 self.store.error = str(error)
                 self.progress.record(source, "", self.progress.snapshot()["provider"], "failed", error)
-                if attempt.get("online"):
+                if attempt.get("online") and error_info(error)["key"] not in {"error_format", "error_value"}:
                     self.cooldown = time.monotonic() + 300
                 continue
             outcome = "untranslated" if provider == "untranslated" else "success"
@@ -529,7 +546,7 @@ class Worker:
                         # The translation was cached successfully; a game-folder write failure
                         # must not be reported as a translation failure or disable the API.
                         self.store.error = str(error)
-            if provider in {"mymemory", "libre", "bing"}:
+            if provider in {"mymemory", "libre", "bing", "google"}:
                 self.stop.wait(1.5)
         if interrupted:
             self.progress.finish("interrupted")

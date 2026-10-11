@@ -27,4 +27,4 @@ Finder가 권한을 요청하면 macOS 안내를 따르세요. 복사가 안 되
 
 로컬 ZIP에는 개인 Mod 이름, 수정과 게임의 기존 번역이 포함될 수 있습니다. 공개 배포는 프로젝트 패키징 도구가 만든 기본 수동 패키지를 사용하세요.
 
-0.1.2은 초기 버전이며 게임 내 표시와 글꼴은 미검증입니다. [전체 안내와 감사의 말](https://github.com/venti-klee/dressmaker-languages).
+0.1.3은 초기 버전이며 게임 내 표시와 글꼴은 미검증입니다. [전체 안내와 감사의 말](https://github.com/venti-klee/dressmaker-languages).
