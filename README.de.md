@@ -42,17 +42,6 @@ Zum Bauen werden eigene Spiel- und Loader-Assemblies sowie ein .NET SDK benötig
 
 Issues und Pull Requests zu Begriffen, Schriften und Kompatibilität sind willkommen. Geben Sie Spiel-, OS- und Loader-Versionen sowie einen öffentlich teilbaren Text an. Aktualisieren Sie bei Textänderungen alle sieben Kataloge und Anleitungen. Keine Spielstände, privaten Mods oder Spielressourcen hochladen.
 
-## Auf GitHub veröffentlichen
-
-1. Erstellen Sie ein leeres **Public**-Repository. README und Lizenz sind vorhanden; keine zusätzlichen erzeugen.
-2. Entpacken Sie **Dressmaker-Languages-GitHub-0.1.6.zip** und laden Sie den Inhalt mit `README.md` im Stammverzeichnis hoch. `.github/`, `.gitignore` und `.gitattributes` gehören dazu. Finder zeigt versteckte Dateien mit `Command + Shift + .`. Git erhält die Ausführungsrechte der Startskripte.
-3. Erstellen Sie Release `v0.1.6` und hängen Sie das Mac-Archiv an. Quellen gehören ins Repository, das Mac-Paket ist für Spieler.
-4. Prüfen Sie das Plugin vor Veröffentlichung im eigenen Spiel und aktualisieren Sie die Ergebnisse. Persönliche Daten, Pfade, Tokens und Git-Verlauf sind ausgeschlossen. 
-
-Die genaue Liste steht in `UPLOAD-MANIFEST.json`. Offizielle GitHub-Anleitungen sind unten verlinkt.
-
-Offizielle GitHub-Anleitungen: [Create repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) · [Upload files](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository) · [Create Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
-
 ## Quellen und Lizenz
 
 Unabhängig nach den [öffentlich beschriebenen Funktionen von SallyHCAs Werkzeug](https://www.nexusmods.com/dressmaker/mods/339) erstellt, ohne dessen Code, Wörterbücher oder Ressourcen. Eigener Code und erstellte Wörterbücher stehen unter [MIT](LICENSE), ohne Rechte an Spiel- oder Referenzressourcen. Keine Verbindung zum Spiel, Nexus Mods, Microsoft oder Argos.

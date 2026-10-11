@@ -42,17 +42,6 @@ Para compilar necesitas tus ensamblados del juego y del loader y un SDK .NET. El
 
 Se aceptan Issues y Pull Requests sobre terminología, fuentes y compatibilidad. Incluye versiones de juego, sistema y loader y un ejemplo publicable. Actualiza los siete catálogos y guías al cambiar textos. No subas partidas, mods privados ni recursos del juego.
 
-## Publicación en GitHub
-
-1. Crea un repositorio **Public** vacío. Ya se incluyen README y licencia; no generes otros.
-2. Extrae **Dressmaker-Languages-GitHub-0.1.6.zip** y sube su contenido con `README.md` en la raíz. Incluye `.github/`, `.gitignore` y `.gitattributes`. Finder muestra archivos ocultos con `Command + Shift + .`. Git conserva los permisos ejecutables de los scripts.
-3. Crea la Release `v0.1.6` y adjunta el archivo Mac. Las fuentes son para el repositorio; el archivo Mac es para jugadores.
-4. Verifica el parche en tu juego antes de publicarlo y actualiza los resultados. Se excluyen datos personales, rutas, tokens e historial Git. 
-
-`UPLOAD-MANIFEST.json` enumera los archivos exactos. Las instrucciones oficiales de GitHub aparecen abajo.
-
-Instrucciones oficiales de GitHub: [Create repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) · [Upload files](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository) · [Create Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
-
 ## Créditos y licencia
 
 Implementación independiente basada en las [funciones públicas de SallyHCA](https://www.nexusmods.com/dressmaker/mods/339), sin su código, diccionarios ni recursos. El código propio y los diccionarios redactados usan [MIT](LICENSE), sin conceder derechos sobre recursos del juego o del proyecto citado. Sin afiliación con el juego, Nexus Mods, Microsoft o Argos.

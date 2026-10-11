@@ -42,17 +42,6 @@ python3 -m unittest discover -s tests -v
 
 用語、フォント、互換性の Issue / Pull Request を歓迎します。ゲーム、OS、ModLoader の版と公開できる原文例を添えてください。画面文言を変える場合は7言語の辞書と説明書を更新し、セーブ、非公開の Mod、ゲーム素材を投稿しないでください。
 
-## GitHub への公開
-
-1. 空の **Public** リポジトリを作ります。README とライセンスは同梱済みなので新規生成しません。
-2. **Dressmaker-Languages-GitHub-0.1.6.zip** を展開し、中身をアップロードします。`README.md` をルートに置き、`.github/`、`.gitignore`、`.gitattributes` も含めます。Finder の `Command + Shift + .` で隠しファイルを表示できます。Git を使うと起動スクリプトの実行権限を保持できます。
-3. `v0.1.6` の Release を作り、Mac 配布版を添付します。ソースはリポジトリ用、Mac 版はプレイヤー用です。
-4. 公開前に自分のゲームで動作を確認し、検証結果を更新してください。このパッケージには個人データ、パス、トークン、Git 履歴を含みません。
-
-対象ファイルは `UPLOAD-MANIFEST.json` に記載しています。下に GitHub 公式の公開手順へのリンクがあります。
-
-GitHub 公式手順: [Create repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) · [Upload files](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository) · [Create Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
-
 ## 出典とライセンス
 
 [SallyHCA のツールの公開機能](https://www.nexusmods.com/dressmaker/mods/339)を参考に独立実装しました。同プロジェクトのコード、辞書、素材は含みません。独自コードと作成した辞書は [MIT](LICENSE) です。ゲームや参考プロジェクトの素材への権利は与えません。ゲーム、Nexus Mods、Microsoft、Argos とは無関係のプロジェクトです。

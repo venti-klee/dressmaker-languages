@@ -24,38 +24,38 @@
     },
     {
       "path": "README.de.md",
-      "bytes": 10914,
-      "sha256": "eada1be56d48b5f7a4d3a7e9727fff79b6c7ce1f1fa63dbb48f7b3ceb500d832"
+      "bytes": 9655,
+      "sha256": "5468bc28d3350e90cde2c7c6d9b7f1482b47254ad27c7e34d265bdad09fe329c"
     },
     {
       "path": "README.es.md",
-      "bytes": 10308,
-      "sha256": "57cd91cb91e21a1e5578f22ea45a320e5e667d75cfabf013236ebd67ae5c7917"
+      "bytes": 9137,
+      "sha256": "5b18c770bb3791c4acf5d9ac7d3072ac056708ebfa46b72e021710d313b13e70"
     },
     {
       "path": "README.fr.md",
-      "bytes": 11147,
-      "sha256": "1b14e8e6d0da2af5ec4e988229435b1e7e8a428a8d771bea0accc3e939bf9724"
+      "bytes": 9930,
+      "sha256": "ffcab9ecab43789314dbe4c4447feafdadd2005287d6696e3ce4696f98b77bc1"
     },
     {
       "path": "README.ja.md",
-      "bytes": 11862,
-      "sha256": "24de840e88f7270ee580ac19cab46855ef7ddb61c6b518f51880fee4a1e388cb"
+      "bytes": 10479,
+      "sha256": "a5fa691585a640d39100e69be9284395c29915ffc0a6857822bccc16de7a9ef9"
     },
     {
       "path": "README.ko.md",
-      "bytes": 11358,
-      "sha256": "105de81d159489d62accb79036e6f27cb67781261c0129feb3e0b7e57b6600f8"
+      "bytes": 10043,
+      "sha256": "8b530a868912aed43b9afaa22ad0c9f706f3dd19f0a09983019aa96c3f7457af"
     },
     {
       "path": "README.md",
-      "bytes": 10410,
-      "sha256": "09f484fb1c9b0ef86e15454a2ebd2f93b06c612f7546c6ac32f0fea4ab61b25f"
+      "bytes": 9135,
+      "sha256": "284bbf80230b9f7ce276f853ae400270a3aeec2729f0651e2b74d4dad9d8aee1"
     },
     {
       "path": "README.zh-CN.md",
-      "bytes": 9653,
-      "sha256": "6eedf56c923c1f3474a3554d2aa42e7376ed2fe63056f3fdbd666113ac49c164"
+      "bytes": 8417,
+      "sha256": "d28657f5129e439fd668b86aa3948adea8c95c1c5f4ce4639bae3acf2ec5e8e3"
     },
     {
       "path": "Start.command",
@@ -115,32 +115,32 @@
     {
       "path": "docs/de.md",
       "bytes": 16212,
-      "sha256": "078566ec15baa5619a9564279ed2d254df38022900871d5e1abc5625140c6fcc"
+      "sha256": "f3636cd81e764ac3e66c15574c33ace8c9618b4836a2646f5d874d100bc29928"
     },
     {
       "path": "docs/en.md",
-      "bytes": 14542,
-      "sha256": "9fbcd5e95f62d5584e59da5242494026903ee4d8d24feaced70188af1ce5105c"
+      "bytes": 14523,
+      "sha256": "ef11d356593fb8fc4dd808c50c47e44068fc0e9071785a46b3cd50c0f2f298c8"
     },
     {
       "path": "docs/es.md",
-      "bytes": 15660,
-      "sha256": "1792674033a3523bf0841569494c65c0590d2e0f6344774e34766c3946dfacec"
+      "bytes": 15673,
+      "sha256": "05d054ab7ac5b9694d7cfbb2adcc3cc13760a4c03ce68f4b15e0cfd86b93cc07"
     },
     {
       "path": "docs/fr.md",
-      "bytes": 16859,
-      "sha256": "d9218e07b3a2859b128978458691be63ad713a195d276f9c69acfbf19f0a4ca1"
+      "bytes": 16871,
+      "sha256": "4bbc99a0b3cfd0056b18eb9327b592f24de57f7ca98ef3dba348f82c41c3023a"
     },
     {
       "path": "docs/ja.md",
-      "bytes": 17125,
-      "sha256": "76e3cb1aa9f583a8f7d891c1994f0d7d2a43a26cf9d6a8065dec1ced53d2ec18"
+      "bytes": 17140,
+      "sha256": "3662890824e9a8d9a8dda65dd79a96c00d76a6a1f6b2925afb6d8707bc27b983"
     },
     {
       "path": "docs/ko.md",
-      "bytes": 16421,
-      "sha256": "9ffecf89b7dbea17c56d7e272c8a1730b9f90193e26705fc67efea3af3c6bb3b"
+      "bytes": 16427,
+      "sha256": "20d7ac2a5f13f7900f0e164606d9c7899cdbdcdb361ece5ee8eb40f24369c741"
     },
     {
       "path": "docs/manual-de.md",
@@ -179,8 +179,8 @@
     },
     {
       "path": "docs/zh-CN.md",
-      "bytes": 14017,
-      "sha256": "4418ecd60c50edd793d8df09f8062fc06b64c04eb85bbcf931d00bfb72592b13"
+      "bytes": 14002,
+      "sha256": "a348bdb9d3c37db09f1be9da00293805853bf2f90c82593fb531d4024d858ccb"
     },
     {
       "path": "scripts/package.py",
@@ -229,8 +229,8 @@
     },
     {
       "path": "使用说明.md",
-      "bytes": 13975,
-      "sha256": "2978b6acd251a1c0ae34e5716aed6d30f6e0757a0b59b2f564b51710f0a43ea4"
+      "bytes": 13960,
+      "sha256": "e0e051b23fb76258a1c75c8a4266f0c424c199acd59d37fa500fa573cf52da2c"
     },
     {
       "path": "启动翻译助手.command",

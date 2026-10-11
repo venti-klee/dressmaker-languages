@@ -42,17 +42,6 @@ Building the plugin requires your own game and loader assemblies plus a .NET SDK
 
 Issues and pull requests for terminology, fonts, and compatibility are welcome. Include game, OS, and loader versions plus a shareable source-text example. Update all seven catalogs and guides when changing UI text. Do not commit saves, private mod files, or game assets.
 
-## Publishing your GitHub repository
-
-1. Create an empty **Public** repository. Do not generate another README or license; both are included here.
-2. Extract **Dressmaker-Languages-GitHub-0.1.6.zip** and upload its contents with `README.md` at the repository root. Include hidden `.github/`, `.gitignore`, and `.gitattributes` entries. Finder shows hidden files with `Command + Shift + .`. Uploading through Git preserves executable script permissions.
-3. Create a `v0.1.6` Release and attach the Mac archive. The source archive is for repository contents; the Mac archive is for players.
-4. Verify the patch in your own game before publishing and update the verification notes. Personal data, paths, tokens, and Git history are excluded from this archive. 
-
-`UPLOAD-MANIFEST.json` lists the exact upload files. GitHub’s official publishing documentation is linked below.
-
-Official GitHub instructions: [Create repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) · [Upload files](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository) · [Create Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
-
 ## Credits and license
 
 Independently implemented from the public feature description of [SallyHCA’s tool](https://www.nexusmods.com/dressmaker/mods/339); its code, dictionaries, and assets are not included. Original code and authored dictionaries use the [MIT license](LICENSE), which grants no rights to game or reference-project assets. This project is not affiliated with the game, Nexus Mods, Microsoft, or Argos.

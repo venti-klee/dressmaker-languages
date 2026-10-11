@@ -4,7 +4,7 @@
 
 Un asistente independiente para Mac y un parche que traduce la interfaz de Yuuma ModLoader y los nombres mostrados de los objetos de los mods. Se basa en la descripción pública de [la herramienta de SallyHCA](https://www.nexusmods.com/dressmaker/mods/339) y de [su proyecto](https://github.com/Sally-4869/dressmaker-mods-cn). No incluye código, diccionarios ni recursos de ese proyecto.
 
-Download ZIP de GitHub contiene fuentes sin plugin compilado ni `.app`. Los jugadores deben usar la Release Mac; los usuarios de fuentes deben compilar con los pasos siguientes. Publicación: [README](../README.es.md).
+Download ZIP de GitHub contiene fuentes sin plugin compilado ni `.app`. Los jugadores deben usar la Release Mac; los usuarios de fuentes deben compilar con los pasos siguientes. Descripción del proyecto: [README](../README.es.md).
 
 ## Instalación
 

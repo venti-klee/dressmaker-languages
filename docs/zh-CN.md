@@ -4,7 +4,7 @@
 
 这是一个独立制作的 Mac 补丁及本机翻译助手，用来翻译 Yuuma ModLoader 界面和 Mod 物品的显示名称。参考项目：[SallyHCA 的汉化工具](https://www.nexusmods.com/dressmaker/mods/339)、[其公开项目说明](https://github.com/Sally-4869/dressmaker-mods-cn)。本包没有复制该项目的程序、词典或其他资产。
 
-GitHub 的 Download ZIP 是源码快照，不包含已编译的游戏插件或 `.app`。普通玩家请使用 Release 中的 Mac 安装包；源码用户需按本文构建步骤自行编译。项目介绍和发布步骤见 [README](../README.zh-CN.md)。
+GitHub 的 Download ZIP 是源码快照，不包含已编译的游戏插件或 `.app`。普通玩家请使用 Release 中的 Mac 安装包；源码用户需按本文构建步骤自行编译。项目介绍见 [README](../README.zh-CN.md)。
 
 ## 开始使用
 

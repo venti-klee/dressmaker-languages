@@ -42,17 +42,6 @@ python3 -m unittest discover -s tests -v
 
 欢迎通过 Issue / Pull Request 反馈术语、字体和兼容问题。请附游戏、系统和 ModLoader 版本，以及可公开的示例原文。修改界面文案时同步更新七份语言表和说明；不要提交存档、私人 Mod 文件或游戏资产。
 
-## 发布到你的 GitHub
-
-1. 在 GitHub 新建空仓库，选择 **Public**。不要另行生成 README 或许可证；此包已提供。
-2. 解压 **Dressmaker-Languages-GitHub-0.1.6.zip**，上传解压目录内的内容，让 `README.md` 位于仓库根目录。包含 `.github/`、`.gitignore` 和 `.gitattributes` 等隐藏项；Finder 可用 `Command + Shift + .` 显示它们。用 Git 上传会保留启动脚本的可执行权限。
-3. 在 Releases 创建 `v0.1.6`，附上 Mac 安装包。源码包用于仓库，Mac 包用于玩家下载，两者分别上传。
-4. 发布前在你自己的游戏里检查补丁，并将验证结果更新到说明。此包已排除本机数据、路径和令牌，未包含任何 Git 历史。
-
-上传的准确文件清单见 `UPLOAD-MANIFEST.json`。发布方法参见下方 GitHub 官方文档。
-
-GitHub 官方说明: [Create repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) · [Upload files](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository) · [Create Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
-
 ## 来源与许可
 
 根据 [SallyHCA 工具的公开功能](https://www.nexusmods.com/dressmaker/mods/339)独立实现，未复制其代码、词典和资产。独立代码及手工词典使用 [MIT 许可证](LICENSE)；不授权游戏或参考项目的资产。项目与游戏、Nexus Mods、微软及 Argos 无官方关联。

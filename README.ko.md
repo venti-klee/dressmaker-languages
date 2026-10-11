@@ -42,17 +42,6 @@ python3 -m unittest discover -s tests -v
 
 용어, 글꼴, 호환성 Issue / Pull Request를 환영합니다. 게임, OS, 로더 버전과 공개 가능한 원문을 제공하세요. 화면 문구 수정 시 일곱 언어 사전과 설명서를 함께 갱신하고 저장 파일, 비공개 Mod와 게임 자산은 올리지 마세요.
 
-## GitHub 공개
-
-1. 빈 **Public** 저장소를 만드세요. README와 라이선스는 이미 있으므로 따로 생성하지 마세요.
-2. **Dressmaker-Languages-GitHub-0.1.6.zip**을 풀고 내부 내용을 업로드하세요. 루트에 `README.md`가 있어야 하며 `.github/`, `.gitignore`, `.gitattributes`도 포함하세요. Finder에서 `Command + Shift + .`으로 숨김 파일을 볼 수 있습니다. Git으로 올리면 실행 스크립트 권한이 유지됩니다.
-3. `v0.1.6` Release를 만들고 Mac 패키지를 첨부하세요. 소스는 저장소용이고 Mac 패키지는 플레이어용입니다.
-4. 공개 전에 본인 게임에서 확인하고 검증 내용을 갱신하세요. 개인 데이터, 경로, 토큰, Git 기록은 패키지에서 제외했습니다. 
-
-정확한 파일 목록은 `UPLOAD-MANIFEST.json`에 있습니다. 아래에 GitHub 공식 공개 방법 링크가 있습니다.
-
-GitHub 공식 안내: [Create repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) · [Upload files](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository) · [Create Release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
-
 ## 출처와 라이선스
 
 [SallyHCA 도구의 공개 기능](https://www.nexusmods.com/dressmaker/mods/339)을 참고해 독립 구현했습니다. 해당 코드, 사전, 자산은 포함하지 않습니다. 독립 코드와 작성한 사전은 [MIT](LICENSE)이며 게임이나 참고 프로젝트 자산의 권리를 부여하지 않습니다. 게임, Nexus Mods, Microsoft, Argos와 공식 관계가 없습니다.

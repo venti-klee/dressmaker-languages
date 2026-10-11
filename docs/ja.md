@@ -4,7 +4,7 @@
 
 Yuuma ModLoader の画面と Mod アイテムの表示名を翻訳する、独立開発の Mac 用アシスタントとゲームパッチです。[SallyHCA のツール](https://www.nexusmods.com/dressmaker/mods/339)と[公開プロジェクト](https://github.com/Sally-4869/dressmaker-mods-cn)の機能説明を参考にしています。そのコード、辞書、素材は同梱していません。
 
-GitHub の Download ZIP はソースのみで、ビルド済みプラグインと `.app` はありません。プレイヤーは Mac Release を利用し、ソース利用者は下記の手順でビルドしてください。公開手順は [README](../README.ja.md) にあります。
+GitHub の Download ZIP はソースのみで、ビルド済みプラグインと `.app` はありません。プレイヤーは Mac Release を利用し、ソース利用者は下記の手順でビルドしてください。プロジェクトの概要は [README](../README.ja.md) にあります。
 
 ## 導入手順
 
