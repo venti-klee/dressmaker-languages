@@ -51,7 +51,7 @@ L’option de repli vers MyMemory est désactivée par défaut. Elle effectue un
 
 La session Bing reste en mémoire. Aucune connexion à un compte, conservation de compte, rotation de proxy ou résolution de CAPTCHA n’est utilisée. Les résultats valides sont conservés par langue cible ; les corrections manuelles restent prioritaires.
 
-Les 63 tests automatisés ont réussi : session, code du chinois, réponses invalides, cache hors ligne, repli et budget. Bing a fourni des traductions réelles en chinois, japonais, coréen, français, allemand et espagnol. Le cache hors ligne et la conservation de `{0}` ont été vérifiés. Des erreurs de connexion et délais dépassés ont aussi eu lieu ; l’adaptateur reste expérimental.
+Les 66 tests automatisés ont réussi : session, code du chinois, réponses invalides, cache hors ligne, repli et budget. Bing a fourni des traductions réelles en chinois, japonais, coréen, français, allemand et espagnol. Le cache hors ligne et la conservation de `{0}` ont été vérifiés. Des erreurs de connexion et délais dépassés ont aussi eu lieu ; l’adaptateur reste expérimental.
 
 ## Correction et désinstallation
 
@@ -134,3 +134,5 @@ Les filtres ne concernent que la liste ; la traduction des textes manquants trai
 Le décompte distingue textes affichés en jeu, contenus de mods, candidats du gestionnaire et entrées du dictionnaire/cache seules. L’analyse peut collecter formats internes, erreurs et textes inutilisés : les candidats ne représentent pas des omissions visibles. Le mode automatique traite les textes affichés et les mods. Filtrez Non traduit + Textes affichés en jeu pour vérifier les textes collectés ; ouvrez les écrans non visités pour les collecter.
 
 Un échec du service suspend le lot et laisse le reste non traité. Après la pause, les tâches inachevées sont retentées avec la même langue et le même périmètre, y compris les candidats lancés manuellement. Cliquer à nouveau ne contourne pas la pause et ne réinitialise pas la progression. Changer les réglages annule l’ancienne tentative. Seules les traductions enregistrées avec succès réduisent le décompte.
+
+Correction des espaces de début et de fin avec Google : le corps est envoyé et vérifié intégralement, puis les espaces sont restaurés. Une réponse correcte n’est plus rejetée pour des espaces supprimés ; balises, variables et intégrité du corps restent protégées.

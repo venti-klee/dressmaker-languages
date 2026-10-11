@@ -51,7 +51,7 @@ Die Ersatzoption mit MyMemory ist standardmäßig deaktiviert. Bei Netzwerk- ode
 
 Die Bing-Sitzung bleibt im Arbeitsspeicher. Es gibt keine Anmeldung, Kontospeicherung, Proxyrotation oder CAPTCHA-Umgehung. Gültige Ergebnisse werden je Zielsprache gespeichert; manuelle Korrekturen behalten Vorrang.
 
-Alle 63 automatisierten Tests bestanden: Sitzung, chinesischer Sprachcode, ungültige Antworten, Offline-Cache, Ersatzdienst und Budget. Bing lieferte reale chinesische, japanische, koreanische, französische, deutsche und spanische Übersetzungen. Offline-Cache und Erhalt von `{0}` wurden geprüft. Es gab auch Verbindungsfehler und Zeitüberschreitungen; die Anbindung bleibt experimentell.
+Alle 66 automatisierten Tests bestanden: Sitzung, chinesischer Sprachcode, ungültige Antworten, Offline-Cache, Ersatzdienst und Budget. Bing lieferte reale chinesische, japanische, koreanische, französische, deutsche und spanische Übersetzungen. Offline-Cache und Erhalt von `{0}` wurden geprüft. Es gab auch Verbindungsfehler und Zeitüberschreitungen; die Anbindung bleibt experimentell.
 
 ## Korrekturen und Deinstallation
 
@@ -134,3 +134,5 @@ Filter gelten nur für die Liste; die Übersetzung fehlender Texte verarbeitet d
 Die Anzahl unterscheidet Spielanzeigetexte, Mod-Inhalte, Manager-Kandidaten und reine Wörterbuch/Cache-Einträge. Programm-Scans erfassen auch interne Formate, Fehler und ungenutzte Texte; Kandidaten sind keine Anzahl sichtbarer Übersetzungslücken. Automatisch werden angezeigte Texte und Mod-Inhalte verarbeitet. Unübersetzt + Spielanzeigetexte prüft erfasste sichtbare Texte; noch nicht besuchte Ansichten im Spiel öffnen, um sie zu erfassen.
 
 Bei Dienstausfall pausiert der Stapel; der Rest bleibt unbearbeitet. Nach der Wartezeit werden unerledigte Aufgaben mit derselben Sprache und Auswahl erneut versucht, einschließlich manuell gestarteter Kandidaten. Erneutes Klicken umgeht die Pause nicht und setzt den Fortschritt nicht zurück. Geänderte Einstellungen verwerfen den alten Wiederholungsversuch. Nur erfolgreich gespeicherte Übersetzungen senken die Anzahl.
+
+Google entfernt Rand-Leerzeichen: Jetzt wird der Textkörper gesendet, vollständig geprüft und die Leerzeichen werden wiederhergestellt. Gültige Antworten werden dadurch nicht mehr abgewiesen; Tags, Variablen und Vollständigkeit bleiben geschützt.

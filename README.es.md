@@ -26,7 +26,7 @@ La [guía española](docs/es.md) explica modelos, desinstalación y datos. Downl
 
 Se leen campos JSON como `name`, `displayName`, `display_name`, `description`, `tooltip` y `title`. Los hooks cubren Unity Text / TextMeshPro en el loader o nombres detectados. No se garantizan interfaces propias, textos en imágenes, formatos binarios especiales ni fuentes no inglesas. La herramienta no añade telas ni una localización completa del juego base.
 
-El plugin se compiló para ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1. Pasaron las 63 pruebas automatizadas. Se comprobó el cambio de idioma local y Bing y MyMemory devolvieron traducciones reales. La red, los límites o cambios de página pueden interrumpir los adaptadores web. Faltan pruebas de nombres de telas de terceros, disposición y fuentes en el juego.
+El plugin se compiló para ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1. Pasaron las 66 pruebas automatizadas. Se comprobó el cambio de idioma local y Bing y MyMemory devolvieron traducciones reales. La red, los límites o cambios de página pueden interrumpir los adaptadores web. Faltan pruebas de nombres de telas de terceros, disposición y fuentes en el juego.
 
 El modo en línea envía textos ingleses desconocidos al servicio elegido. Las solicitudes se separan al menos 3 segundos y el presupuesto predeterminado es de 4.500 bytes UTF-8 diarios. Los fallos conservan el original. La alternativa MyMemory está desactivada por defecto; al activarla ambos intentos cuentan. El diccionario y la caché funcionan sin conexión.
 
@@ -101,3 +101,5 @@ Los filtros solo afectan a la lista; la traducción de textos pendientes procesa
 El recuento separa textos visibles del juego, contenido de mods, candidatos del gestor y entradas solo del diccionario/caché. El análisis puede recoger formatos internos, errores y textos sin usar; los candidatos no son un recuento de omisiones visibles. El modo automático procesa textos visibles y mods. Filtra Sin traducir + Textos visibles en el juego para revisar lo recopilado; abre las pantallas no visitadas para recogerlas.
 
 Un fallo del servicio pausa el lote y deja el resto sin procesar. Tras la espera se reintentan las tareas incompletas con el mismo idioma y alcance, incluidos candidatos iniciados manualmente. Volver a pulsar no evita la espera ni reinicia el progreso. Cambiar los ajustes cancela el reintento anterior. Solo las traducciones guardadas correctamente reducen el recuento.
+
+Se corrigió el tratamiento de espacios iniciales y finales de Google: se envía el cuerpo, se verifica completo y se restauran los espacios. Ya no se rechazan respuestas correctas por recortar los bordes; etiquetas, variables e integridad siguen protegidas.

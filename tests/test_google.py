@@ -40,6 +40,23 @@ class GoogleTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, GOOGLE_PAGE_ERROR):
                     self.store.google.translate('Moonlit brocade', 'zh-CN')
 
+    def test_boundary_spaces_are_preserved_without_rejecting_trimmed_source_echo(self):
+        adapter = GoogleWeb()
+        source = '  Moonlit brocade \t'
+        reply = json.dumps([[['月光锦缎', 'Moonlit brocade']]])
+        with patch.object(adapter, 'read', return_value=reply) as read:
+            self.assertEqual(adapter.translate(source, 'zh-CN'), '  月光锦缎 \t')
+            import urllib.parse
+            query = urllib.parse.parse_qs(urllib.parse.urlparse(read.call_args.args[0].full_url).query)
+            self.assertEqual(query['q'], ['Moonlit brocade'])
+
+    def test_boundary_normalization_still_rejects_partial_and_changed_body(self):
+        adapter = GoogleWeb()
+        for echo in ['Moonlit', 'Moonlit  brocade', 'different source']:
+            with patch.object(adapter, 'read', return_value=json.dumps([[['译文', echo]]])):
+                with self.assertRaisesRegex(ValueError, GOOGLE_PAGE_ERROR):
+                    adapter.translate(' Moonlit brocade ', 'zh-CN')
+
     def test_cached_translation_survives_reopen_offline_and_language_switch(self):
         with patch.object(self.store.google, 'translate', return_value='月光锦缎'):
             self.assertEqual(self.store.translate('Moonlit brocade'), ('月光锦缎', 'google'))

@@ -607,7 +607,7 @@ class Worker:
             except Exception as error:
                 self.store.error = str(error)
                 self.progress.record(source, "", self.progress.snapshot()["provider"], "failed", error)
-                if attempt.get("online") and error_info(error)["key"] not in {"error_format", "error_value"}:
+                if attempt.get("online") and error_info(error)["key"] not in {"error_format", "error_value", "error_length"}:
                     self.cooldown = time.monotonic() + 300
                     self.deferred_batch = (config.copy(), all_candidates)
                     break  # Leave the rest unprocessed; do not report skipped entries as handled.

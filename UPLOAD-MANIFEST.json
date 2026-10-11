@@ -24,38 +24,38 @@
     },
     {
       "path": "README.de.md",
-      "bytes": 10230,
-      "sha256": "8300c8614b7d344a27e45076bb640627d83bfcee562c3fa1ad3f052eb165c07e"
+      "bytes": 10484,
+      "sha256": "4cb782f92f0403aed77509218d9b7293a3283b39acbd0bbbe7a5586b0433dd4e"
     },
     {
       "path": "README.es.md",
-      "bytes": 9643,
-      "sha256": "50952e34d3bf99b1e311234eb58ac9575976c7ff3dc06b5df311c8eb6907d10e"
+      "bytes": 9903,
+      "sha256": "b2e4a95f2170b3f35351f7444624151b3df172d60f8d526b433eea6bd0f9a280"
     },
     {
       "path": "README.fr.md",
-      "bytes": 10446,
-      "sha256": "53266245e9a31a73521d51316d9f2f6df7ed30c5c53463457bd977fcb7d63f9c"
+      "bytes": 10726,
+      "sha256": "5b90a861ede085ad911be7b07833a0bb70d000fe88edea810d56fbc98ef0d902"
     },
     {
       "path": "README.ja.md",
-      "bytes": 11140,
-      "sha256": "8f426e77417c30d0664701c8d07530306d16602720c13b90df1a48a55c006181"
+      "bytes": 11412,
+      "sha256": "6414a5ea702d0d524534acd4806ccb3c4bf99647f259d0073bf66e1e77a907b9"
     },
     {
       "path": "README.ko.md",
-      "bytes": 10662,
-      "sha256": "dc183c797950dac0800de5ae22fd1f5e2ce2e811057a0df413961db0a2b938ba"
+      "bytes": 10910,
+      "sha256": "eab743f0facd649b2132efa82d453cddccebcf01249034cf1bfd5d9ce01087a9"
     },
     {
       "path": "README.md",
-      "bytes": 9765,
-      "sha256": "bee5096cb4012472d9f54d028a748c3cc625486dc76cac0acb7cc0a58f5783ff"
+      "bytes": 10027,
+      "sha256": "15c9e8c4112a3865ac88a490a7937b3d9c4e2f006a222061865b8726ce9ac5b6"
     },
     {
       "path": "README.zh-CN.md",
-      "bytes": 9086,
-      "sha256": "ab42f32442843e2e65930ac536588dfa068b7c89c6592d08bb52b697a6a5c513"
+      "bytes": 9306,
+      "sha256": "312f66e3705ed0d02c64da6899129e07e75da38127ba96acf1f05db60d1710ee"
     },
     {
       "path": "Start.command",
@@ -69,8 +69,8 @@
     },
     {
       "path": "assistant/core.py",
-      "bytes": 35753,
-      "sha256": "17556fd31f64723a9180f161d14b746429165eb85fc30dca95347442e003a08d"
+      "bytes": 35769,
+      "sha256": "7e8ba7e2e8871755c99e3412cf9e4c0d80161a24d78966400972af33f0f8c302"
     },
     {
       "path": "assistant/dictionary.json",
@@ -104,8 +104,8 @@
     },
     {
       "path": "assistant/providers.py",
-      "bytes": 5920,
-      "sha256": "6d7d233ca943ad178028043b17419194d0705a0486514316e85c9e50dbbceb72"
+      "bytes": 6270,
+      "sha256": "14249458777324a6935ffaebab4da5fcdaa018e2cf1951b730f697d0e3e403e9"
     },
     {
       "path": "assistant/server.py",
@@ -114,33 +114,33 @@
     },
     {
       "path": "docs/de.md",
-      "bytes": 15528,
-      "sha256": "73ee12aee4032b60531aa4feeba752d4237d11077b5e5fa0b57a5ebe81d44003"
+      "bytes": 15782,
+      "sha256": "79030df9136844381ff04f1337b11b85f9ba516946980551c8f0dbc6edad8c78"
     },
     {
       "path": "docs/en.md",
-      "bytes": 13897,
-      "sha256": "c50220853e773ff149bb8e3af9c21fe1bdd4e2355502dbc0ed7f2f69e442d65b"
+      "bytes": 14159,
+      "sha256": "889bd5ff9026d1101df6ab4a5a4cc8276f1ff6088324529f6975380172cb004d"
     },
     {
       "path": "docs/es.md",
-      "bytes": 14995,
-      "sha256": "5f6a2ca3553d3ad97d14ca41f432a20b88b6123f3f9d53654f163f47f93d5d6e"
+      "bytes": 15255,
+      "sha256": "b234dcab2d8e8979783136cc7263661b15bf4a1c024a1ab8cc63d7dc76eca470"
     },
     {
       "path": "docs/fr.md",
-      "bytes": 16158,
-      "sha256": "faae0f74e1dfa1c57d280aa67839edd82d6ca9993de16b1a085e8c402d11dc0d"
+      "bytes": 16438,
+      "sha256": "ad264b2af0d566a05be56cd705057955554d48f83a0ce92edfbe33d9b5d346ce"
     },
     {
       "path": "docs/ja.md",
-      "bytes": 16403,
-      "sha256": "d81fa2fb5dd0964202a341da844a52194b991a02ed2cb7646c8944616432959a"
+      "bytes": 16675,
+      "sha256": "cf0ebbe3a5045193d1277f446af51fae8f698731cc45cafd60d740caec2696bc"
     },
     {
       "path": "docs/ko.md",
-      "bytes": 15725,
-      "sha256": "5a9ebc85562132633328d1c559bac67541a86268d3c0a11954332e27e537abbe"
+      "bytes": 15973,
+      "sha256": "6b276ae3113116c13a243a94810629778d8fc96c836869cbf94964e8c33488f8"
     },
     {
       "path": "docs/manual-de.md",
@@ -179,8 +179,8 @@
     },
     {
       "path": "docs/zh-CN.md",
-      "bytes": 13450,
-      "sha256": "77ce291172d455fd81e0f639b754bf838a504c437ce8ceeab07f46872eefb263"
+      "bytes": 13670,
+      "sha256": "66a61452792f6998d1ab726f39b295fe4b77299da4a6c96902ff3b906c371535"
     },
     {
       "path": "scripts/package.py",
@@ -204,8 +204,8 @@
     },
     {
       "path": "tests/test_google.py",
-      "bytes": 6148,
-      "sha256": "3a3c20143e545b5fc56ea31f562f98d6ab454e0a5d41c47d27dd5eac926b6559"
+      "bytes": 7156,
+      "sha256": "838a9ab0e8d7302a8fedc2ab6f4e078d92242eb82edddf8d950110bc66fedc3a"
     },
     {
       "path": "tests/test_i18n.py",
@@ -214,8 +214,8 @@
     },
     {
       "path": "tests/test_progress.py",
-      "bytes": 13275,
-      "sha256": "c77c18212b6ea66d7f98819ebb0aa52c7b3566bf6c207a01bc199997a99b39f5"
+      "bytes": 14121,
+      "sha256": "2bf79dbf502ccda00e02bf0b3373b7571c3e828526ad1ea3b87a4886bf5bb23a"
     },
     {
       "path": "tests/test_providers.py",
@@ -229,8 +229,8 @@
     },
     {
       "path": "使用说明.md",
-      "bytes": 13408,
-      "sha256": "05a1c6dd55ef4929076d15d2a41cedbbfb000e85e87e29a4aa3ed21701b32734"
+      "bytes": 13628,
+      "sha256": "2236047b0e356dff51bd6cce6f47368abb2fb328e897f44718dc3ca3c01f71cd"
     },
     {
       "path": "启动翻译助手.command",

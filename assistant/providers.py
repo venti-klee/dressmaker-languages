@@ -27,8 +27,15 @@ class GoogleWeb:
             return raw.decode("utf-8")
 
     def translate(self, text, language):
+        # Google drops boundary whitespace in its source echo. Translate the
+        # body, keep strict completeness checks, then restore the boundaries.
+        body = text.strip()
+        if not body:
+            return text
+        leading = text[:len(text) - len(text.lstrip())]
+        trailing = text[len(text.rstrip()):]
         query = urllib.parse.urlencode({"client": "gtx", "sl": "en", "tl": language,
-                                       "dt": "t", "q": text})
+                                       "dt": "t", "q": body})
         request = urllib.request.Request(self.ENDPOINT + "?" + query, headers={
             "User-Agent": "Mozilla/5.0 (compatible; DressmakerLanguages/0.1.3)",
             "Accept": "application/json", "Referer": "https://translate.google.com/"})
@@ -41,12 +48,12 @@ class GoogleWeb:
                    or not isinstance(part[1], str) for part in parts):
                 raise ValueError()
             # Reject partial replies instead of caching a truncated translation.
-            if "".join(part[1] for part in parts) != text:
+            if "".join(part[1] for part in parts) != body:
                 raise ValueError()
             translated = "".join(part[0] for part in parts)
             if not translated.strip():
                 raise ValueError()
-            return translated
+            return leading + translated + trailing
         except (ValueError, KeyError, IndexError, TypeError):
             raise ValueError(GOOGLE_PAGE_ERROR) from None
 

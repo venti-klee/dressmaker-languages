@@ -26,7 +26,7 @@ Details zu Modellen, Deinstallation und Daten stehen in der [deutschen Anleitung
 
 Der Scanner liest JSON-Felder wie `name`, `displayName`, `display_name`, `description`, `tooltip` und `title`. Laufzeit-Hooks betreffen Unity Text / TextMeshPro in der Loader-Oberfläche oder gescannte Namen. Eigene Oberflächen, Bildtext, besondere Binärformate und nicht englische Quellen sind nicht garantiert. Das Werkzeug fügt keine Stoffe hinzu und übersetzt das Basisspiel nicht vollständig in neue Sprachen.
 
-Das Plugin wurde für ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1 gebaut. Alle 63 automatisierten Tests bestanden. Die lokale Sprachumschaltung wurde geprüft; Bing und MyMemory lieferten reale Übersetzungen. Web-Anbindungen können durch Netzwerk, Limits oder Seitenänderungen ausfallen. Stoffnamen anderer Anbieter, Layout und Schrift im Spiel bleiben zu prüfen.
+Das Plugin wurde für ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1 gebaut. Alle 66 automatisierten Tests bestanden. Die lokale Sprachumschaltung wurde geprüft; Bing und MyMemory lieferten reale Übersetzungen. Web-Anbindungen können durch Netzwerk, Limits oder Seitenänderungen ausfallen. Stoffnamen anderer Anbieter, Layout und Schrift im Spiel bleiben zu prüfen.
 
 Online werden unbekannte englische Anzeigetexte an den gewählten Dienst gesendet. Anfragen haben mindestens 3 Sekunden Abstand; das Tagesbudget beträgt standardmäßig 4.500 UTF-8-Bytes. Bei Fehlern bleibt der Originaltext erhalten. Der MyMemory-Ersatz ist zunächst ausgeschaltet; aktiv zählen beide Versuche zum Budget. Wörterbuch und Cache bleiben offline nutzbar.
 
@@ -101,3 +101,5 @@ Filter gelten nur für die Liste; die Übersetzung fehlender Texte verarbeitet d
 Die Anzahl unterscheidet Spielanzeigetexte, Mod-Inhalte, Manager-Kandidaten und reine Wörterbuch/Cache-Einträge. Programm-Scans erfassen auch interne Formate, Fehler und ungenutzte Texte; Kandidaten sind keine Anzahl sichtbarer Übersetzungslücken. Automatisch werden angezeigte Texte und Mod-Inhalte verarbeitet. Unübersetzt + Spielanzeigetexte prüft erfasste sichtbare Texte; noch nicht besuchte Ansichten im Spiel öffnen, um sie zu erfassen.
 
 Bei Dienstausfall pausiert der Stapel; der Rest bleibt unbearbeitet. Nach der Wartezeit werden unerledigte Aufgaben mit derselben Sprache und Auswahl erneut versucht, einschließlich manuell gestarteter Kandidaten. Erneutes Klicken umgeht die Pause nicht und setzt den Fortschritt nicht zurück. Geänderte Einstellungen verwerfen den alten Wiederholungsversuch. Nur erfolgreich gespeicherte Übersetzungen senken die Anzahl.
+
+Google entfernt Rand-Leerzeichen: Jetzt wird der Textkörper gesendet, vollständig geprüft und die Leerzeichen werden wiederhergestellt. Gültige Antworten werden dadurch nicht mehr abgewiesen; Tags, Variablen und Vollständigkeit bleiben geschützt.

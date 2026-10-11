@@ -51,7 +51,7 @@ La opción de recurrir a MyMemory está desactivada por defecto. Hace un único 
 
 La sesión de Bing permanece en memoria. No se inicia sesión, no se guardan cuentas, no se rotan proxies ni se evitan CAPTCHA. Los resultados válidos se guardan por idioma de destino y las correcciones manuales tienen prioridad.
 
-Pasaron las 63 pruebas automatizadas: sesión, código del chino, respuestas inválidas, caché sin conexión, alternativa y presupuesto. Bing devolvió traducciones reales en chino, japonés, coreano, francés, alemán y español. Se comprobaron la caché sin conexión y la conservación de `{0}`. También hubo errores de conexión y tiempos de espera agotados; el adaptador sigue siendo experimental.
+Pasaron las 66 pruebas automatizadas: sesión, código del chino, respuestas inválidas, caché sin conexión, alternativa y presupuesto. Bing devolvió traducciones reales en chino, japonés, coreano, francés, alemán y español. Se comprobaron la caché sin conexión y la conservación de `{0}`. También hubo errores de conexión y tiempos de espera agotados; el adaptador sigue siendo experimental.
 
 ## Corrección y desinstalación
 
@@ -134,3 +134,5 @@ Los filtros solo afectan a la lista; la traducción de textos pendientes procesa
 El recuento separa textos visibles del juego, contenido de mods, candidatos del gestor y entradas solo del diccionario/caché. El análisis puede recoger formatos internos, errores y textos sin usar; los candidatos no son un recuento de omisiones visibles. El modo automático procesa textos visibles y mods. Filtra Sin traducir + Textos visibles en el juego para revisar lo recopilado; abre las pantallas no visitadas para recogerlas.
 
 Un fallo del servicio pausa el lote y deja el resto sin procesar. Tras la espera se reintentan las tareas incompletas con el mismo idioma y alcance, incluidos candidatos iniciados manualmente. Volver a pulsar no evita la espera ni reinicia el progreso. Cambiar los ajustes cancela el reintento anterior. Solo las traducciones guardadas correctamente reducen el recuento.
+
+Se corrigió el tratamiento de espacios iniciales y finales de Google: se envía el cuerpo, se verifica completo y se restauran los espacios. Ya no se rechazan respuestas correctas por recortar los bordes; etiquetas, variables e integridad siguen protegidas.

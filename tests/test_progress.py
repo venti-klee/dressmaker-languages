@@ -246,6 +246,20 @@ class ProgressTests(unittest.TestCase):
         self.assertEqual(self.worker.progress.snapshot()['translated'], 0)
         self.assertEqual(self.store.cache_get('512 MiB', 'zh-CN'), ('512 MiB', 'original'))
 
+    def test_oversized_entry_does_not_pause_other_entries_or_schedule_service_retry(self):
+        self.add('Quux Alpha', 'Quux Bravo')
+        self.store.save_config({'online': True})
+        def translate(source, config, on_progress=None):
+            if source.endswith('Alpha'):
+                raise ValueError('单条超过免费接口的 500 字节限制，请安装离线模型或手动翻译')
+            return '有效译文', 'argos-offline'
+        with patch.object(self.store, 'translate', side_effect=translate):
+            self.worker.process_batch(self.store.config.copy())
+        result = self.worker.progress.snapshot()
+        self.assertEqual((result['processed'], result['translated'], result['failed']), (2, 1, 1))
+        self.assertEqual(self.worker.cooldown, 0)
+        self.assertIsNone(self.worker.deferred_batch)
+
 
 if __name__ == '__main__':
     unittest.main()

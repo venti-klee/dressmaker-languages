@@ -26,7 +26,7 @@ Consultez le [guide français](docs/fr.md) pour les modèles, la désinstallatio
 
 L’analyse reconnaît `name`, `displayName`, `display_name`, `description`, `tooltip` et `title` dans les fichiers JSON. Les hooks ciblent Unity Text / TextMeshPro dans le gestionnaire ou les noms découverts. Les interfaces personnalisées, images, formats binaires spéciaux et sources non anglaises ne sont pas garantis. L’outil n’ajoute pas de tissus et ne localise pas entièrement le jeu de base.
 
-Le plugin a été compilé pour ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1. Les 63 tests automatisés ont réussi. Le changement de langue local a été vérifié et Bing et MyMemory ont fourni des traductions réelles. Les adaptateurs web peuvent échouer selon le réseau, les limites et les changements de page. Les noms de tissus tiers, la disposition et les polices en jeu restent à vérifier.
+Le plugin a été compilé pour ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1. Les 66 tests automatisés ont réussi. Le changement de langue local a été vérifié et Bing et MyMemory ont fourni des traductions réelles. Les adaptateurs web peuvent échouer selon le réseau, les limites et les changements de page. Les noms de tissus tiers, la disposition et les polices en jeu restent à vérifier.
 
 Le mode en ligne envoie les textes anglais inconnus au service choisi. Les requêtes sont espacées d’au moins 3 secondes ; le budget par défaut est de 4 500 octets UTF-8 par jour. Un échec conserve l’original. Le repli MyMemory est désactivé par défaut ; les deux essais comptent dans le budget lorsqu’il est activé. Le dictionnaire et le cache restent utilisables hors ligne.
 
@@ -101,3 +101,5 @@ Les filtres ne concernent que la liste ; la traduction des textes manquants trai
 Le décompte distingue textes affichés en jeu, contenus de mods, candidats du gestionnaire et entrées du dictionnaire/cache seules. L’analyse peut collecter formats internes, erreurs et textes inutilisés : les candidats ne représentent pas des omissions visibles. Le mode automatique traite les textes affichés et les mods. Filtrez Non traduit + Textes affichés en jeu pour vérifier les textes collectés ; ouvrez les écrans non visités pour les collecter.
 
 Un échec du service suspend le lot et laisse le reste non traité. Après la pause, les tâches inachevées sont retentées avec la même langue et le même périmètre, y compris les candidats lancés manuellement. Cliquer à nouveau ne contourne pas la pause et ne réinitialise pas la progression. Changer les réglages annule l’ancienne tentative. Seules les traductions enregistrées avec succès réduisent le décompte.
+
+Correction des espaces de début et de fin avec Google : le corps est envoyé et vérifié intégralement, puis les espaces sont restaurés. Une réponse correcte n’est plus rejetée pour des espaces supprimés ; balises, variables et intégrité du corps restent protégées.

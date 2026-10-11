@@ -26,7 +26,7 @@ See the [English user guide](docs/en.md) for model setup, uninstalling, and loca
 
 The scanner recognizes common JSON fields such as `name`, `displayName`, `display_name`, `description`, `tooltip`, and `title`. Runtime hooks cover Unity Text / TextMeshPro in the loader UI or names discovered by scanning. Custom interfaces, image text, special binary content, and non-English sources are not guaranteed. This tool does not add fabric content or a complete new localization of the base game.
 
-The plugin compiled against ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1, and 63 automated tests passed. Local UI language switching was checked. Bing and MyMemory returned live translations, but free web adapters can fail because of network conditions, service limits, or page changes. Third-party fabric names, in-game layout, and font rendering still need verification.
+The plugin compiled against ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1, and 66 automated tests passed. Local UI language switching was checked. Bing and MyMemory returned live translations, but free web adapters can fail because of network conditions, service limits, or page changes. Third-party fabric names, in-game layout, and font rendering still need verification.
 
 Online mode sends untranslated English display text to the selected provider. Translation requests are spaced at least 3 seconds apart; the default daily budget is 4,500 UTF-8 bytes. Failures retain the original text. MyMemory fallback is off by default; both attempts count toward the budget when enabled. Dictionaries and existing cache stay available offline.
 
@@ -101,3 +101,5 @@ Filters affect the list only; “Translate missing text” still processes the c
 Missing counts now separate game display text, mod content, manager candidates and dictionary/cache-only entries. Program scans can collect internal formats, errors and unused text; candidate counts do not represent visible missing translations. Automatic translation handles displayed text and mod content. Filter Untranslated + Game display text to check collected visible text; unvisited screens still need to be opened in game.
 
 A service failure pauses the batch and leaves the rest unprocessed, not translated or processed. After cooldown, unfinished tasks retry with the same language and scope, including manually started candidates. Clicking again does not bypass cooldown or reset progress. Changed settings cancel the old retry. Missing counts decrease only when translations are successfully saved; “No translation produced” is not completion.
+
+Google boundary-whitespace handling is fixed: send the body, strictly verify its complete source echo, then restore boundary whitespace. Valid replies are no longer rejected merely for trimmed boundaries; tags, variables and body completeness remain protected.
