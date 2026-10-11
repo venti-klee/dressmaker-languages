@@ -18,6 +18,7 @@ import urllib.parse
 import urllib.request
 import zipfile
 from providers import BingWeb
+from progress import TranslationProgress
 
 LANGUAGES = {"zh-CN": "简体中文", "ja": "日本語", "ko": "한국어", "fr": "Français", "de": "Deutsch", "es": "Español", "en": "English（原文）"}
 ARGOS_CODES = {"zh-CN": "zh", "ja": "ja", "ko": "ko", "fr": "fr", "de": "de", "es": "es"}
@@ -305,20 +306,20 @@ class Store:
         masked, tokens = protect(source)
         return restore(translator.translate(masked), tokens)
 
-    def network(self, source, language, config=None):
+    def network(self, source, language, config=None, on_progress=None):
         config = config or self.config.copy()
         # Serialise all public requests, including manual calls and fallback attempts.
         with self.network_lock:
             try:
-                return self.network_once(source, language, config)
+                return self.network_once(source, language, config, on_progress)
             except (ValueError, urllib.error.URLError, TimeoutError) as error:
                 # Budget, input and format errors must never trigger another request.
                 if not config.get("fallback") or config["provider"] == "mymemory" or isinstance(error, ValueError) and str(error) not in {"免费接口限额或暂不可用", "必应网页接口已变化或暂不可用"}:
                     raise
                 fallback = dict(config, provider="mymemory", fallback=False)
-                return self.network_once(source, language, fallback)
+                return self.network_once(source, language, fallback, on_progress)
 
-    def network_once(self, source, language, config):
+    def network_once(self, source, language, config, on_progress=None):
         masked, tokens = protect(source)
         if len(masked.encode("utf-8")) > 500:
             raise ValueError("单条超过免费接口的 500 字节限制，请安装离线模型或手动翻译")
@@ -336,8 +337,12 @@ class Store:
             self.db.commit()
         delay = self.next_request - time.monotonic()
         if delay > 0:
+            if on_progress:
+                on_progress("waiting", config["provider"], time.time() + delay)
             time.sleep(delay)
         self.next_request = time.monotonic() + 3
+        if on_progress:
+            on_progress("online", config["provider"])
         if config["provider"] == "bing":
             result = self.bing.translate(masked, language)
         elif config["provider"] == "libre":
@@ -351,7 +356,7 @@ class Store:
             result = html.unescape(reply.get("responseData", {}).get("translatedText", ""))
         return restore(result, tokens), config["provider"]
 
-    def translate(self, source, config=None):
+    def translate(self, source, config=None, on_progress=None):
         # Hold configuration stable while a language change races with a network reply.
         with self.lock:
             config = config or self.config.copy()
@@ -372,6 +377,8 @@ class Store:
             self.cache_put(source, language, composed, "dictionary-composed")
             return composed, "dictionary-composed"
         if config.get("offline_model"):
+            if on_progress:
+                on_progress("offline", "argos-offline")
             try:
                 result = self.offline(source, language)
             except Exception as error:
@@ -381,7 +388,7 @@ class Store:
                 self.cache_put(source, language, result, "argos-offline")
                 return result, "argos-offline"
         if config.get("online"):
-            result, provider = self.network(source, language, config)
+            result, provider = self.network(source, language, config, on_progress)
             if result != source:
                 self.cache_put(source, language, result, provider)
                 return result, provider
@@ -469,6 +476,67 @@ class Worker:
         self.path = None
         self.cooldown = 0
         self.last_model_attempt = {}
+        self.progress = TranslationProgress()
+
+    def request_translation(self):
+        with self.store.lock:
+            language = self.store.config["language"]
+        if self.progress.queue(language):
+            self.last_model_attempt.clear()
+            self.cooldown = 0
+            self.wake.set()
+
+    def process_batch(self, config, all_candidates=False):
+        now = time.monotonic()
+        candidates = [item for item in self.store.entries(limit=10000)
+                      if not item["value"] and (all_candidates or item["kind"] != "loader")
+                      and now - self.last_model_attempt.get((config["language"], item["source"]), -3600) >= 300]
+        if not candidates:
+            if self.progress.snapshot()["state"] == "queued":
+                self.progress.begin(config["language"], 0)
+                self.progress.finish()
+            return
+        self.progress.begin(config["language"], len(candidates))
+        interrupted = False
+        for item in candidates:
+            with self.store.lock:
+                changed = config != self.store.config
+            if self.stop.is_set() or changed:
+                interrupted = True
+                break
+            source = item["source"]
+            self.last_model_attempt[(config["language"], source)] = time.monotonic()
+            attempt = config.copy()
+            if time.monotonic() < self.cooldown:
+                attempt["online"] = False
+            self.progress.current(source)
+            try:
+                value, provider = self.store.translate(source, attempt, on_progress=self.progress.stage)
+            except Exception as error:
+                self.store.error = str(error)
+                self.progress.record(source, "", self.progress.snapshot()["provider"], "failed", error)
+                if attempt.get("online"):
+                    self.cooldown = time.monotonic() + 300
+                continue
+            outcome = "untranslated" if provider == "untranslated" else "success"
+            self.progress.record(source, value, provider, outcome)
+            if outcome == "success":
+                self.store.error = ""
+                if self.store.installed:
+                    try:
+                        self.store.publish()
+                    except Exception as error:
+                        # The translation was cached successfully; a game-folder write failure
+                        # must not be reported as a translation failure or disable the API.
+                        self.store.error = str(error)
+            if provider in {"mymemory", "libre", "bing"}:
+                self.stop.wait(1.5)
+        if interrupted:
+            self.progress.finish("interrupted")
+        elif time.monotonic() < self.cooldown:
+            self.progress.finish("cooldown", time.time() + self.cooldown - time.monotonic())
+        else:
+            self.progress.finish()
 
     def ingest(self):
         path = self.store.plugin_data / "pending.jsonl"
@@ -498,34 +566,8 @@ class Worker:
                 if config.get("auto") or self.wake.is_set():
                     all_candidates = self.wake.is_set()
                     self.wake.clear()
-                    for item in self.store.entries(limit=10000):
-                        if self.stop.is_set():
-                            break
-                        if item["value"]:
-                            continue
-                        if item["kind"] == "loader" and not all_candidates:
-                            continue  # Do not spend a free quota on invisible DLL literals.
-                        key = (config["language"], item["source"])
-                        if time.monotonic() - self.last_model_attempt.get(key, -3600) < 300:
-                            continue
-                        self.last_model_attempt[key] = time.monotonic()
-                        attempt = config.copy()
-                        if time.monotonic() < self.cooldown:
-                            attempt["online"] = False
-                        try:
-                            value, provider = self.store.translate(item["source"], attempt)
-                            if provider != "untranslated":
-                                self.store.error = ""
-                            if provider != "untranslated" and self.store.installed:
-                                self.store.publish()
-                            if provider in {"mymemory", "libre", "bing"}:
-                                self.stop.wait(1.5)
-                        except Exception as error:
-                            self.store.error = str(error)
-                            if attempt.get("online"):
-                                self.cooldown = time.monotonic() + 300
-                        if config != self.store.config:
-                            break
+                    self.process_batch(config, all_candidates)
             except Exception as error:
                 self.store.error = str(error)
+                self.progress.finish("failed", error=error)
             self.stop.wait(2)

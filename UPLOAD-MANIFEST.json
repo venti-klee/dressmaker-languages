@@ -1,5 +1,5 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.2",
   "archive_kind": "source",
   "files": [
     {
@@ -24,38 +24,38 @@
     },
     {
       "path": "README.de.md",
-      "bytes": 6871,
-      "sha256": "419e6b018643208580c604ebb3024eb4cfa25bb9734d6f5d8d7d8fe134def17d"
+      "bytes": 7125,
+      "sha256": "5db99d47e02ed355a0f52487a31ed6b5738fc1072623692752a494d4787d87da"
     },
     {
       "path": "README.es.md",
-      "bytes": 6466,
-      "sha256": "920855dfa48de9acdd46c5b90fa7e7d220a62fd85adb4bb527647f9aa63f2341"
+      "bytes": 6685,
+      "sha256": "7c5922564a4ff473af17399b2dd6a4aed41c9966e7fb420fbe5ffe7e86bfa044"
     },
     {
       "path": "README.fr.md",
-      "bytes": 6897,
-      "sha256": "b788d590aea9c2dc822eb62a90c605b1320453e953f43c6661c7f5d7ee31a7ba"
+      "bytes": 7148,
+      "sha256": "328afc37ba824426c620bc08800dacf83172729f707eaa6c91e1e61847501735"
     },
     {
       "path": "README.ja.md",
-      "bytes": 7535,
-      "sha256": "3efa581c5e03f5fdc7fe93bb214bf52bdd9e9c1a8134c750c1ebb11c5c31b058"
+      "bytes": 7756,
+      "sha256": "a5a693c3f4bba7bf4cd8e2d44b57cd9280e8a8866bb53790f67de77ea82a27d9"
     },
     {
       "path": "README.ko.md",
-      "bytes": 7216,
-      "sha256": "7f75ca48eadccd91f111bd39a65aed1f7343a89eedb9465831b5baeedc414a73"
+      "bytes": 7448,
+      "sha256": "365f666572ea08723e97e148b97afe39cff9bf98e751d4aa3a9cdb41ab0916f3"
     },
     {
       "path": "README.md",
-      "bytes": 6719,
-      "sha256": "a406624fa429ff0cd7ff57d4597c79985e4d8c7cb0e30325290cac9a1db6c723"
+      "bytes": 6929,
+      "sha256": "83bc96912c75c46476c56a47872dc8999415d1fb4356731b3105d67c90becab8"
     },
     {
       "path": "README.zh-CN.md",
-      "bytes": 6145,
-      "sha256": "91f5d00ce478194a77c9c4bd0cee0bc63012a9ccda464ca9b6effc6a735d7eb2"
+      "bytes": 6315,
+      "sha256": "a5e8b3505ffc28d942b6cbcaff5e63093d06bd406055e4126a2ce1a7c5602d61"
     },
     {
       "path": "Start.command",
@@ -65,12 +65,12 @@
     {
       "path": "VERSION",
       "bytes": 6,
-      "sha256": "80447316529fc62014fbaa047fb67c51ac30e32830cda370405349d8d66d196c"
+      "sha256": "297b50f08386d3521f8fdaf2f78eb8d9d0acdf452d2e61596905fba37208c792"
     },
     {
       "path": "assistant/core.py",
-      "bytes": 26776,
-      "sha256": "9d0e7c1686d849d382a88a21d2c86f754ef53faf59d4e53646f8f3a3efebb0e1"
+      "bytes": 28559,
+      "sha256": "146f9b023121e147d93560a59adadf72b5ae7cf6e2489be072dcab066f53888b"
     },
     {
       "path": "assistant/dictionary.json",
@@ -84,8 +84,8 @@
     },
     {
       "path": "assistant/index.html",
-      "bytes": 12876,
-      "sha256": "0b63ee99763e1b8fe5849d23fcc6369a7775c8b321dee6a08ac8635bc9edf8ec"
+      "bytes": 17537,
+      "sha256": "61d15be94fb1c0c6552958d247ef3084a19d7e5c9545efbce5519e3c9e8eaff0"
     },
     {
       "path": "assistant/install_model.py",
@@ -94,8 +94,13 @@
     },
     {
       "path": "assistant/locales.json",
-      "bytes": 57272,
-      "sha256": "a1a9c3bd27b1a5b93acf8381143173297bdaf261c14843289406dcb76e873e36"
+      "bytes": 69760,
+      "sha256": "713b7db468f2395df0ccd212dcc3e545f5c6a41c49202b8038beab0ea63486b5"
+    },
+    {
+      "path": "assistant/progress.py",
+      "bytes": 3200,
+      "sha256": "9c2ec56df927c33a833527fb3936332ef314aceb8b74bd9ab469d3b07807d501"
     },
     {
       "path": "assistant/providers.py",
@@ -104,78 +109,78 @@
     },
     {
       "path": "assistant/server.py",
-      "bytes": 10262,
-      "sha256": "1c9d935ff8af86a1e4d88a8cc1ebed8ee39781a9c9cae4e5c3ca4e698634ae79"
+      "bytes": 10392,
+      "sha256": "07b904d66b68cd86198e8800abcb375c430eeddb9f1cd2350af98e92f7bc441d"
     },
     {
       "path": "docs/de.md",
-      "bytes": 12253,
-      "sha256": "0b967521ef938bb51702528a3df1141035ede09bd3aa4b4c6f9ce0f9c3c17d1d"
+      "bytes": 12507,
+      "sha256": "0ee87ccfe2d778562813d095043aa2ef3584677754df6f51f0964850a894ad38"
     },
     {
       "path": "docs/en.md",
-      "bytes": 10904,
-      "sha256": "39cacaa78b4f0e020de4f2809d1a0c36cab301c12ecd1df6808a12172b9c5950"
+      "bytes": 11114,
+      "sha256": "ba3b585e06f653dd55e00a8683dc62baeef4775a7ec1632752414eab51918360"
     },
     {
       "path": "docs/es.md",
-      "bytes": 11873,
-      "sha256": "4fdf90cce72331772e9708725a52647ac6e994c23a71d7ceb0ceefe0c2afc227"
+      "bytes": 12092,
+      "sha256": "21a61c6349c67b5b85a6c0b4fa5046823cc781dd35aa7ecae763139b4be5eeb7"
     },
     {
       "path": "docs/fr.md",
-      "bytes": 12690,
-      "sha256": "c5da6f3050f8deea827b977298b25706c83bd0d813e09bfc7404980e33f34642"
+      "bytes": 12941,
+      "sha256": "068469e80309ad72ae9fbfc09dffb20ed811fe476549587bfb92d4d4df90eb47"
     },
     {
       "path": "docs/ja.md",
-      "bytes": 12872,
-      "sha256": "c9fa2b55afc234da448180f89c99ab92aea2bdb33d557571e4495693652f35d3"
+      "bytes": 13093,
+      "sha256": "906330bd810ea72b6c5e74716bf4b1a9e596d3f61ab87e583a1bbf4e9a75a968"
     },
     {
       "path": "docs/ko.md",
-      "bytes": 12366,
-      "sha256": "be816d98fc27199d727ea1777bb91fc2a12b45b19977e301f353c0b776e078a0"
+      "bytes": 12598,
+      "sha256": "bc05d479d3a4664aeccb8fe387b4737305fe87c124a7700bf83d9e45776b29d4"
     },
     {
       "path": "docs/manual-de.md",
       "bytes": 2924,
-      "sha256": "c5dded3c88a5039d0a84ad3f2846a94226c1d0f1af6eb9475d9fe4248d239e65"
+      "sha256": "3f0f74e8ce762631f76f4c781debd199f86421284467dff3625e363778ee18f7"
     },
     {
       "path": "docs/manual-en.md",
       "bytes": 2839,
-      "sha256": "fe51162673391b24556289a196d742c1cd321e51c0e482e5aac0032aabd0b4f0"
+      "sha256": "7336de598c1914842e0eab376eb64a52775b9b2904d0c20bfcc59181d5daa99c"
     },
     {
       "path": "docs/manual-es.md",
       "bytes": 2730,
-      "sha256": "4e6b205fedd30e598d417605431162e3d0da083db865fa14d6795d9f96f4f9e2"
+      "sha256": "c89a93e6329b54236728d616fd8dc712d3e0f560374e5f78f6b05bb1ccc3f9d8"
     },
     {
       "path": "docs/manual-fr.md",
       "bytes": 2862,
-      "sha256": "8e044c616510f6a7ea3aa663d099afa818866853b8999672f608f2319d951738"
+      "sha256": "6e3db2e0c12eeab5f67cf40007c58f3a92ae993cf5050961e236177f82258aa0"
     },
     {
       "path": "docs/manual-ja.md",
       "bytes": 3360,
-      "sha256": "b3011499e63d6a4d0f8fa29084942c377317afca18c0b95620068ef1ed21cd5e"
+      "sha256": "b55536c0ec17661cf4bf98861bc485a33d208a3cdd5ebf393239cb03588fa2e0"
     },
     {
       "path": "docs/manual-ko.md",
       "bytes": 3021,
-      "sha256": "3bf6c88f270ac2979c83fd90e8de02b4f4041cd37c28b475921b74c5d2a6ec52"
+      "sha256": "f55538eb7501c744e1e4f944b696459452c9ecbb2768929114fac0a736b2c0d0"
     },
     {
       "path": "docs/manual-zh-CN.md",
       "bytes": 2889,
-      "sha256": "718354a1d2e14e22caa147d80facda09715bb72fa9fc2ecdf62ea53af020c3cd"
+      "sha256": "5366f5a8802797174eaf2d4efd5415d234657fdd254af5312ae013b267d52da8"
     },
     {
       "path": "docs/zh-CN.md",
-      "bytes": 10571,
-      "sha256": "406f7af3b9e40a787f50b079b87a75591ca06aa516ee0b274ce32a1fe1d08976"
+      "bytes": 10741,
+      "sha256": "a9de5b986b7af316946f6c70751fca88b6924ff415b20f0b069fe4290a61bf24"
     },
     {
       "path": "scripts/package.py",
@@ -194,8 +199,13 @@
     },
     {
       "path": "tests/test_i18n.py",
-      "bytes": 3072,
-      "sha256": "30a2b2d16a493abf4a6ee13be8ade2984fddc4ec9c173cba064035d2a0a72111"
+      "bytes": 3346,
+      "sha256": "60ec94f88b28c659b1da66d3b1c43db0d25aea66ce4f7fba63fa10c7d9d705aa"
+    },
+    {
+      "path": "tests/test_progress.py",
+      "bytes": 8097,
+      "sha256": "c0a624de49d7ee554c94dd3b1380fa96ba84792d9480e24c7c11b50dafbf2fa0"
     },
     {
       "path": "tests/test_providers.py",
@@ -209,8 +219,8 @@
     },
     {
       "path": "使用说明.md",
-      "bytes": 10551,
-      "sha256": "8c5e8094938114d4b670a094d20374881a311ff3da451ee52fcba7987e3e0323"
+      "bytes": 10721,
+      "sha256": "0e351e6a92135299fca8609bd6b512c2c537f1766a6ee44d0887d35e7e348023"
     },
     {
       "path": "启动翻译助手.command",

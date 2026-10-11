@@ -1,4 +1,4 @@
-# Dressmaker Sprachassistent 0.1.1
+# Dressmaker Sprachassistent 0.1.2
 
 [简体中文](zh-CN.md) · [English](en.md) · [日本語](ja.md) · [한국어](ko.md) · [Français](fr.md) · **Deutsch** · [Español](es.md)
 
@@ -51,7 +51,7 @@ Die Ersatzoption mit MyMemory ist standardmäßig deaktiviert. Bei Netzwerk- ode
 
 Die Bing-Sitzung bleibt im Arbeitsspeicher. Es gibt keine Anmeldung, Kontospeicherung, Proxyrotation oder CAPTCHA-Umgehung. Gültige Ergebnisse werden je Zielsprache gespeichert; manuelle Korrekturen behalten Vorrang.
 
-Alle 28 automatisierten Tests bestanden: Sitzung, chinesischer Sprachcode, ungültige Antworten, Offline-Cache, Ersatzdienst und Budget. Bing lieferte reale chinesische, japanische, koreanische, französische, deutsche und spanische Übersetzungen. Offline-Cache und Erhalt von `{0}` wurden geprüft. Es gab auch Verbindungsfehler und Zeitüberschreitungen; die Anbindung bleibt experimentell.
+Alle 36 automatisierten Tests bestanden: Sitzung, chinesischer Sprachcode, ungültige Antworten, Offline-Cache, Ersatzdienst und Budget. Bing lieferte reale chinesische, japanische, koreanische, französische, deutsche und spanische Übersetzungen. Offline-Cache und Erhalt von `{0}` wurden geprüft. Es gab auch Verbindungsfehler und Zeitüberschreitungen; die Anbindung bleibt experimentell.
 
 ## Korrekturen und Deinstallation
 
@@ -74,7 +74,7 @@ Die Seite ist nur auf dem lokalen Computer erreichbar. Ein zufälliges Sitzungst
 
 ## Prüfung und Grenzen
 
-Das Plugin wurde mit ModLoader 0.7.3, BepInEx 5.4.23.5 und Unity 6000.3.4f1 kompiliert. Elf Tests des Übersetzungskerns bestanden. Reale MyMemory-Anfragen lieferten chinesische, japanische, koreanische und französische Übersetzungen. Die Übersetzung der Oberfläche und Anleitungen wurde in 0.1.1 ergänzt.
+Das Plugin wurde mit ModLoader 0.7.3, BepInEx 5.4.23.5 und Unity 6000.3.4f1 kompiliert. Elf Tests des Übersetzungskerns bestanden. Reale MyMemory-Anfragen lieferten chinesische, japanische, koreanische und französische Übersetzungen. Die Übersetzung der Oberfläche und Anleitungen wurde in 0.1.2 ergänzt.
 
 **Die Integration im Spiel wurde noch nicht getestet.** Textabdeckung, Layout, japanische und koreanische Schriften und Namen externer Stoff-Mods müssen noch im Spiel geprüft werden. Bei der Entwicklung waren auf diesem Computer keine Inhaltspakete installiert.
 
@@ -104,3 +104,8 @@ Dies ist eine unabhängige Implementierung. Die Danksagung bedeutet keine Unters
 ## Paket zur manuellen Installation herunterladen
 
 Exportiert Plugin, Wörterbuch und gespeicherte Übersetzungen für die gespeicherte Spielsprache, ohne in den Spielordner zu schreiben. Nach neuen Übersetzungen oder einem Sprachwechsel erneut exportieren. Die ZIP enthält Anleitungen in sieben Sprachen. [Paket zur manuellen Installation herunterladen](manual-de.md).
+
+
+## Übersetzungsfortschritt
+
+Aktualisierung jede Sekunde. Der Fortschritt zählt bearbeitete Einträge; beibehaltene Originale und Fehler gelten nicht als erfolgreiche Übersetzungen. Die Liste aktualisiert sich und behält ungespeicherte Änderungen.

@@ -1,4 +1,4 @@
-# Dressmaker Language Assistant 0.1.1
+# Dressmaker Language Assistant 0.1.2
 
 [简体中文](zh-CN.md) · **English** · [日本語](ja.md) · [한국어](ko.md) · [Français](fr.md) · [Deutsch](de.md) · [Español](es.md)
 
@@ -51,7 +51,7 @@ Choose a translation service and click **Save settings**.
 
 The Bing session stays in memory. No login, account storage, proxy rotation, or CAPTCHA bypass is used. Successful results are cached separately for each game target; manual corrections retain priority.
 
-Tests cover session parsing, Chinese language mapping, invalid responses, offline cache, fallback, and budgets. All 28 automated tests passed. Bing returned live Chinese, Japanese, Korean, French, German, and Spanish translations. Offline cache reuse and preservation of `{0}` were also checked. Connection errors and timeouts occurred during testing, so the adapter remains experimental.
+Tests cover session parsing, Chinese language mapping, invalid responses, offline cache, fallback, and budgets. All 36 automated tests passed. Bing returned live Chinese, Japanese, Korean, French, German, and Spanish translations. Offline cache reuse and preservation of `{0}` were also checked. Connection errors and timeouts occurred during testing, so the adapter remains experimental.
 
 ## Editing and uninstalling
 
@@ -74,7 +74,7 @@ The page listens only on the local computer and protects write operations with a
 
 ## Verification and limitations
 
-The game plugin compiled against ModLoader 0.7.3, BepInEx 5.4.23.5, and Unity 6000.3.4f1. Eleven translation-core tests passed. MyMemory returned Chinese, Japanese, Korean, and French translations in live requests. Interface and guide localization are additional features of 0.1.1.
+The game plugin compiled against ModLoader 0.7.3, BepInEx 5.4.23.5, and Unity 6000.3.4f1. Eleven translation-core tests passed. MyMemory returned Chinese, Japanese, Korean, and French translations in live requests. Interface and guide localization are additional features of 0.1.2.
 
 **Integration inside the game has not been tested.** Text coverage, layout, Japanese/Korean font rendering, and third-party fabric names still require in-game verification; no content packs were installed on this computer during development.
 
@@ -104,3 +104,8 @@ This is an independent implementation; acknowledgement does not imply endorsemen
 ## Download manual installation package
 
 Export the plugin, dictionary and saved translations for the saved game language without writing to the game folder. Export again after translating or changing language. The ZIP includes instructions in seven languages. [Download manual installation package](manual-en.md).
+
+
+## Translation progress
+
+Updates every second. Progress counts processed entries; unchanged originals and failures are not successful translations. The list updates automatically and preserves unsaved edits.

@@ -106,6 +106,7 @@ def main():
                 status = store.status()
                 status["error_info"] = error_info(status.get("error", ""))
                 status["model"] = model_job.copy()
+                status["progress"] = worker.progress.snapshot()
                 return self.reply(200, status)
             if parsed.path == "/api/manual-package":
                 try:
@@ -117,7 +118,10 @@ def main():
                     return self.reply(400, {"error": str(error), "error_info": error_info(error)})
             if parsed.path == "/api/entries":
                 query = urllib.parse.parse_qs(parsed.query).get("q", [""])[0]
-                return self.reply(200, {"entries": store.entries(query)})
+                with store.lock:
+                    entries = store.entries(query)
+                    language = store.config["language"]
+                return self.reply(200, {"entries": entries, "language": language})
             return self.reply(404, {"error": "未找到页面"})
 
         def do_POST(self):
@@ -138,9 +142,7 @@ def main():
                 elif self.path == "/api/scan":
                     store.scan()
                 elif self.path == "/api/translate":
-                    worker.last_model_attempt.clear()
-                    worker.cooldown = 0
-                    worker.wake.set()
+                    worker.request_translation()
                 elif self.path == "/api/save":
                     store.cache_put(data["source"], store.config["language"], data["value"], "manual")
                     if store.installed:

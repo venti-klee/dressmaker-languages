@@ -27,6 +27,8 @@ class LocalizationTests(unittest.TestCase):
         keys += re.findall(r"\bt\('([^']+)'", page)
         keys = [key for key in keys if not key.endswith("_")]
         keys += ["kind_display", "kind_content", "kind_loader", "model_idle", "model_installing", "model_done", "model_failed"]
+        keys += ["progress_" + state for state in ["idle", "queued", "running", "waiting", "finished", "cooldown", "interrupted", "failed"]]
+        keys += ["progress_result_" + outcome for outcome in ["success", "untranslated", "failed"]]
         for language, catalog in self.catalogs.items():
             for key in keys:
                 self.assertIn(key, catalog, (language, key))
@@ -45,7 +47,7 @@ class LocalizationTests(unittest.TestCase):
             path = BUNDLE / "docs" / (language + ".md")
             text = path.read_text()
             self.assertGreater(len(text), 3000, language)
-            self.assertIn("0.1.1", text)
+            self.assertIn((BUNDLE / "VERSION").read_text().strip(), text)
             self.assertIn("Start.command", text)
             self.assertIn("4,500" if language == "en" else "4", text)
             for target in re.findall(r"\]\(([^)]+)\)", text):

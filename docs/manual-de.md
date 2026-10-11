@@ -27,4 +27,4 @@ Zur Deinstallation das Spiel beenden und nur die zwei `DressmakerLanguages`-Ordn
 
 Ein lokaler Export kann eigene Mod-Namen, Korrekturen und vorhandene Spielübersetzungen enthalten. Für öffentliche Verteilung das Basispaket des Projekt-Paketierungsskripts verwenden.
 
-Version 0.1.1 ist eine frühe Ausgabe; Darstellung und Schriften im Spiel sind noch ungeprüft. [Anleitungen und Danksagung](https://github.com/venti-klee/dressmaker-languages).
+Version 0.1.2 ist eine frühe Ausgabe; Darstellung und Schriften im Spiel sind noch ungeprüft. [Anleitungen und Danksagung](https://github.com/venti-klee/dressmaker-languages).

@@ -27,4 +27,4 @@ Finderで権限の確認が表示されたらmacOSの案内に従います。コ
 
 ローカル出力には自分のMod名、修正、ゲーム内の既存訳文が含まれる場合があります。公開配布にはプロジェクトのパッケージ処理で作る基本手動パッケージを使用してください。
 
-0.1.1は初期版で、ゲーム内表示とフォントは未検証です。[説明と謝辞](https://github.com/venti-klee/dressmaker-languages)。
+0.1.2は初期版で、ゲーム内表示とフォントは未検証です。[説明と謝辞](https://github.com/venti-klee/dressmaker-languages)。

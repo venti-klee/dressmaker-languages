@@ -27,4 +27,4 @@ Pour désinstaller, quittez le jeu et retirez seulement les deux dossiers `Dress
 
 Un export local peut contenir vos noms de mods, corrections et traductions déjà présentes dans votre jeu. Pour une diffusion publique, utilisez le paquet de base généré par le script du projet.
 
-La version 0.1.1 est préliminaire ; affichage et polices en jeu restent à vérifier. [Guides et remerciements](https://github.com/venti-klee/dressmaker-languages).
+La version 0.1.2 est préliminaire ; affichage et polices en jeu restent à vérifier. [Guides et remerciements](https://github.com/venti-klee/dressmaker-languages).

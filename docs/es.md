@@ -1,4 +1,4 @@
-# Asistente multilingüe de Dressmaker 0.1.1
+# Asistente multilingüe de Dressmaker 0.1.2
 
 [简体中文](zh-CN.md) · [English](en.md) · [日本語](ja.md) · [한국어](ko.md) · [Français](fr.md) · [Deutsch](de.md) · **Español**
 
@@ -51,7 +51,7 @@ La opción de recurrir a MyMemory está desactivada por defecto. Hace un único 
 
 La sesión de Bing permanece en memoria. No se inicia sesión, no se guardan cuentas, no se rotan proxies ni se evitan CAPTCHA. Los resultados válidos se guardan por idioma de destino y las correcciones manuales tienen prioridad.
 
-Pasaron las 28 pruebas automatizadas: sesión, código del chino, respuestas inválidas, caché sin conexión, alternativa y presupuesto. Bing devolvió traducciones reales en chino, japonés, coreano, francés, alemán y español. Se comprobaron la caché sin conexión y la conservación de `{0}`. También hubo errores de conexión y tiempos de espera agotados; el adaptador sigue siendo experimental.
+Pasaron las 36 pruebas automatizadas: sesión, código del chino, respuestas inválidas, caché sin conexión, alternativa y presupuesto. Bing devolvió traducciones reales en chino, japonés, coreano, francés, alemán y español. Se comprobaron la caché sin conexión y la conservación de `{0}`. También hubo errores de conexión y tiempos de espera agotados; el adaptador sigue siendo experimental.
 
 ## Corrección y desinstalación
 
@@ -74,7 +74,7 @@ La página solo escucha en el ordenador local y protege las operaciones de escri
 
 ## Verificación y limitaciones
 
-El plugin se compiló con ModLoader 0.7.3, BepInEx 5.4.23.5 y Unity 6000.3.4f1. Pasaron once pruebas del núcleo de traducción. Las solicitudes reales a MyMemory devolvieron traducciones en chino, japonés, coreano y francés. La localización de la interfaz y las guías se añadió en 0.1.1.
+El plugin se compiló con ModLoader 0.7.3, BepInEx 5.4.23.5 y Unity 6000.3.4f1. Pasaron once pruebas del núcleo de traducción. Las solicitudes reales a MyMemory devolvieron traducciones en chino, japonés, coreano y francés. La localización de la interfaz y las guías se añadió en 0.1.2.
 
 **La integración dentro del juego aún no se ha probado.** Quedan por comprobar la cobertura, la disposición, las fuentes japonesas y coreanas y los nombres de telas de terceros. No había paquetes de contenido instalados en este ordenador durante el desarrollo.
 
@@ -104,3 +104,8 @@ La implementación es independiente; los agradecimientos no implican respaldo de
 ## Descargar paquete de instalación manual
 
 Exporta el plugin, el diccionario y las traducciones del idioma del juego guardado sin escribir en su carpeta. Vuelve a exportar después de traducir o cambiar de idioma. El ZIP incluye instrucciones en siete idiomas. [Descargar paquete de instalación manual](manual-es.md).
+
+
+## Progreso de traducción
+
+Se actualiza cada segundo. El progreso cuenta textos procesados; originales conservados y fallos no son traducciones correctas. La lista se actualiza conservando las ediciones sin guardar.
