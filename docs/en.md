@@ -51,7 +51,7 @@ Choose a translation service and click **Save settings**.
 
 The Bing session stays in memory. No login, account storage, proxy rotation, or CAPTCHA bypass is used. Successful results are cached separately for each game target; manual corrections retain priority.
 
-Tests cover session parsing, Chinese language mapping, invalid responses, offline cache, fallback, and budgets. All 25 automated tests passed. Bing returned live Chinese, Japanese, Korean, French, German, and Spanish translations. Offline cache reuse and preservation of `{0}` were also checked. Connection errors and timeouts occurred during testing, so the adapter remains experimental.
+Tests cover session parsing, Chinese language mapping, invalid responses, offline cache, fallback, and budgets. All 28 automated tests passed. Bing returned live Chinese, Japanese, Korean, French, German, and Spanish translations. Offline cache reuse and preservation of `{0}` were also checked. Connection errors and timeouts occurred during testing, so the adapter remains experimental.
 
 ## Editing and uninstalling
 
@@ -99,3 +99,8 @@ Thank you to the authors and teams whose work made this project possible:
 - [SallyHCA — Fully Automatic Chinese Localization Tool](https://www.nexusmods.com/dressmaker/mods/339) — Thank you for sharing the approach to translating the mod manager and content names. Your tool and public description inspired this project’s translation workflow.
 
 This is an independent implementation; acknowledgement does not imply endorsement. Their programs, dictionaries, game assets, and models are not redistributed in this package.
+
+
+## Download manual installation package
+
+Export the plugin, dictionary and saved translations for the saved game language without writing to the game folder. Export again after translating or changing language. The ZIP includes instructions in seven languages. [Download manual installation package](manual-en.md).

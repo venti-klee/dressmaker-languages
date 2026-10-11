@@ -26,7 +26,7 @@ La [guía española](docs/es.md) explica modelos, desinstalación y datos. Downl
 
 Se leen campos JSON como `name`, `displayName`, `display_name`, `description`, `tooltip` y `title`. Los hooks cubren Unity Text / TextMeshPro en el loader o nombres detectados. No se garantizan interfaces propias, textos en imágenes, formatos binarios especiales ni fuentes no inglesas. La herramienta no añade telas ni una localización completa del juego base.
 
-El plugin se compiló para ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1. Pasaron las 25 pruebas automatizadas. Se comprobó el cambio de idioma local y Bing y MyMemory devolvieron traducciones reales. La red, los límites o cambios de página pueden interrumpir los adaptadores web. Faltan pruebas de nombres de telas de terceros, disposición y fuentes en el juego.
+El plugin se compiló para ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1. Pasaron las 28 pruebas automatizadas. Se comprobó el cambio de idioma local y Bing y MyMemory devolvieron traducciones reales. La red, los límites o cambios de página pueden interrumpir los adaptadores web. Faltan pruebas de nombres de telas de terceros, disposición y fuentes en el juego.
 
 El modo en línea envía textos ingleses desconocidos al servicio elegido. Las solicitudes se separan al menos 3 segundos y el presupuesto predeterminado es de 4.500 bytes UTF-8 diarios. Los fallos conservan el original. La alternativa MyMemory está desactivada por defecto; al activarla ambos intentos cuentan. El diccionario y la caché funcionan sin conexión.
 
@@ -38,7 +38,7 @@ Fuentes en `src/` y `assistant/`. El asistente básico utiliza solo la bibliotec
 python3 -m unittest discover -s tests -v
 ```
 
-Para compilar necesitas tus ensamblados del juego y del loader y un SDK .NET. El asistente es 0.1.1; el plugin sin cambios conserva la versión interna 0.1.0. GitHub Actions está configurado pero aún no se ha ejecutado de forma remota.
+Para compilar necesitas tus ensamblados del juego y del loader y un SDK .NET. El asistente es 0.1.1; el plugin sin cambios conserva la versión interna 0.1.0. Las comprobaciones de GitHub Actions están activadas; consulta los resultados en la página Actions del repositorio.
 
 Se aceptan Issues y Pull Requests sobre terminología, fuentes y compatibilidad. Incluye versiones de juego, sistema y loader y un ejemplo publicable. Actualiza los siete catálogos y guías al cambiar textos. No subas partidas, mods privados ni recursos del juego.
 
@@ -66,3 +66,8 @@ Gracias a los autores y equipos cuyo trabajo hizo posible este proyecto:
 - [SallyHCA — Herramienta automática de traducción al chino](https://www.nexusmods.com/dressmaker/mods/339) — Gracias por compartir el enfoque para traducir el gestor de mods y los nombres del contenido. Tu herramienta y su descripción pública inspiraron el proceso de traducción de este proyecto.
 
 La implementación es independiente; los agradecimientos no implican respaldo de los autores. No se redistribuyen sus programas, diccionarios, recursos del juego ni modelos.
+
+
+## Descargar paquete de instalación manual
+
+Exporta el plugin, el diccionario y las traducciones del idioma del juego guardado sin escribir en su carpeta. Vuelve a exportar después de traducir o cambiar de idioma. El ZIP incluye instrucciones en siete idiomas. [Descargar paquete de instalación manual](docs/manual-es.md).

@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -71,6 +72,16 @@ def main():
         if any(not path.is_file() for path in binaries):
             raise RuntimeError('Compile the plugin and provide the Mac launcher before packaging a Mac release; or use --source-only.')
         create_archive(args.out / ('Dressmaker-Languages-Mac-' + version + '.zip'), files + binaries, version, 'mac-release')
+        sys.path.insert(0, str(ROOT / 'assistant'))
+        from core import manual_archive
+        dictionaries = json.loads((ROOT / 'assistant/dictionary.json').read_text())
+        # Public release uses only authored terms, never the local game's tables or user cache.
+        path = args.out / ('Dressmaker-Languages-Manual-zh-CN-' + version + '.zip')
+        path.write_bytes(manual_archive(ROOT, 'zh-CN', dictionaries.get('zh-CN', {}), []))
+        with zipfile.ZipFile(path) as archive:
+            if archive.testzip() is not None:
+                raise RuntimeError('Manual archive integrity check failed')
+            print(path.name + ': ' + str(len(archive.namelist())) + ' files')
 
 
 if __name__ == '__main__':

@@ -26,7 +26,7 @@ See the [English user guide](docs/en.md) for model setup, uninstalling, and loca
 
 The scanner recognizes common JSON fields such as `name`, `displayName`, `display_name`, `description`, `tooltip`, and `title`. Runtime hooks cover Unity Text / TextMeshPro in the loader UI or names discovered by scanning. Custom interfaces, image text, special binary content, and non-English sources are not guaranteed. This tool does not add fabric content or a complete new localization of the base game.
 
-The plugin compiled against ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1, and 25 automated tests passed. Local UI language switching was checked. Bing and MyMemory returned live translations, but free web adapters can fail because of network conditions, service limits, or page changes. Third-party fabric names, in-game layout, and font rendering still need verification.
+The plugin compiled against ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1, and 28 automated tests passed. Local UI language switching was checked. Bing and MyMemory returned live translations, but free web adapters can fail because of network conditions, service limits, or page changes. Third-party fabric names, in-game layout, and font rendering still need verification.
 
 Online mode sends untranslated English display text to the selected provider. Translation requests are spaced at least 3 seconds apart; the default daily budget is 4,500 UTF-8 bytes. Failures retain the original text. MyMemory fallback is off by default; both attempts count toward the budget when enabled. Dictionaries and existing cache stay available offline.
 
@@ -38,7 +38,7 @@ Source is in `src/` and `assistant/`. The basic assistant uses only Python’s s
 python3 -m unittest discover -s tests -v
 ```
 
-Building the plugin requires your own game and loader assemblies plus a .NET SDK; see the full guide. The assistant is 0.1.1; the unchanged game plugin retains internal version 0.1.0. GitHub Actions is configured but has not run remotely yet.
+Building the plugin requires your own game and loader assemblies plus a .NET SDK; see the full guide. The assistant is 0.1.1; the unchanged game plugin retains internal version 0.1.0. GitHub Actions checks are enabled; see the repository Actions page for results.
 
 Issues and pull requests for terminology, fonts, and compatibility are welcome. Include game, OS, and loader versions plus a shareable source-text example. Update all seven catalogs and guides when changing UI text. Do not commit saves, private mod files, or game assets.
 
@@ -66,3 +66,8 @@ Thank you to the authors and teams whose work made this project possible:
 - [SallyHCA — Fully Automatic Chinese Localization Tool](https://www.nexusmods.com/dressmaker/mods/339) — Thank you for sharing the approach to translating the mod manager and content names. Your tool and public description inspired this project’s translation workflow.
 
 This is an independent implementation; acknowledgement does not imply endorsement. Their programs, dictionaries, game assets, and models are not redistributed in this package.
+
+
+## Download manual installation package
+
+Export the plugin, dictionary and saved translations for the saved game language without writing to the game folder. Export again after translating or changing language. The ZIP includes instructions in seven languages. [Download manual installation package](docs/manual-en.md).

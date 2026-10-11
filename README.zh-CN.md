@@ -26,7 +26,7 @@
 
 扫描支持 `name`、`displayName`、`display_name`、`description`、`tooltip`、`title` 等常见 JSON 字段。运行时接入 Unity Text / TextMeshPro，范围限于 ModLoader 界面或已扫描名称。自绘界面、图片文字、特殊二进制内容及非英语源文本不保证覆盖。本工具不会安装新的布料内容，也不提供完整游戏本体本地化。
 
-插件针对 ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1 编译，25 项自动测试已通过。本机网页语言切换已检查；必应及 MyMemory 已取得实际译文，但免费网页接口可能受网络、服务限制或页面变化影响。第三方布料包名称、游戏内布局和字体仍需验证。
+插件针对 ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1 编译，28 项自动测试已通过。本机网页语言切换已检查；必应及 MyMemory 已取得实际译文，但免费网页接口可能受网络、服务限制或页面变化影响。第三方布料包名称、游戏内布局和字体仍需验证。
 
 联网补译会把未命中的英文显示文字发送到所选服务。所有翻译请求至少间隔 3 秒，每日默认预算为 4,500 UTF-8 字节；失败保留原文。备用 MyMemory 默认关闭，开启后两次尝试分别计入预算。离线词典与已有缓存不受联网失败影响。
 
@@ -38,7 +38,7 @@
 python3 -m unittest discover -s tests -v
 ```
 
-编译游戏插件需要自己安装的游戏、ModLoader 程序集及 .NET SDK；参见完整说明。助手版本为 0.1.1，游戏插件未改动，内部版本仍为 0.1.0。GitHub Actions 的检查已配置，尚未在远端运行。
+编译游戏插件需要自己安装的游戏、ModLoader 程序集及 .NET SDK；参见完整说明。助手版本为 0.1.1，游戏插件未改动，内部版本仍为 0.1.0。GitHub Actions 自动检查已启用，结果可在仓库 Actions 页面查看。
 
 欢迎通过 Issue / Pull Request 反馈术语、字体和兼容问题。请附游戏、系统和 ModLoader 版本，以及可公开的示例原文。修改界面文案时同步更新七份语言表和说明；不要提交存档、私人 Mod 文件或游戏资产。
 
@@ -47,7 +47,7 @@ python3 -m unittest discover -s tests -v
 1. 在 GitHub 新建空仓库，选择 **Public**。不要另行生成 README 或许可证；此包已提供。
 2. 解压 **Dressmaker-Languages-GitHub-0.1.1.zip**，上传解压目录内的内容，让 `README.md` 位于仓库根目录。包含 `.github/`、`.gitignore` 和 `.gitattributes` 等隐藏项；Finder 可用 `Command + Shift + .` 显示它们。用 Git 上传会保留启动脚本的可执行权限。
 3. 在 Releases 创建 `v0.1.1`，附上 Mac 安装包。源码包用于仓库，Mac 包用于玩家下载，两者分别上传。
-4. 发布前在你自己的游戏里检查补丁，并将验证结果更新到说明。此包已排除本机数据、路径和令牌，未包含任何 Git 历史，。
+4. 发布前在你自己的游戏里检查补丁，并将验证结果更新到说明。此包已排除本机数据、路径和令牌，未包含任何 Git 历史。
 
 上传的准确文件清单见 `UPLOAD-MANIFEST.json`。发布方法参见下方 GitHub 官方文档。
 
@@ -66,3 +66,8 @@ GitHub 官方说明: [Create repository](https://docs.github.com/en/repositories
 - [SallyHCA — 全自动中文汉化工具](https://www.nexusmods.com/dressmaker/mods/339) — 感谢你分享 Mod 管理器与内容名称汉化的思路。你发布的工具及公开说明启发了本项目的翻译流程。
 
 本项目为独立实现；致谢不代表原作者为本项目背书。没有随包分发上述作者的程序、词典、游戏资产或模型。
+
+
+## 下载手动安装包
+
+按已保存的游戏语言，导出插件、词典和已有译文，无需写入游戏目录。新译文或语言变化后请重新导出；压缩包内有七种语言的安装说明。 [下载手动安装包](docs/manual-zh-CN.md).

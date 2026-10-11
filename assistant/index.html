@@ -26,6 +26,8 @@
 <p class="hint" id="model-status"></p>
 <div class="buttons"><button id="install" data-i18n="install"></button><button class="danger" id="uninstall" data-i18n="uninstall"></button></div>
 <p class="hint" data-i18n="install_hint"></p>
+<div class="buttons"><button id="manual" data-i18n="manual_download"></button></div>
+<p class="hint" data-i18n="manual_hint"></p>
 </div><div class="card"><h2 data-i18n="entries_heading"></h2>
 <div class="buttons"><button class="primary" id="scan" data-i18n="scan"></button><button id="translate" data-i18n="translate"></button><button id="refresh" data-i18n="refresh"></button></div>
 <p class="hint" data-i18n="scan_hint"></p>
@@ -56,6 +58,7 @@ for(const [value,label] of Object.entries(nativeNames))$('ui-language').add(new 
 $('ui-language').onchange=()=>{uiLocale=normalizeLocale($('ui-language').value);try{localStorage.setItem('dressmaker-ui-language',uiLocale);}catch(e){}renderLocale();};
 $('settings').onclick=()=>run(()=>api('settings',{language:$('language').value,game:$('game').value,provider:$('provider').value,libre_url:$('libre_url').value.trim(),daily_bytes:Number($('daily_bytes').value),auto:$('auto').checked,online:$('online').checked,offline_model:$('offline_model').checked,fallback:$('fallback').checked}),'toast_settings');
 for(const id of ['scan','translate','install','uninstall'])$(id).onclick=()=>run(()=>api(id,{}),'toast_'+id);
+$('manual').onclick=async()=>{const button=$('manual');button.disabled=true;try{const r=await fetch('/api/manual-package',{headers:{'X-Session':session}});if(!r.ok){const j=await r.json();const e=new Error(j.error);e.info=j.error_info;throw e;}const url=URL.createObjectURL(await r.blob()),a=document.createElement('a');a.href=url;a.download=(r.headers.get('Content-Disposition')||'').match(/filename="([^"]+)"/)?.[1]||'Dressmaker-Languages-Manual.zip';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);toast('toast_manual');}catch(e){showError(e);}finally{button.disabled=false;}};
 $('refresh').onclick=$('search').onclick=()=>run(entries,'toast_refresh');$('query').onkeydown=e=>{if(e.key==='Enter')entries().catch(showError);};$('model').onclick=()=>run(()=>api('model',{language:$('language').value}),'toast_model');$('shutdown').onclick=async()=>{try{await api('shutdown',{});stopped=true;clearInterval(pollTimer);renderStatus();}catch(e){showError(e);}};
 history.replaceState(null,'','/');renderLocale();status().then(entries).catch(showError);pollTimer=setInterval(status,4000);
 </script></body></html>

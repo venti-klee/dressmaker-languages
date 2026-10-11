@@ -51,7 +51,7 @@ La opción de recurrir a MyMemory está desactivada por defecto. Hace un único 
 
 La sesión de Bing permanece en memoria. No se inicia sesión, no se guardan cuentas, no se rotan proxies ni se evitan CAPTCHA. Los resultados válidos se guardan por idioma de destino y las correcciones manuales tienen prioridad.
 
-Pasaron las 25 pruebas automatizadas: sesión, código del chino, respuestas inválidas, caché sin conexión, alternativa y presupuesto. Bing devolvió traducciones reales en chino, japonés, coreano, francés, alemán y español. Se comprobaron la caché sin conexión y la conservación de `{0}`. También hubo errores de conexión y tiempos de espera agotados; el adaptador sigue siendo experimental.
+Pasaron las 28 pruebas automatizadas: sesión, código del chino, respuestas inválidas, caché sin conexión, alternativa y presupuesto. Bing devolvió traducciones reales en chino, japonés, coreano, francés, alemán y español. Se comprobaron la caché sin conexión y la conservación de `{0}`. También hubo errores de conexión y tiempos de espera agotados; el adaptador sigue siendo experimental.
 
 ## Corrección y desinstalación
 
@@ -99,3 +99,8 @@ Gracias a los autores y equipos cuyo trabajo hizo posible este proyecto:
 - [SallyHCA — Herramienta automática de traducción al chino](https://www.nexusmods.com/dressmaker/mods/339) — Gracias por compartir el enfoque para traducir el gestor de mods y los nombres del contenido. Tu herramienta y su descripción pública inspiraron el proceso de traducción de este proyecto.
 
 La implementación es independiente; los agradecimientos no implican respaldo de los autores. No se redistribuyen sus programas, diccionarios, recursos del juego ni modelos.
+
+
+## Descargar paquete de instalación manual
+
+Exporta el plugin, el diccionario y las traducciones del idioma del juego guardado sin escribir en su carpeta. Vuelve a exportar después de traducir o cambiar de idioma. El ZIP incluye instrucciones en siete idiomas. [Descargar paquete de instalación manual](manual-es.md).

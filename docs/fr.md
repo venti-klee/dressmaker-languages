@@ -51,7 +51,7 @@ L’option de repli vers MyMemory est désactivée par défaut. Elle effectue un
 
 La session Bing reste en mémoire. Aucune connexion à un compte, conservation de compte, rotation de proxy ou résolution de CAPTCHA n’est utilisée. Les résultats valides sont conservés par langue cible ; les corrections manuelles restent prioritaires.
 
-Les 25 tests automatisés ont réussi : session, code du chinois, réponses invalides, cache hors ligne, repli et budget. Bing a fourni des traductions réelles en chinois, japonais, coréen, français, allemand et espagnol. Le cache hors ligne et la conservation de `{0}` ont été vérifiés. Des erreurs de connexion et délais dépassés ont aussi eu lieu ; l’adaptateur reste expérimental.
+Les 28 tests automatisés ont réussi : session, code du chinois, réponses invalides, cache hors ligne, repli et budget. Bing a fourni des traductions réelles en chinois, japonais, coréen, français, allemand et espagnol. Le cache hors ligne et la conservation de `{0}` ont été vérifiés. Des erreurs de connexion et délais dépassés ont aussi eu lieu ; l’adaptateur reste expérimental.
 
 ## Correction et désinstallation
 
@@ -99,3 +99,8 @@ Merci aux auteurs et aux équipes qui ont rendu ce projet possible :
 - [SallyHCA — Outil de localisation chinoise automatique](https://www.nexusmods.com/dressmaker/mods/339) — Merci d’avoir partagé une méthode pour traduire le gestionnaire et les noms des contenus. Votre outil et sa présentation publique ont inspiré le parcours de traduction de ce projet.
 
 Cette implémentation est indépendante ; ces remerciements ne supposent aucune approbation des auteurs. Leurs programmes, dictionnaires, ressources du jeu et modèles ne sont pas redistribués ici.
+
+
+## Télécharger le paquet pour installation manuelle
+
+Exportez le plugin, le dictionnaire et les traductions de la langue de jeu enregistrée, sans écrire dans le dossier du jeu. Exportez à nouveau après une traduction ou un changement de langue. Le ZIP contient les instructions en sept langues. [Télécharger le paquet pour installation manuelle](manual-fr.md).

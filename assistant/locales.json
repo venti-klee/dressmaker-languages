@@ -85,14 +85,17 @@
     "error_request": "请求无效或内容过大。",
     "error_model_language": "请选择可下载离线模型的目标语言，英语原文不需要模型。",
     "error_model_busy": "已有模型正在安装，请等待完成。",
-    "error_permission": "没有写入游戏目录的权限。请检查文件夹权限，或手动安装补丁。",
+    "error_permission": "没有写入游戏目录的权限。请点击“下载手动安装包”，按包内说明用 Finder 复制文件。",
     "error_network": "无法连接翻译服务。词典与缓存仍可离线使用。",
     "bing_option": "必应 · 网页接口（实验性，免密钥）",
     "bing_hint": "必应使用公开翻译网页的会话，网页变化或限流可能导致失败。每次请求至少间隔 3 秒。",
     "fallback": "所选接口不可用时，改用 MyMemory",
     "fallback_hint": "开启后，同一文本可能发送到两个服务；两次请求都计入本地每日预算。",
     "error_bing": "必应翻译网页已变化或暂不可用。可换用 MyMemory，或继续使用离线翻译。",
-    "badge_bing": "必应网页"
+    "badge_bing": "必应网页",
+    "manual_download": "下载手动安装包",
+    "manual_hint": "按已保存的游戏语言，导出插件、词典和已有译文，无需写入游戏目录。新译文或语言变化后请重新导出；压缩包内有七种语言的安装说明。",
+    "toast_manual": "手动安装包已开始下载，请查看压缩包内的 INSTALL.zh-CN.md。"
   },
   "en": {
     "title": "Dressmaker · Language Assistant",
@@ -180,14 +183,17 @@
     "error_request": "The request is invalid or too large.",
     "error_model_language": "Choose a translation language for the offline model. Original English does not need one.",
     "error_model_busy": "A model is already being installed. Wait for it to finish.",
-    "error_permission": "The game folder is not writable. Check its permissions or install the patch manually.",
+    "error_permission": "Cannot write to the game folder. Select “Download manual installation package” and copy the files with Finder following the included instructions.",
     "error_network": "Could not connect to the translation service. Dictionaries and cache remain available offline.",
     "bing_option": "Bing · Web adapter (experimental, no key)",
     "bing_hint": "Bing uses a session from the public translation page. Page changes or rate limits may cause failures. Requests are spaced at least 3 seconds apart.",
     "fallback": "Use MyMemory if the selected service is unavailable",
     "fallback_hint": "When enabled, the same text may be sent to two services. Both requests count toward the local daily budget.",
     "error_bing": "The Bing translation page has changed or is unavailable. Switch to MyMemory or continue offline.",
-    "badge_bing": "Bing web"
+    "badge_bing": "Bing web",
+    "manual_download": "Download manual installation package",
+    "manual_hint": "Export the plugin, dictionary and saved translations for the saved game language without writing to the game folder. Export again after translating or changing language. The ZIP includes instructions in seven languages.",
+    "toast_manual": "Manual package download started. Follow INSTALL.en.md inside the ZIP."
   },
   "ja": {
     "title": "Dressmaker · 多言語アシスタント",
@@ -275,14 +281,17 @@
     "error_request": "リクエストが無効か大きすぎます。",
     "error_model_language": "オフラインモデルの翻訳先を選択してください。英語の原文にはモデルは不要です。",
     "error_model_busy": "モデルをインストール中です。完了までお待ちください。",
-    "error_permission": "ゲームフォルダーに書き込めません。権限を確認するか、パッチを手動で導入してください。",
+    "error_permission": "ゲームフォルダーに書き込めません。「手動インストール用ZIPをダウンロード」を選び、付属の手順に従ってFinderでコピーしてください。",
     "error_network": "翻訳サービスに接続できません。辞書とキャッシュはオフラインで利用できます。",
     "bing_option": "Bing · Web連携（試験的・キー不要）",
     "bing_hint": "Bingの公開翻訳ページのセッションを使います。ページの変更や利用制限により失敗する場合があります。リクエストは3秒以上の間隔で送信します。",
     "fallback": "選択したサービスが利用できない場合はMyMemoryを使う",
     "fallback_hint": "有効にすると同じ文章を2つのサービスに送信する場合があります。両方のリクエストを1日のローカル上限に計上します。",
     "error_bing": "Bingの翻訳ページが変更されたか、利用できません。MyMemoryに切り替えるか、オフライン翻訳をご利用ください。",
-    "badge_bing": "Bing Web"
+    "badge_bing": "Bing Web",
+    "manual_download": "手動インストール用ZIPをダウンロード",
+    "manual_hint": "保存済みのゲーム言語のプラグイン、辞書、訳文を出力します。ゲームフォルダーへの書き込みは不要です。訳文や言語を変えたら再出力してください。ZIPには7言語の手順書があります。",
+    "toast_manual": "手動インストール用ZIPのダウンロードを開始しました。ZIP内の INSTALL.ja.md をお読みください。"
   },
   "ko": {
     "title": "Dressmaker · 다국어 도우미",
@@ -370,14 +379,17 @@
     "error_request": "요청이 유효하지 않거나 너무 큽니다.",
     "error_model_language": "오프라인 모델의 번역 언어를 선택하세요. 영어 원문에는 모델이 필요하지 않습니다.",
     "error_model_busy": "모델이 이미 설치 중입니다. 완료될 때까지 기다리세요.",
-    "error_permission": "게임 폴더에 쓸 권한이 없습니다. 폴더 권한을 확인하거나 패치를 수동으로 설치하세요.",
+    "error_permission": "게임 폴더에 쓸 수 없습니다. “수동 설치 패키지 다운로드”를 선택하고 동봉된 안내에 따라 Finder로 파일을 복사하세요.",
     "error_network": "번역 서비스에 연결할 수 없습니다. 사전과 캐시는 오프라인에서 계속 사용할 수 있습니다.",
     "bing_option": "Bing · 웹 연동 (실험적, 키 불필요)",
     "bing_hint": "Bing 공개 번역 페이지의 세션을 사용합니다. 페이지 변경이나 사용 제한으로 실패할 수 있습니다. 요청은 최소 3초 간격으로 전송됩니다.",
     "fallback": "선택한 서비스를 사용할 수 없으면 MyMemory 사용",
     "fallback_hint": "켜면 같은 텍스트가 두 서비스로 전송될 수 있습니다. 두 요청 모두 로컬 일일 한도에 포함됩니다.",
     "error_bing": "Bing 번역 페이지가 변경되었거나 사용할 수 없습니다. MyMemory로 바꾸거나 오프라인 번역을 사용하세요.",
-    "badge_bing": "Bing 웹"
+    "badge_bing": "Bing 웹",
+    "manual_download": "수동 설치 패키지 다운로드",
+    "manual_hint": "저장된 게임 언어의 플러그인, 사전과 번역을 내보냅니다. 게임 폴더 쓰기 권한은 필요 없습니다. 번역이나 언어가 바뀌면 다시 내보내세요. ZIP에 7개 언어 설치 안내가 있습니다.",
+    "toast_manual": "수동 설치 패키지 다운로드가 시작되었습니다. ZIP의 INSTALL.ko.md를 확인하세요."
   },
   "fr": {
     "title": "Dressmaker · Assistant multilingue",
@@ -465,14 +477,17 @@
     "error_request": "La requête est invalide ou trop volumineuse.",
     "error_model_language": "Choisissez une langue de traduction pour le modèle. Le texte anglais d’origine n’en a pas besoin.",
     "error_model_busy": "Un modèle est déjà en cours d’installation. Attendez la fin.",
-    "error_permission": "Le dossier du jeu n’est pas accessible en écriture. Vérifiez les permissions ou installez le correctif manuellement.",
+    "error_permission": "Écriture impossible dans le dossier du jeu. Cliquez sur « Télécharger le paquet pour installation manuelle », puis copiez les fichiers avec Finder selon les instructions incluses.",
     "error_network": "Connexion au service impossible. Dictionnaires et cache restent disponibles hors ligne.",
     "bing_option": "Bing · Adaptateur web (expérimental, sans clé)",
     "bing_hint": "Bing utilise une session de sa page publique de traduction. Des changements ou des limites peuvent provoquer des échecs. Les requêtes sont espacées d’au moins 3 secondes.",
     "fallback": "Utiliser MyMemory si le service choisi est indisponible",
     "fallback_hint": "Si cette option est activée, le même texte peut être envoyé à deux services. Les deux requêtes comptent dans le budget quotidien local.",
     "error_bing": "La page Bing a changé ou est indisponible. Choisissez MyMemory ou continuez hors ligne.",
-    "badge_bing": "Bing web"
+    "badge_bing": "Bing web",
+    "manual_download": "Télécharger le paquet pour installation manuelle",
+    "manual_hint": "Exportez le plugin, le dictionnaire et les traductions de la langue de jeu enregistrée, sans écrire dans le dossier du jeu. Exportez à nouveau après une traduction ou un changement de langue. Le ZIP contient les instructions en sept langues.",
+    "toast_manual": "Téléchargement lancé. Suivez INSTALL.fr.md dans le ZIP."
   },
   "de": {
     "title": "Dressmaker · Sprachassistent",
@@ -560,14 +575,17 @@
     "error_request": "Die Anfrage ist ungültig oder zu groß.",
     "error_model_language": "Eine Übersetzungssprache für das Offline-Modell wählen. Englische Originaltexte benötigen kein Modell.",
     "error_model_busy": "Ein Modell wird bereits installiert. Bitte den Abschluss abwarten.",
-    "error_permission": "Der Spielordner ist nicht beschreibbar. Berechtigungen prüfen oder den Patch manuell installieren.",
+    "error_permission": "Keine Schreibberechtigung für den Spielordner. Laden Sie das Paket zur manuellen Installation herunter und kopieren Sie die Dateien mit Finder gemäß der beiliegenden Anleitung.",
     "error_network": "Keine Verbindung zum Übersetzungsdienst. Wörterbücher und Cache bleiben offline verfügbar.",
     "bing_option": "Bing · Web-Anbindung (experimentell, ohne Schlüssel)",
     "bing_hint": "Bing nutzt eine Sitzung der öffentlichen Übersetzungsseite. Seitenänderungen oder Nutzungslimits können Fehler verursachen. Anfragen erfolgen mit mindestens 3 Sekunden Abstand.",
     "fallback": "MyMemory verwenden, wenn der gewählte Dienst nicht verfügbar ist",
     "fallback_hint": "Bei aktivierter Option kann derselbe Text an zwei Dienste gesendet werden. Beide Anfragen zählen zum lokalen Tagesbudget.",
     "error_bing": "Die Bing-Seite wurde geändert oder ist nicht verfügbar. Wechseln Sie zu MyMemory oder übersetzen Sie weiter offline.",
-    "badge_bing": "Bing-Web"
+    "badge_bing": "Bing-Web",
+    "manual_download": "Paket zur manuellen Installation herunterladen",
+    "manual_hint": "Exportiert Plugin, Wörterbuch und gespeicherte Übersetzungen für die gespeicherte Spielsprache, ohne in den Spielordner zu schreiben. Nach neuen Übersetzungen oder einem Sprachwechsel erneut exportieren. Die ZIP enthält Anleitungen in sieben Sprachen.",
+    "toast_manual": "Der Download wurde gestartet. Folgen Sie INSTALL.de.md in der ZIP."
   },
   "es": {
     "title": "Dressmaker · Asistente multilingüe",
@@ -655,13 +673,16 @@
     "error_request": "La solicitud no es válida o es demasiado grande.",
     "error_model_language": "Elige un idioma de traducción para el modelo. El inglés original no necesita uno.",
     "error_model_busy": "Ya se está instalando un modelo. Espera a que termine.",
-    "error_permission": "No se puede escribir en la carpeta del juego. Comprueba los permisos o instala el parche manualmente.",
+    "error_permission": "No se puede escribir en la carpeta del juego. Selecciona « Descargar paquete de instalación manual » y copia los archivos con Finder siguiendo las instrucciones incluidas.",
     "error_network": "No se pudo conectar con el servicio. El diccionario y la caché siguen disponibles sin conexión.",
     "bing_option": "Bing · Adaptador web (experimental, sin clave)",
     "bing_hint": "Bing usa una sesión de su página pública de traducción. Los cambios o límites pueden causar fallos. Las solicitudes se separan al menos 3 segundos.",
     "fallback": "Usar MyMemory si el servicio elegido no está disponible",
     "fallback_hint": "Al activarlo, el mismo texto puede enviarse a dos servicios. Ambas solicitudes cuentan para el presupuesto diario local.",
     "error_bing": "La página de Bing ha cambiado o no está disponible. Cambia a MyMemory o continúa sin conexión.",
-    "badge_bing": "Bing web"
+    "badge_bing": "Bing web",
+    "manual_download": "Descargar paquete de instalación manual",
+    "manual_hint": "Exporta el plugin, el diccionario y las traducciones del idioma del juego guardado sin escribir en su carpeta. Vuelve a exportar después de traducir o cambiar de idioma. El ZIP incluye instrucciones en siete idiomas.",
+    "toast_manual": "Descarga iniciada. Sigue INSTALL.es.md dentro del ZIP."
   }
 }

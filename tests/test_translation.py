@@ -1,8 +1,10 @@
 import json
+import io
 from pathlib import Path
 import sys
 import tempfile
 import unittest
+import zipfile
 from unittest.mock import patch
 
 BUNDLE = Path(__file__).resolve().parent.parent
@@ -123,5 +125,56 @@ class Tests(unittest.TestCase):
         self.store.uninstall()
         self.assertEqual(original.read_text(), '{"id":"original-id"}')
         self.assertTrue(list((self.store.root / 'backups').glob('*/config/runtime.json')))
+
+    def export_fixture(self):
+        bundle = Path(self.temp.name) / 'bundle'
+        plugin = bundle / 'BepInEx/plugins/DressmakerLanguages/DressmakerLanguages.dll'
+        plugin.parent.mkdir(parents=True)
+        plugin.write_bytes(b'test-plugin')
+        (bundle / 'docs').mkdir()
+        for locale in ['zh-CN', 'en', 'ja', 'ko', 'fr', 'de', 'es']:
+            (bundle / 'docs' / ('manual-' + locale + '.md')).write_text('Test installation guide')
+        (bundle / 'LICENSE').write_text('Test license')
+        self.store.bundle = bundle
+
+    def test_export_manual_works_without_game_write_permission(self):
+        self.export_fixture()
+        self.store.cache_put('Mod Manager', 'zh-CN', '自定义管理器', 'manual')
+        self.store.cache_put('New fabric', 'zh-CN', '新布料', 'bing')
+        with patch('core.atomic_json', side_effect=PermissionError('denied')), patch('core.shutil.copy2', side_effect=PermissionError('denied')):
+            language, raw = self.store.export_manual()
+        self.assertEqual(language, 'zh-CN')
+        self.assertFalse(self.store.game.exists())
+        with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+            self.assertIsNone(archive.testzip())
+            self.assertEqual(archive.read('BepInEx/plugins/DressmakerLanguages/DressmakerLanguages.dll'), b'test-plugin')
+            values = json.loads(archive.read('BepInEx/config/DressmakerLanguages/translations.zh-CN.json'))
+            self.assertEqual(values['Mod Manager'], '自定义管理器')
+            self.assertEqual(values['New fabric'], '新布料')
+            self.assertEqual(len([name for name in archive.namelist() if name.startswith('INSTALL.')]), 7)
+            self.assertFalse(any('settings' in name or 'sqlite' in name or 'session' in name for name in archive.namelist()))
+
+    def test_manual_export_uses_saved_language_and_separates_caches(self):
+        self.export_fixture()
+        self.store.cache_put('New fabric', 'zh-CN', '新布料', 'manual')
+        self.store.cache_put('New fabric', 'fr', 'Nouveau tissu', 'manual')
+        self.store.save_config({'language': 'fr'})
+        language, raw = self.store.export_manual()
+        with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+            self.assertEqual(language, 'fr')
+            self.assertEqual(json.loads(archive.read('BepInEx/config/DressmakerLanguages/runtime.json')), {'language': 'fr'})
+            self.assertEqual(json.loads(archive.read('BepInEx/config/DressmakerLanguages/translations.fr.json'))['New fabric'], 'Nouveau tissu')
+            self.assertNotIn('BepInEx/config/DressmakerLanguages/translations.zh-CN.json', archive.namelist())
+
+    def test_partial_installation_is_not_reported_complete(self):
+        self.export_fixture()
+        loader = self.store.game / 'BepInEx/plugins/DressmakerMods.dll'
+        loader.parent.mkdir(parents=True)
+        loader.write_bytes(b'loader-fixture')
+        with patch.object(self.store, 'scan'), patch.object(self.store, 'publish', side_effect=PermissionError('denied')):
+            with self.assertRaises(PermissionError):
+                self.store.install()
+        self.assertFalse(self.store.installed)
+        self.assertFalse(self.store.installation_complete())
 
 if __name__ == '__main__': unittest.main()

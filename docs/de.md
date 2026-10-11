@@ -51,7 +51,7 @@ Die Ersatzoption mit MyMemory ist standardmäßig deaktiviert. Bei Netzwerk- ode
 
 Die Bing-Sitzung bleibt im Arbeitsspeicher. Es gibt keine Anmeldung, Kontospeicherung, Proxyrotation oder CAPTCHA-Umgehung. Gültige Ergebnisse werden je Zielsprache gespeichert; manuelle Korrekturen behalten Vorrang.
 
-Alle 25 automatisierten Tests bestanden: Sitzung, chinesischer Sprachcode, ungültige Antworten, Offline-Cache, Ersatzdienst und Budget. Bing lieferte reale chinesische, japanische, koreanische, französische, deutsche und spanische Übersetzungen. Offline-Cache und Erhalt von `{0}` wurden geprüft. Es gab auch Verbindungsfehler und Zeitüberschreitungen; die Anbindung bleibt experimentell.
+Alle 28 automatisierten Tests bestanden: Sitzung, chinesischer Sprachcode, ungültige Antworten, Offline-Cache, Ersatzdienst und Budget. Bing lieferte reale chinesische, japanische, koreanische, französische, deutsche und spanische Übersetzungen. Offline-Cache und Erhalt von `{0}` wurden geprüft. Es gab auch Verbindungsfehler und Zeitüberschreitungen; die Anbindung bleibt experimentell.
 
 ## Korrekturen und Deinstallation
 
@@ -99,3 +99,8 @@ Vielen Dank an die Autoren und Teams, deren Arbeit dieses Projekt ermöglicht ha
 - [SallyHCA — Automatisches chinesisches Übersetzungswerkzeug](https://www.nexusmods.com/dressmaker/mods/339) — Danke für den veröffentlichten Ansatz zur Übersetzung der Mod-Verwaltung und Inhaltsnamen. Das Werkzeug und die öffentliche Beschreibung haben den Übersetzungsablauf dieses Projekts inspiriert.
 
 Dies ist eine unabhängige Implementierung. Die Danksagung bedeutet keine Unterstützung durch die Autoren. Ihre Programme, Wörterbücher, Spielressourcen und Modelle werden nicht mitgeliefert.
+
+
+## Paket zur manuellen Installation herunterladen
+
+Exportiert Plugin, Wörterbuch und gespeicherte Übersetzungen für die gespeicherte Spielsprache, ohne in den Spielordner zu schreiben. Nach neuen Übersetzungen oder einem Sprachwechsel erneut exportieren. Die ZIP enthält Anleitungen in sieben Sprachen. [Paket zur manuellen Installation herunterladen](manual-de.md).

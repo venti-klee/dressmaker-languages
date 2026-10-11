@@ -2,6 +2,7 @@
 import collections
 import datetime
 import html
+import io
 import json
 import os
 from pathlib import Path
@@ -15,6 +16,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import zipfile
 from providers import BingWeb
 
 LANGUAGES = {"zh-CN": "简体中文", "ja": "日本語", "ko": "한국어", "fr": "Français", "de": "Deutsch", "es": "Español", "en": "English（原文）"}
@@ -41,6 +43,29 @@ def read_json(path, default):
         return json.loads(Path(path).read_text(encoding="utf-8-sig"))
     except (OSError, ValueError):
         return default
+
+def manual_archive(bundle, language, values, known_sources):
+    """Build an installable ZIP entirely in memory, without writing to the game."""
+    bundle = Path(bundle)
+    if language not in LANGUAGES:
+        raise ValueError("暂不支持此语言")
+    plugin = bundle / "BepInEx/plugins/DressmakerLanguages/DressmakerLanguages.dll"
+    if not plugin.is_file():
+        raise ValueError("缺少已编译的游戏插件")
+    output = io.BytesIO()
+    with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as archive:
+        archive.write(plugin, "BepInEx/plugins/DressmakerLanguages/DressmakerLanguages.dll")
+        configs = {"runtime.json": {"language": language}, "known-sources.json": known_sources,
+                   "translations." + language + ".json": values}
+        for name, value in configs.items():
+            archive.writestr("BepInEx/config/DressmakerLanguages/" + name,
+                             json.dumps(value, ensure_ascii=False, indent=2) + "\n")
+        for locale in LANGUAGES:
+            archive.write(bundle / "docs" / ("manual-" + locale + ".md"), "INSTALL." + locale + ".md")
+        archive.writestr("README.md", "Dressmaker Languages · Manual installation\n\n" +
+                        " · ".join("[%s](INSTALL.%s.md)" % (name, locale) for locale, name in LANGUAGES.items()) + "\n")
+        archive.write(bundle / "LICENSE", "LICENSE")
+    return output.getvalue()
 
 def protect(source):
     tokens = []
@@ -368,16 +393,33 @@ class Store:
             rows = self.db.execute("SELECT p.source,p.kind,t.value,t.provider FROM pending p LEFT JOIN translations t ON p.source=t.source AND t.language=? WHERE p.source LIKE ? ORDER BY CASE p.kind WHEN 'display' THEN 0 WHEN 'content' THEN 1 ELSE 2 END,p.source LIMIT ?", (language, "%" + query + "%", limit)).fetchall()
             return [{"source": src, "kind": kind, "value": self.dictionary.get(src, value or ""), "provider": "dictionary" if src in self.dictionary and provider != "manual" else (provider or ""), "manual": provider == "manual"} if provider != "manual" else {"source": src, "kind": kind, "value": value, "provider": provider, "manual": True} for src, kind, value, provider in rows]
 
-    def publish(self):
-        language = self.config["language"]
+    def runtime_snapshot(self):
         with self.lock:
+            language = self.config["language"]
             values = self.dictionary.copy()
             values.update({s: v for s, v in self.db.execute("SELECT source,value FROM translations WHERE language=? AND provider='manual'", (language,))})
             for source, value in self.db.execute("SELECT source,value FROM translations WHERE language=? AND provider!='manual'", (language,)):
                 values.setdefault(source, value)
+            return language, values, read_json(self.root / "known-sources.json", [])
+
+    def export_manual(self):
+        with self.lock:
+            language, values, sources = self.runtime_snapshot()
+            return language, manual_archive(self.bundle, language, values, sources)
+
+    def publish(self):
+        with self.lock:
+            language, values, sources = self.runtime_snapshot()
             atomic_json(self.plugin_data / ("translations." + language + ".json"), values)
-            atomic_json(self.plugin_data / "known-sources.json", read_json(self.root / "known-sources.json", []))
+            atomic_json(self.plugin_data / "known-sources.json", sources)
             atomic_json(self.plugin_data / "runtime.json", {"language": language})
+
+    def installation_complete(self):
+        language = self.config["language"]
+        return ((self.game / "BepInEx/plugins/DressmakerLanguages/DressmakerLanguages.dll").is_file()
+                and read_json(self.plugin_data / "runtime.json", {}).get("language") == language
+                and (self.plugin_data / ("translations." + language + ".json")).is_file()
+                and (self.plugin_data / "known-sources.json").is_file())
 
     def install(self):
         plugin = self.bundle / "BepInEx/plugins/DressmakerLanguages/DressmakerLanguages.dll"
@@ -391,11 +433,16 @@ class Store:
             shutil.copytree(target, backup / "plugin")
         if self.plugin_data.exists():
             shutil.copytree(self.plugin_data, backup / "config")
-        target.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(plugin, target / plugin.name)
-        self.installed = True
-        self.scan()
-        self.publish()
+        self.installed = False
+        try:
+            target.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(plugin, target / plugin.name)
+            self.scan()
+            self.publish()
+            self.installed = True
+        except Exception:
+            self.installed = self.installation_complete()
+            raise
 
     def uninstall(self):
         # Move only owned files into backups, retaining translations and all original mods.

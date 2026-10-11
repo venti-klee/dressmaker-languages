@@ -21,7 +21,7 @@ def main():
     parser.add_argument("--no-browser", action="store_true")
     args = parser.parse_args()
     store = Store(args.data, BUNDLE)
-    store.installed = (store.game / "BepInEx/plugins/DressmakerLanguages/DressmakerLanguages.dll").is_file()
+    store.installed = store.installation_complete()
     worker = Worker(store)
     session = secrets.token_urlsafe(32)
     model_job = {"running": False, "state": "idle", "detail": ""}
@@ -46,7 +46,7 @@ def main():
         def log_message(self, *args):
             pass
 
-        def reply(self, code, data, content_type="application/json; charset=utf-8"):
+        def reply(self, code, data, content_type="application/json; charset=utf-8", headers=None):
             if isinstance(data, dict) and data.get("error") and "error_info" not in data:
                 data["error_info"] = error_info(data["error"])
             raw = data if isinstance(data, bytes) else json.dumps(data, ensure_ascii=False).encode("utf-8")
@@ -56,6 +56,8 @@ def main():
             self.send_header("Cache-Control", "no-store")
             self.send_header("X-Content-Type-Options", "nosniff")
             self.send_header("Referrer-Policy", "no-referrer")
+            for key, value in (headers or {}).items():
+                self.send_header(key, value)
             self.send_header("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'")
             self.end_headers()
             self.wfile.write(raw)
@@ -93,7 +95,8 @@ def main():
                 return self.reply(403, {"error": "会话无效"})
             if parsed.path.startswith("/docs/"):
                 language = parsed.path[len("/docs/"):].removesuffix(".md") if hasattr(str, "removesuffix") else parsed.path[len("/docs/"):-3]
-                if language not in LANGUAGES or parsed.path != "/docs/" + language + ".md":
+                locale = language[len("manual-"):] if language.startswith("manual-") else language
+                if locale not in LANGUAGES or parsed.path != "/docs/" + language + ".md":
                     return self.reply(404, {"error": "未找到页面"})
                 path = BUNDLE / "docs" / (language + ".md")
                 if not path.is_file():
@@ -104,6 +107,14 @@ def main():
                 status["error_info"] = error_info(status.get("error", ""))
                 status["model"] = model_job.copy()
                 return self.reply(200, status)
+            if parsed.path == "/api/manual-package":
+                try:
+                    language, archive = store.export_manual()
+                    version = (BUNDLE / "VERSION").read_text().strip()
+                    name = "Dressmaker-Languages-Manual-%s-%s.zip" % (language, version)
+                    return self.reply(200, archive, "application/zip", {"Content-Disposition": 'attachment; filename="' + name + '"'})
+                except Exception as error:
+                    return self.reply(400, {"error": str(error), "error_info": error_info(error)})
             if parsed.path == "/api/entries":
                 query = urllib.parse.parse_qs(parsed.query).get("q", [""])[0]
                 return self.reply(200, {"entries": store.entries(query)})
