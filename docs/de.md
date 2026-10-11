@@ -1,4 +1,4 @@
-# Dressmaker Sprachassistent 0.1.3
+# Dressmaker Sprachassistent 0.1.4
 
 [简体中文](zh-CN.md) · [English](en.md) · [日本語](ja.md) · [한국어](ko.md) · [Français](fr.md) · **Deutsch** · [Español](es.md)
 
@@ -51,13 +51,13 @@ Die Ersatzoption mit MyMemory ist standardmäßig deaktiviert. Bei Netzwerk- ode
 
 Die Bing-Sitzung bleibt im Arbeitsspeicher. Es gibt keine Anmeldung, Kontospeicherung, Proxyrotation oder CAPTCHA-Umgehung. Gültige Ergebnisse werden je Zielsprache gespeichert; manuelle Korrekturen behalten Vorrang.
 
-Alle 45 automatisierten Tests bestanden: Sitzung, chinesischer Sprachcode, ungültige Antworten, Offline-Cache, Ersatzdienst und Budget. Bing lieferte reale chinesische, japanische, koreanische, französische, deutsche und spanische Übersetzungen. Offline-Cache und Erhalt von `{0}` wurden geprüft. Es gab auch Verbindungsfehler und Zeitüberschreitungen; die Anbindung bleibt experimentell.
+Alle 56 automatisierten Tests bestanden: Sitzung, chinesischer Sprachcode, ungültige Antworten, Offline-Cache, Ersatzdienst und Budget. Bing lieferte reale chinesische, japanische, koreanische, französische, deutsche und spanische Übersetzungen. Offline-Cache und Erhalt von `{0}` wurden geprüft. Es gab auch Verbindungsfehler und Zeitüberschreitungen; die Anbindung bleibt experimentell.
 
 ## Korrekturen und Deinstallation
 
 Den englischen Originaltext suchen, die Übersetzung bearbeiten und **Speichern** wählen. Manuelle Korrekturen überschreiben maschinelle Übersetzungen und Wörterbücher derselben Zielsprache. Variablen, Zeilenumbrüche und Formatierungstags erhalten; fehlerhafte Übersetzungen werden abgelehnt. Beim Wechsel der Assistentensprache bleiben nicht gespeicherte Übersetzungsentwürfe erhalten.
 
-Die Liste zeigt höchstens 500 Einträge. Weitere Einträge über die Suche finden. **Fehlende Texte übersetzen** verarbeitet auch Textkandidaten der Verwaltung. Der automatische Modus bevorzugt tatsächlich angezeigte Texte und Mod-Inhalte, damit ungenutzte Programmtexte das kostenlose Kontingent nicht verbrauchen.
+**Fehlende Texte übersetzen** verarbeitet auch Textkandidaten der Verwaltung. Der automatische Modus bevorzugt tatsächlich angezeigte Texte und Mod-Inhalte, damit ungenutzte Programmtexte das kostenlose Kontingent nicht verbrauchen.
 
 **Patch deinstallieren** wählen und das Spiel neu starten. Eigene Plugin- und Konfigurationsordner werden nach `data/backups/` verschoben; Übersetzungsdaten bleiben erhalten. Der ursprüngliche Loader, Mods, Gegenstands-IDs, Texturen und Spielstände werden vom Patch nicht verändert.
 
@@ -74,7 +74,7 @@ Die Seite ist nur auf dem lokalen Computer erreichbar. Ein zufälliges Sitzungst
 
 ## Prüfung und Grenzen
 
-Das Plugin wurde mit ModLoader 0.7.3, BepInEx 5.4.23.5 und Unity 6000.3.4f1 kompiliert. Elf Tests des Übersetzungskerns bestanden. Reale MyMemory-Anfragen lieferten chinesische, japanische, koreanische und französische Übersetzungen. Die Übersetzung der Oberfläche und Anleitungen wurde in 0.1.3 ergänzt.
+Das Plugin wurde mit ModLoader 0.7.3, BepInEx 5.4.23.5 und Unity 6000.3.4f1 kompiliert. Elf Tests des Übersetzungskerns bestanden. Reale MyMemory-Anfragen lieferten chinesische, japanische, koreanische und französische Übersetzungen. Die Übersetzung der Oberfläche und Anleitungen wurde in 0.1.4 ergänzt.
 
 **Die Integration im Spiel wurde noch nicht getestet.** Textabdeckung, Layout, japanische und koreanische Schriften und Namen externer Stoff-Mods müssen noch im Spiel geprüft werden. Bei der Entwicklung waren auf diesem Computer keine Inhaltspakete installiert.
 
@@ -117,3 +117,16 @@ Google-Webanfragen benötigen keinen Schlüssel. Die Verfügbarkeit hängt vom N
 Beispiel: Heute (UTC): 4,498 / 4,500 Bytes genutzt · 2 übrig. Dies ist das lokale Budget; ein höherer Wert erhöht nicht das Kontingent des Dienstes.
 
 Übersetzungen werden lokal gespeichert und sind offline wiederverwendbar. Bei Updates den Ordner data behalten; Sprachcaches und manuelle Korrekturen bleiben erhalten.
+
+## Wörterbuchsuche und Filter (0.1.4)
+
+Die Suche erfasst Original und gespeicherte Übersetzung. Ergebnisse erscheinen beim Tippen oder mit Enter. Die Liste vereint erfasste Texte, Wörterbuch und Cache der aktuellen Zielsprache, mit einer Zeile je Original.
+
+- **Status**: unübersetzt, übersetzt oder Original beibehalten. Die Anzahl basiert auf den tatsächlich verwendeten gespeicherten Werten; ungespeicherte Änderungen zählen nicht als erfolgreiche Übersetzungen.
+- **Kanal**: Wörterbuch, kombinierte Begriffe, manuelle Korrektur, Offline-Modell, Google, Bing, MyMemory oder LibreTranslate. Angezeigt wird der tatsächlich verwendete Kanal, etwa Wörterbuch, wenn es eine ältere Maschinenübersetzung ersetzt.
+- **Quelle**: alle Einträge, erfasste Texte, Spielanzeigetexte, Mod-Inhalte, Manager-Kandidaten oder nur Wörterbuch/Cache. „Unübersetzt“ + „Spielanzeigetexte“ zeigt sichtbare fehlende Übersetzungen.
+- **Sortierung und Seiten**: Original auf-/absteigend, zuletzt gespeichert oder Spielanzeigetexte zuerst; 25, 50 oder 100 Zeilen pro Seite und direkte Seitenwahl. Leere Ergebnisse zeigen einen Hinweis; Filter lassen sich zurücksetzen.
+
+Filter und Seitenwechsel behalten ungespeicherte Änderungen bei und zeigen ihre Anzahl. Jede Zeile vor dem Schließen oder Neuladen speichern: Ungespeicherte Entwürfe gehen beim Neuladen verloren. Gespeicherte Zeilen können aus dem aktuellen Filter verschwinden. Suche und Filter kontaktieren keine Übersetzungsdienste und verbrauchen kein Übersetzungsbudget.
+
+Filter gelten nur für die Liste; die Übersetzung fehlender Texte verarbeitet die erfasste Warteschlange.

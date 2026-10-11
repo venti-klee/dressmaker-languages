@@ -1,4 +1,4 @@
-# Asistente multilingüe de Dressmaker 0.1.3
+# Asistente multilingüe de Dressmaker 0.1.4
 
 [简体中文](zh-CN.md) · [English](en.md) · [日本語](ja.md) · [한국어](ko.md) · [Français](fr.md) · [Deutsch](de.md) · **Español**
 
@@ -51,13 +51,13 @@ La opción de recurrir a MyMemory está desactivada por defecto. Hace un único 
 
 La sesión de Bing permanece en memoria. No se inicia sesión, no se guardan cuentas, no se rotan proxies ni se evitan CAPTCHA. Los resultados válidos se guardan por idioma de destino y las correcciones manuales tienen prioridad.
 
-Pasaron las 45 pruebas automatizadas: sesión, código del chino, respuestas inválidas, caché sin conexión, alternativa y presupuesto. Bing devolvió traducciones reales en chino, japonés, coreano, francés, alemán y español. Se comprobaron la caché sin conexión y la conservación de `{0}`. También hubo errores de conexión y tiempos de espera agotados; el adaptador sigue siendo experimental.
+Pasaron las 56 pruebas automatizadas: sesión, código del chino, respuestas inválidas, caché sin conexión, alternativa y presupuesto. Bing devolvió traducciones reales en chino, japonés, coreano, francés, alemán y español. Se comprobaron la caché sin conexión y la conservación de `{0}`. También hubo errores de conexión y tiempos de espera agotados; el adaptador sigue siendo experimental.
 
 ## Corrección y desinstalación
 
 Busca el original inglés, edita su traducción y pulsa **Guardar**. Las correcciones manuales sustituyen las traducciones automáticas y los diccionarios del mismo idioma. Conserva variables, saltos de línea y etiquetas de formato: se rechazan las traducciones que los dañen. Cambiar el idioma del asistente conserva los borradores de traducción sin guardar.
 
-La lista muestra hasta 500 entradas; busca las demás. **Traducir los textos pendientes** también intenta procesar cadenas candidatas del gestor. El modo automático prioriza los textos realmente mostrados y el contenido de los mods para evitar consumir la cuota con cadenas sin usar del programa.
+**Traducir los textos pendientes** también intenta procesar cadenas candidatas del gestor. El modo automático prioriza los textos realmente mostrados y el contenido de los mods para evitar consumir la cuota con cadenas sin usar del programa.
 
 Pulsa **Desinstalar el parche** y reinicia el juego. Las carpetas propias del plugin y su configuración se trasladan a `data/backups/`. Las traducciones se conservan. Este parche no modifica el cargador original, mods, identificadores de objetos, texturas ni partidas guardadas.
 
@@ -74,7 +74,7 @@ La página solo escucha en el ordenador local y protege las operaciones de escri
 
 ## Verificación y limitaciones
 
-El plugin se compiló con ModLoader 0.7.3, BepInEx 5.4.23.5 y Unity 6000.3.4f1. Pasaron once pruebas del núcleo de traducción. Las solicitudes reales a MyMemory devolvieron traducciones en chino, japonés, coreano y francés. La localización de la interfaz y las guías se añadió en 0.1.3.
+El plugin se compiló con ModLoader 0.7.3, BepInEx 5.4.23.5 y Unity 6000.3.4f1. Pasaron once pruebas del núcleo de traducción. Las solicitudes reales a MyMemory devolvieron traducciones en chino, japonés, coreano y francés. La localización de la interfaz y las guías se añadió en 0.1.4.
 
 **La integración dentro del juego aún no se ha probado.** Quedan por comprobar la cobertura, la disposición, las fuentes japonesas y coreanas y los nombres de telas de terceros. No había paquetes de contenido instalados en este ordenador durante el desarrollo.
 
@@ -117,3 +117,16 @@ Las solicitudes web de Google no necesitan clave. La disponibilidad depende de l
 Ejemplo: Hoy (UTC): 4,498 / 4,500 bytes usados · 2 restantes. Es un presupuesto local; aumentarlo no aumenta la cuota del servicio.
 
 Las traducciones se guardan localmente y se reutilizan sin conexión. Conserva la carpeta data al actualizar; se mantienen las cachés por idioma y las correcciones.
+
+## Búsqueda y filtros del diccionario (0.1.4)
+
+La búsqueda incluye el original y la traducción guardada. Los resultados se actualizan al escribir o al pulsar Enter. La lista combina los textos recopilados, el diccionario y la caché del idioma de destino actual, con una fila por original.
+
+- **Estado**: sin traducir, traducido u original conservado. El recuento usa los valores guardados que se aplican realmente; los cambios sin guardar no cuentan como traducciones realizadas.
+- **Canal**: diccionario, términos combinados, corrección manual, modelo sin conexión, Google, Bing, MyMemory o LibreTranslate. Se muestra el canal usado, por ejemplo diccionario cuando sustituye una traducción automática anterior.
+- **Origen**: todos, recopilados, visibles en el juego, contenido de mods, candidatos del gestor o solo diccionario/caché. Combina « Sin traducir » y « Textos visibles en el juego » para localizar traducciones faltantes visibles.
+- **Orden y páginas**: original ascendente/descendente, guardados recientes o textos del juego primero; 25, 50 o 100 filas por página y acceso por número. Si no hay resultados, aparece una indicación; puedes borrar los filtros.
+
+Los filtros y las páginas conservan los cambios sin guardar y muestran su número. Guarda cada fila antes de cerrar o recargar la página: los borradores sin guardar se pierden al recargar. Una fila guardada puede salir del filtro actual. La búsqueda y los filtros no contactan con servicios de traducción ni consumen presupuesto.
+
+Los filtros solo afectan a la lista; la traducción de textos pendientes procesa la cola recopilada.

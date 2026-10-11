@@ -26,7 +26,8 @@ class LocalizationTests(unittest.TestCase):
         keys = re.findall(r'data-i18n(?:-placeholder|-aria)?="([^"]+)"', page)
         keys += re.findall(r"\bt\('([^']+)'", page)
         keys = [key for key in keys if not key.endswith("_")]
-        keys += ["kind_display", "kind_content", "kind_loader", "model_idle", "model_installing", "model_done", "model_failed"]
+        keys += ["kind_display", "kind_content", "kind_loader", "kind_stored", "model_idle", "model_installing", "model_done", "model_failed"]
+        keys += ["entry_" + state for state in ["missing", "translated", "original"]]
         keys += ["progress_" + state for state in ["idle", "queued", "running", "waiting", "finished", "cooldown", "interrupted", "failed"]]
         keys += ["progress_result_" + outcome for outcome in ["success", "untranslated", "failed"]]
         for language, catalog in self.catalogs.items():

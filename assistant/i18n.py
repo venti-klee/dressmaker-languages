@@ -2,6 +2,8 @@
 import urllib.error
 
 ERROR_CODES = {
+    "无效的词典筛选条件": "error_filter",
+    "目标语言已更改，请刷新列表后保存": "error_save_language",
     "译文破坏了标签或变量，已拒绝写入": "error_format",
     "译文中的格式标签或变量与原文不一致": "error_format",
     "译文为空或过长": "error_value",

@@ -412,6 +412,61 @@ class Store:
             rows = self.db.execute("SELECT p.source,p.kind,t.value,t.provider FROM pending p LEFT JOIN translations t ON p.source=t.source AND t.language=? WHERE p.source LIKE ? ORDER BY CASE p.kind WHEN 'display' THEN 0 WHEN 'content' THEN 1 ELSE 2 END,p.source LIMIT ?", (language, "%" + query + "%", limit)).fetchall()
             return [{"source": src, "kind": kind, "value": self.dictionary.get(src, value or ""), "provider": "dictionary" if src in self.dictionary and provider != "manual" else (provider or ""), "manual": provider == "manual"} if provider != "manual" else {"source": src, "kind": kind, "value": value, "provider": provider, "manual": True} for src, kind, value, provider in rows]
 
+    def browse_entries(self, query="", state="all", provider="all", kind="all",
+                       order="source", page=1, page_size=50):
+        """Browse effective translations, including terms not yet encountered in game.
+
+        Keep the worker's collected-text queue separate. Filter after applying the
+        same dictionary/manual precedence as the published game translations.
+        """
+        if (state not in {"all", "missing", "translated", "original"}
+                or kind not in {"all", "collected", "display", "content", "loader", "stored"}
+                or order not in {"source", "source_desc", "recent", "priority"}
+                or not isinstance(provider, str) or len(provider) > 100
+                or not isinstance(query, str) or len(query) > 1000
+                or type(page) is not int or not 1 <= page <= 1000000
+                or type(page_size) is not int or page_size not in {25, 50, 100}):
+            raise ValueError("无效的词典筛选条件")
+        with self.lock:
+            language = self.config["language"]
+            pending = dict(self.db.execute("SELECT source,kind FROM pending"))
+            cache = {s: (v, p, u) for s, v, p, u in self.db.execute(
+                "SELECT source,value,provider,updated FROM translations WHERE language=?", (language,))}
+            records = []
+            for source in pending.keys() | cache.keys() | self.dictionary.keys():
+                value, channel, updated = cache.get(source, ("", "", ""))
+                if channel != "manual" and source in self.dictionary:
+                    value, channel = self.dictionary[source], "dictionary"
+                    updated = ""  # A superseded machine cache is not the effective dictionary entry.
+                if language == "en" and channel != "manual":
+                    value, channel = source, "original"
+                value, channel = value or "", channel or ""
+                entry_state = "missing" if not value.strip() else "original" if value == source else "translated"
+                records.append({"source": source, "value": value, "provider": channel,
+                                "kind": pending.get(source, "stored"), "manual": channel == "manual",
+                                "state": entry_state, "updated": updated or ""})
+            counts = dict(collections.Counter(item["state"] for item in records))
+            needle = query.strip().casefold()
+            matches = [item for item in records
+                       if (not needle or needle in item["source"].casefold() or needle in item["value"].casefold())
+                       and (state == "all" or item["state"] == state)
+                       and (provider == "all" or item["provider"] == provider)
+                       and (kind == "all" or (kind == "collected" and item["kind"] != "stored") or item["kind"] == kind)]
+            matches.sort(key=lambda item: (item["source"].casefold(), item["source"]))
+            if order == "source_desc":
+                matches.reverse()
+            elif order == "recent":
+                matches.sort(key=lambda item: item["updated"], reverse=True)
+            elif order == "priority":
+                matches.sort(key=lambda item: {"display": 0, "content": 1, "loader": 2}.get(item["kind"], 3))
+            pages = max(1, (len(matches) + page_size - 1) // page_size)
+            page = min(page, pages)
+            start = (page - 1) * page_size
+            return {"language": language, "entries": matches[start:start + page_size],
+                    "total": len(records), "matching": len(matches), "counts": counts,
+                    "page": page, "pages": pages, "page_size": page_size,
+                    "start": start + 1 if matches else 0, "end": min(start + page_size, len(matches))}
+
     def runtime_snapshot(self):
         with self.lock:
             language = self.config["language"]

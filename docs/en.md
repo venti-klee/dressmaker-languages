@@ -1,4 +1,4 @@
-# Dressmaker Language Assistant 0.1.3
+# Dressmaker Language Assistant 0.1.4
 
 [简体中文](zh-CN.md) · **English** · [日本語](ja.md) · [한국어](ko.md) · [Français](fr.md) · [Deutsch](de.md) · [Español](es.md)
 
@@ -51,13 +51,13 @@ Choose a translation service and click **Save settings**.
 
 The Bing session stays in memory. No login, account storage, proxy rotation, or CAPTCHA bypass is used. Successful results are cached separately for each game target; manual corrections retain priority.
 
-Tests cover session parsing, Chinese language mapping, invalid responses, offline cache, fallback, and budgets. All 45 automated tests passed. Bing returned live Chinese, Japanese, Korean, French, German, and Spanish translations. Offline cache reuse and preservation of `{0}` were also checked. Connection errors and timeouts occurred during testing, so the adapter remains experimental.
+Tests cover session parsing, Chinese language mapping, invalid responses, offline cache, fallback, and budgets. All 56 automated tests passed. Bing returned live Chinese, Japanese, Korean, French, German, and Spanish translations. Offline cache reuse and preservation of `{0}` were also checked. Connection errors and timeouts occurred during testing, so the adapter remains experimental.
 
 ## Editing and uninstalling
 
 Search the English source text, edit its translation, and click **Save**. Manual corrections override both machine translations and dictionaries for that target. Preserve variables, line breaks, and rich-text tags; malformed translations are rejected. Changing the assistant language preserves unsaved translation drafts.
 
-The list shows up to 500 entries; search for others. **Translate missing text** also tries candidate strings from the manager. Automatic mode prioritizes text actually displayed in the game and mod content, rather than spending the quota on unused assembly strings.
+**Translate missing text** also tries candidate strings from the manager. Automatic mode prioritizes text actually displayed in the game and mod content, rather than spending the quota on unused assembly strings.
 
 Click **Uninstall the patch**, then restart the game. Owned plugin and configuration folders move into `data/backups/`. Translation data stays available. The original loader, mods, item IDs, textures, and save files are not modified by this patch.
 
@@ -74,7 +74,7 @@ The page listens only on the local computer and protects write operations with a
 
 ## Verification and limitations
 
-The game plugin compiled against ModLoader 0.7.3, BepInEx 5.4.23.5, and Unity 6000.3.4f1. Eleven translation-core tests passed. MyMemory returned Chinese, Japanese, Korean, and French translations in live requests. Interface and guide localization are additional features of 0.1.3.
+The game plugin compiled against ModLoader 0.7.3, BepInEx 5.4.23.5, and Unity 6000.3.4f1. Eleven translation-core tests passed. MyMemory returned Chinese, Japanese, Korean, and French translations in live requests. Interface and guide localization are additional features of 0.1.4.
 
 **Integration inside the game has not been tested.** Text coverage, layout, Japanese/Korean font rendering, and third-party fabric names still require in-game verification; no content packs were installed on this computer during development.
 
@@ -117,3 +117,16 @@ Google web requests need no key. Availability depends on your network; page chan
 Example: Today (UTC): 4,498 / 4,500 bytes used · 2 remaining. This is a local budget; increasing it does not increase the service’s quota.
 
 Translations are saved locally and reusable offline. Keep the data folder when updating; language caches and manual corrections are preserved.
+
+## Dictionary search and filters (0.1.4)
+
+Search matches both the source and saved translation. Results update as you type, or press Enter. The list combines collected text with the current target language’s dictionary and cache, with one row per source.
+
+- **Status**: untranslated, translated, or original retained. Missing counts use effective saved values; unsaved edits do not count as successful translations.
+- **Channel**: dictionary, composed terms, manual corrections, offline model, Google, Bing, MyMemory, or LibreTranslate. This shows the channel actually used, so a dictionary overriding an old machine translation is shown as dictionary.
+- **Source**: all entries, collected text, game display text, mod content, manager candidates, or dictionary/cache only. Choose “Untranslated” + “Game display text” to focus on visible missing translations.
+- **Sorting and pages**: source ascending/descending, recently saved, or game display text first; 25, 50 or 100 rows per page and direct page jumps. Empty results have a hint; “Clear filters” resets the query.
+
+Filters and page changes preserve unsaved edits and show their count. Save each row before closing or reloading the page; unsaved drafts are lost on reload. A saved row may disappear from the current filter. Searching and filtering do not contact translation services or spend the translation budget.
+
+Filters affect the list only; “Translate missing text” still processes the collected queue.

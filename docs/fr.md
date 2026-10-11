@@ -1,4 +1,4 @@
-# Assistant multilingue Dressmaker 0.1.3
+# Assistant multilingue Dressmaker 0.1.4
 
 [简体中文](zh-CN.md) · [English](en.md) · [日本語](ja.md) · [한국어](ko.md) · **Français** · [Deutsch](de.md) · [Español](es.md)
 
@@ -51,13 +51,13 @@ L’option de repli vers MyMemory est désactivée par défaut. Elle effectue un
 
 La session Bing reste en mémoire. Aucune connexion à un compte, conservation de compte, rotation de proxy ou résolution de CAPTCHA n’est utilisée. Les résultats valides sont conservés par langue cible ; les corrections manuelles restent prioritaires.
 
-Les 45 tests automatisés ont réussi : session, code du chinois, réponses invalides, cache hors ligne, repli et budget. Bing a fourni des traductions réelles en chinois, japonais, coréen, français, allemand et espagnol. Le cache hors ligne et la conservation de `{0}` ont été vérifiés. Des erreurs de connexion et délais dépassés ont aussi eu lieu ; l’adaptateur reste expérimental.
+Les 56 tests automatisés ont réussi : session, code du chinois, réponses invalides, cache hors ligne, repli et budget. Bing a fourni des traductions réelles en chinois, japonais, coréen, français, allemand et espagnol. Le cache hors ligne et la conservation de `{0}` ont été vérifiés. Des erreurs de connexion et délais dépassés ont aussi eu lieu ; l’adaptateur reste expérimental.
 
 ## Correction et désinstallation
 
 Recherchez le texte anglais, modifiez la traduction puis cliquez sur **Enregistrer**. Une correction manuelle remplace les traductions automatiques et le dictionnaire pour cette langue. Conservez les variables, sauts de ligne et balises de mise en forme ; les traductions qui les altèrent sont refusées. Changer la langue de l’assistant conserve les brouillons de traduction non enregistrés.
 
-La liste affiche au maximum 500 entrées ; utilisez la recherche pour les autres. **Traduire les textes manquants** traite aussi les chaînes candidates du gestionnaire. Le mode automatique privilégie les textes réellement affichés et le contenu des mods, plutôt que les chaînes inutilisées du programme.
+ **Traduire les textes manquants** traite aussi les chaînes candidates du gestionnaire. Le mode automatique privilégie les textes réellement affichés et le contenu des mods, plutôt que les chaînes inutilisées du programme.
 
 Cliquez sur **Désinstaller le correctif**, puis redémarrez le jeu. Les dossiers du plugin et de la configuration sont déplacés dans `data/backups/`. Les traductions sont conservées. Le correctif ne modifie pas le chargeur d’origine, les mods, les identifiants, les textures ou les sauvegardes.
 
@@ -74,7 +74,7 @@ La page est accessible uniquement sur l’ordinateur local. Un jeton de session 
 
 ## Vérification et limites
 
-Le plugin a été compilé avec ModLoader 0.7.3, BepInEx 5.4.23.5 et Unity 6000.3.4f1. Onze tests du moteur de traduction ont réussi. Des requêtes réelles à MyMemory ont renvoyé des traductions chinoises, japonaises, coréennes et françaises. La localisation de l’interface et des guides a été ajoutée en version 0.1.3.
+Le plugin a été compilé avec ModLoader 0.7.3, BepInEx 5.4.23.5 et Unity 6000.3.4f1. Onze tests du moteur de traduction ont réussi. Des requêtes réelles à MyMemory ont renvoyé des traductions chinoises, japonaises, coréennes et françaises. La localisation de l’interface et des guides a été ajoutée en version 0.1.4.
 
 **L’intégration dans le jeu n’a pas encore été testée.** La couverture des textes, la disposition, les polices japonaises et coréennes et les noms de tissus tiers restent à vérifier. Aucun paquet de contenu n’était installé sur cet ordinateur pendant le développement.
 
@@ -117,3 +117,16 @@ Les requêtes web Google ne nécessitent aucune clé. La disponibilité dépend 
 Exemple : Aujourd’hui (UTC) : 4,498 / 4,500 octets utilisés · 2 restants. Il s’agit du budget local ; l’augmenter ne relève pas le quota du service.
 
 Les traductions sont enregistrées localement et réutilisables hors ligne. Conservez le dossier data lors des mises à jour ; les caches par langue et les corrections restent enregistrés.
+
+## Recherche et filtres du dictionnaire (0.1.4)
+
+La recherche porte sur l’original et la traduction enregistrée. Les résultats se mettent à jour pendant la saisie ou avec Entrée. La liste réunit les textes collectés, le dictionnaire et le cache de la langue cible actuelle, avec une ligne par original.
+
+- **État** : non traduit, traduit ou original conservé. Le décompte utilise les valeurs enregistrées effectivement appliquées ; les modifications non enregistrées ne comptent pas comme des traductions réussies.
+- **Canal** : dictionnaire, termes combinés, correction manuelle, modèle hors ligne, Google, Bing, MyMemory ou LibreTranslate. Le canal affiché est celui utilisé, notamment dictionnaire lorsqu’il remplace une ancienne traduction automatique.
+- **Origine** : tous les textes, textes collectés, affichés en jeu, contenus des mods, chaînes candidates du gestionnaire, ou dictionnaire/cache uniquement. Combinez « Non traduit » et « Textes affichés en jeu » pour repérer les traductions manquantes visibles.
+- **Tri et pages** : original croissant/décroissant, enregistrements récents ou textes du jeu en premier ; 25, 50 ou 100 lignes par page et accès par numéro. Un message explique les résultats vides ; effacez les filtres pour réinitialiser.
+
+Les filtres et les pages conservent les modifications non enregistrées et affichent leur nombre. Enregistrez chaque ligne avant de fermer ou de recharger la page : les brouillons non enregistrés sont perdus au rechargement. Une ligne enregistrée peut quitter le filtre actuel. La recherche et les filtres ne contactent aucun service de traduction et ne consomment pas de budget.
+
+Les filtres ne concernent que la liste ; la traduction des textes manquants traite la file collectée.
