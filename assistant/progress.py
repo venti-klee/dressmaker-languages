@@ -11,7 +11,7 @@ class TranslationProgress:
         self.data = dict(state="idle", active=False, batch=0, language=None, total=0,
                          processed=0, translated=0, untranslated=0, failed=0,
                          current="", provider="lookup", wait_until=0, started_at=0,
-                         ended_at=0, recent=[], error_info=None)
+                         ended_at=0, recent=[], error_info=None, retry=False)
 
     def queue(self, language):
         with self.lock:
@@ -20,7 +20,7 @@ class TranslationProgress:
             self.data.update(state="queued", active=True, language=language,
                              current="", provider="lookup", wait_until=0, error_info=None,
                              total=0, processed=0, translated=0, untranslated=0, failed=0,
-                             started_at=0, ended_at=0)
+                             started_at=0, ended_at=0, retry=False)
             return True
 
     def begin(self, language, total):
@@ -29,7 +29,7 @@ class TranslationProgress:
             self.data.update(state="running", active=True, batch=batch, language=language,
                              total=total, processed=0, translated=0, untranslated=0, failed=0,
                              current="", provider="lookup", wait_until=0, started_at=time.time(),
-                             ended_at=0, error_info=None)
+                             ended_at=0, error_info=None, retry=False)
 
     def current(self, source):
         with self.lock:
@@ -51,9 +51,9 @@ class TranslationProgress:
             del self.data["recent"][10:]
             self.data.update(current="", wait_until=0)
 
-    def finish(self, state="finished", wait_until=0, error=None):
+    def finish(self, state="finished", wait_until=0, error=None, retry=False):
         with self.lock:
-            self.data.update(state=state, active=False, current="", wait_until=wait_until, ended_at=time.time())
+            self.data.update(state=state, active=False, current="", wait_until=wait_until, ended_at=time.time(), retry=retry)
             if error:
                 self.data["error_info"] = error_info(error)
 
@@ -61,6 +61,7 @@ class TranslationProgress:
         with self.lock:
             result = copy.deepcopy(self.data)
         if result["state"] == "cooldown" and result["wait_until"] <= time.time():
-            result.update(state="finished", wait_until=0)
+            result.update(state="queued" if result["retry"] else "finished", active=result["retry"], wait_until=0)
+        result["remaining"] = max(0, result["total"] - result["processed"])
         result["elapsed"] = max(0, (result["ended_at"] or time.time()) - result["started_at"]) if result["started_at"] else 0
         return result

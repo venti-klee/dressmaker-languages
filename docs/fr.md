@@ -1,4 +1,4 @@
-# Assistant multilingue Dressmaker 0.1.4
+# Assistant multilingue Dressmaker 0.1.5
 
 [简体中文](zh-CN.md) · [English](en.md) · [日本語](ja.md) · [한국어](ko.md) · **Français** · [Deutsch](de.md) · [Español](es.md)
 
@@ -51,7 +51,7 @@ L’option de repli vers MyMemory est désactivée par défaut. Elle effectue un
 
 La session Bing reste en mémoire. Aucune connexion à un compte, conservation de compte, rotation de proxy ou résolution de CAPTCHA n’est utilisée. Les résultats valides sont conservés par langue cible ; les corrections manuelles restent prioritaires.
 
-Les 56 tests automatisés ont réussi : session, code du chinois, réponses invalides, cache hors ligne, repli et budget. Bing a fourni des traductions réelles en chinois, japonais, coréen, français, allemand et espagnol. Le cache hors ligne et la conservation de `{0}` ont été vérifiés. Des erreurs de connexion et délais dépassés ont aussi eu lieu ; l’adaptateur reste expérimental.
+Les 63 tests automatisés ont réussi : session, code du chinois, réponses invalides, cache hors ligne, repli et budget. Bing a fourni des traductions réelles en chinois, japonais, coréen, français, allemand et espagnol. Le cache hors ligne et la conservation de `{0}` ont été vérifiés. Des erreurs de connexion et délais dépassés ont aussi eu lieu ; l’adaptateur reste expérimental.
 
 ## Correction et désinstallation
 
@@ -74,7 +74,7 @@ La page est accessible uniquement sur l’ordinateur local. Un jeton de session 
 
 ## Vérification et limites
 
-Le plugin a été compilé avec ModLoader 0.7.3, BepInEx 5.4.23.5 et Unity 6000.3.4f1. Onze tests du moteur de traduction ont réussi. Des requêtes réelles à MyMemory ont renvoyé des traductions chinoises, japonaises, coréennes et françaises. La localisation de l’interface et des guides a été ajoutée en version 0.1.4.
+Le plugin a été compilé avec ModLoader 0.7.3, BepInEx 5.4.23.5 et Unity 6000.3.4f1. Onze tests du moteur de traduction ont réussi. Des requêtes réelles à MyMemory ont renvoyé des traductions chinoises, japonaises, coréennes et françaises. La localisation de l’interface et des guides a été ajoutée en version 0.1.5.
 
 **L’intégration dans le jeu n’a pas encore été testée.** La couverture des textes, la disposition, les polices japonaises et coréennes et les noms de tissus tiers restent à vérifier. Aucun paquet de contenu n’était installé sur cet ordinateur pendant le développement.
 
@@ -130,3 +130,7 @@ La recherche porte sur l’original et la traduction enregistrée. Les résultat
 Les filtres et les pages conservent les modifications non enregistrées et affichent leur nombre. Enregistrez chaque ligne avant de fermer ou de recharger la page : les brouillons non enregistrés sont perdus au rechargement. Une ligne enregistrée peut quitter le filtre actuel. La recherche et les filtres ne contactent aucun service de traduction et ne consomment pas de budget.
 
 Les filtres ne concernent que la liste ; la traduction des textes manquants traite la file collectée.
+
+Le décompte distingue textes affichés en jeu, contenus de mods, candidats du gestionnaire et entrées du dictionnaire/cache seules. L’analyse peut collecter formats internes, erreurs et textes inutilisés : les candidats ne représentent pas des omissions visibles. Le mode automatique traite les textes affichés et les mods. Filtrez Non traduit + Textes affichés en jeu pour vérifier les textes collectés ; ouvrez les écrans non visités pour les collecter.
+
+Un échec du service suspend le lot et laisse le reste non traité. Après la pause, les tâches inachevées sont retentées avec la même langue et le même périmètre, y compris les candidats lancés manuellement. Cliquer à nouveau ne contourne pas la pause et ne réinitialise pas la progression. Changer les réglages annule l’ancienne tentative. Seules les traductions enregistrées avec succès réduisent le décompte.

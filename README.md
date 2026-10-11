@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-CN.md) · [English](README.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Español](README.es.md)
 
-An independent macOS companion that translates the Yuuma ModLoader interface and English mod display text. **Version 0.1.4 is an early release; integration inside the game has not been tested.**
+An independent macOS companion that translates the Yuuma ModLoader interface and English mod display text. **Version 0.1.5 is an early release; integration inside the game has not been tested.**
 
 ## Features
 
@@ -15,7 +15,7 @@ An independent macOS companion that translates the Yuuma ModLoader interface and
 ## For players
 
 1. Install [Yuuma ModLoader for Mac](https://www.nexusmods.com/dressmaker/mods/1?tab=files).
-2. Download **Dressmaker-Languages-Mac-0.1.4.zip** from the repository’s Releases and extract the complete folder. Python 3.9 or later is required.
+2. Download **Dressmaker-Languages-Mac-0.1.5.zip** from the repository’s Releases and extract the complete folder. Python 3.9 or later is required.
 3. Double-click `Start.command` or `针影裁梦多语言助手.app`.
 4. Choose the assistant language, check the game folder and target language, save settings, install the patch, then restart the game.
 5. Scan after installing new mods, keep the assistant running for translation, and review or edit the results.
@@ -26,7 +26,7 @@ See the [English user guide](docs/en.md) for model setup, uninstalling, and loca
 
 The scanner recognizes common JSON fields such as `name`, `displayName`, `display_name`, `description`, `tooltip`, and `title`. Runtime hooks cover Unity Text / TextMeshPro in the loader UI or names discovered by scanning. Custom interfaces, image text, special binary content, and non-English sources are not guaranteed. This tool does not add fabric content or a complete new localization of the base game.
 
-The plugin compiled against ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1, and 56 automated tests passed. Local UI language switching was checked. Bing and MyMemory returned live translations, but free web adapters can fail because of network conditions, service limits, or page changes. Third-party fabric names, in-game layout, and font rendering still need verification.
+The plugin compiled against ModLoader 0.7.3 / BepInEx 5.4.23.5 / Unity 6000.3.4f1, and 63 automated tests passed. Local UI language switching was checked. Bing and MyMemory returned live translations, but free web adapters can fail because of network conditions, service limits, or page changes. Third-party fabric names, in-game layout, and font rendering still need verification.
 
 Online mode sends untranslated English display text to the selected provider. Translation requests are spaced at least 3 seconds apart; the default daily budget is 4,500 UTF-8 bytes. Failures retain the original text. MyMemory fallback is off by default; both attempts count toward the budget when enabled. Dictionaries and existing cache stay available offline.
 
@@ -38,15 +38,15 @@ Source is in `src/` and `assistant/`. The basic assistant uses only Python’s s
 python3 -m unittest discover -s tests -v
 ```
 
-Building the plugin requires your own game and loader assemblies plus a .NET SDK; see the full guide. The assistant is 0.1.4; the unchanged game plugin retains internal version 0.1.0. GitHub Actions checks are enabled; see the repository Actions page for results.
+Building the plugin requires your own game and loader assemblies plus a .NET SDK; see the full guide. The assistant is 0.1.5; the unchanged game plugin retains internal version 0.1.0. GitHub Actions checks are enabled; see the repository Actions page for results.
 
 Issues and pull requests for terminology, fonts, and compatibility are welcome. Include game, OS, and loader versions plus a shareable source-text example. Update all seven catalogs and guides when changing UI text. Do not commit saves, private mod files, or game assets.
 
 ## Publishing your GitHub repository
 
 1. Create an empty **Public** repository. Do not generate another README or license; both are included here.
-2. Extract **Dressmaker-Languages-GitHub-0.1.4.zip** and upload its contents with `README.md` at the repository root. Include hidden `.github/`, `.gitignore`, and `.gitattributes` entries. Finder shows hidden files with `Command + Shift + .`. Uploading through Git preserves executable script permissions.
-3. Create a `v0.1.4` Release and attach the Mac archive. The source archive is for repository contents; the Mac archive is for players.
+2. Extract **Dressmaker-Languages-GitHub-0.1.5.zip** and upload its contents with `README.md` at the repository root. Include hidden `.github/`, `.gitignore`, and `.gitattributes` entries. Finder shows hidden files with `Command + Shift + .`. Uploading through Git preserves executable script permissions.
+3. Create a `v0.1.5` Release and attach the Mac archive. The source archive is for repository contents; the Mac archive is for players.
 4. Verify the patch in your own game before publishing and update the verification notes. Personal data, paths, tokens, and Git history are excluded from this archive. 
 
 `UPLOAD-MANIFEST.json` lists the exact upload files. GitHub’s official publishing documentation is linked below.
@@ -97,3 +97,7 @@ Search matches both the source and saved translation. Results update as you type
 Filters and page changes preserve unsaved edits and show their count. Save each row before closing or reloading the page; unsaved drafts are lost on reload. A saved row may disappear from the current filter. Searching and filtering do not contact translation services or spend the translation budget.
 
 Filters affect the list only; “Translate missing text” still processes the collected queue.
+
+Missing counts now separate game display text, mod content, manager candidates and dictionary/cache-only entries. Program scans can collect internal formats, errors and unused text; candidate counts do not represent visible missing translations. Automatic translation handles displayed text and mod content. Filter Untranslated + Game display text to check collected visible text; unvisited screens still need to be opened in game.
+
+A service failure pauses the batch and leaves the rest unprocessed, not translated or processed. After cooldown, unfinished tasks retry with the same language and scope, including manually started candidates. Clicking again does not bypass cooldown or reset progress. Changed settings cancel the old retry. Missing counts decrease only when translations are successfully saved; “No translation produced” is not completion.

@@ -446,6 +446,7 @@ class Store:
                                 "kind": pending.get(source, "stored"), "manual": channel == "manual",
                                 "state": entry_state, "updated": updated or ""})
             counts = dict(collections.Counter(item["state"] for item in records))
+            missing_by_kind = dict(collections.Counter(item["kind"] for item in records if item["state"] == "missing"))
             needle = query.strip().casefold()
             matches = [item for item in records
                        if (not needle or needle in item["source"].casefold() or needle in item["value"].casefold())
@@ -464,6 +465,7 @@ class Store:
             start = (page - 1) * page_size
             return {"language": language, "entries": matches[start:start + page_size],
                     "total": len(records), "matching": len(matches), "counts": counts,
+                    "missing_by_kind": missing_by_kind,
                     "page": page, "pages": pages, "page_size": page_size,
                     "start": start + 1 if matches else 0, "end": min(start + page_size, len(matches))}
 
@@ -547,22 +549,40 @@ class Worker:
         self.offset = 0
         self.path = None
         self.cooldown = 0
+        self.deferred_batch = None
         self.last_model_attempt = {}
         self.progress = TranslationProgress()
 
     def request_translation(self):
         with self.store.lock:
-            language = self.store.config["language"]
-        if self.progress.queue(language):
+            config = self.store.config.copy()
+        if time.monotonic() < self.cooldown:
+            if not self.progress.snapshot()["active"]:
+                self.deferred_batch = (config, True)
+                self.progress.finish("cooldown", time.time() + self.cooldown - time.monotonic(), retry=True)
+            return
+        if self.progress.queue(config["language"]):
             self.last_model_attempt.clear()
-            self.cooldown = 0
+            self.deferred_batch = None
             self.wake.set()
 
     def process_batch(self, config, all_candidates=False):
         now = time.monotonic()
         candidates = [item for item in self.store.entries(limit=10000)
-                      if not item["value"] and (all_candidates or item["kind"] != "loader")
-                      and now - self.last_model_attempt.get((config["language"], item["source"]), -3600) >= 300]
+                      if not item["value"] and (all_candidates or item["kind"] != "loader")]
+        if not candidates:
+            self.deferred_batch = None
+            if self.progress.snapshot()["state"] in {"queued", "cooldown"}:
+                self.progress.begin(config["language"], 0)
+                self.progress.finish()
+            return
+        if config.get("online") and now < self.cooldown:
+            self.deferred_batch = self.deferred_batch or (config.copy(), all_candidates)
+            self.progress.finish("cooldown", time.time() + self.cooldown - now, retry=True)
+            return
+        self.deferred_batch = None
+        candidates = [item for item in candidates
+                      if now - self.last_model_attempt.get((config["language"], item["source"]), -3600) >= 300]
         if not candidates:
             if self.progress.snapshot()["state"] == "queued":
                 self.progress.begin(config["language"], 0)
@@ -589,8 +609,10 @@ class Worker:
                 self.progress.record(source, "", self.progress.snapshot()["provider"], "failed", error)
                 if attempt.get("online") and error_info(error)["key"] not in {"error_format", "error_value"}:
                     self.cooldown = time.monotonic() + 300
+                    self.deferred_batch = (config.copy(), all_candidates)
+                    break  # Leave the rest unprocessed; do not report skipped entries as handled.
                 continue
-            outcome = "untranslated" if provider == "untranslated" else "success"
+            outcome = "untranslated" if provider == "untranslated" or value == source else "success"
             self.progress.record(source, value, provider, outcome)
             if outcome == "success":
                 self.store.error = ""
@@ -606,7 +628,7 @@ class Worker:
         if interrupted:
             self.progress.finish("interrupted")
         elif time.monotonic() < self.cooldown:
-            self.progress.finish("cooldown", time.time() + self.cooldown - time.monotonic())
+            self.progress.finish("cooldown", time.time() + self.cooldown - time.monotonic(), retry=True)
         else:
             self.progress.finish()
 
@@ -635,8 +657,13 @@ class Worker:
                 self.ingest()
                 with self.store.lock:
                     config = self.store.config.copy()
-                if config.get("auto") or self.wake.is_set():
-                    all_candidates = self.wake.is_set()
+                if self.deferred_batch and self.deferred_batch[0] != config:
+                    self.deferred_batch = None
+                    self.cooldown = 0
+                    self.progress.finish("interrupted")
+                retry_ready = self.deferred_batch and time.monotonic() >= self.cooldown
+                if (config.get("auto") and not self.deferred_batch) or self.wake.is_set() or retry_ready:
+                    all_candidates = self.wake.is_set() or bool(retry_ready and self.deferred_batch[1])
                     self.wake.clear()
                     self.process_batch(config, all_candidates)
             except Exception as error:

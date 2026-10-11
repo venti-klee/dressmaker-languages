@@ -1,4 +1,4 @@
-# Dressmaker Language Assistant 0.1.4
+# Dressmaker Language Assistant 0.1.5
 
 [简体中文](zh-CN.md) · **English** · [日本語](ja.md) · [한국어](ko.md) · [Français](fr.md) · [Deutsch](de.md) · [Español](es.md)
 
@@ -51,7 +51,7 @@ Choose a translation service and click **Save settings**.
 
 The Bing session stays in memory. No login, account storage, proxy rotation, or CAPTCHA bypass is used. Successful results are cached separately for each game target; manual corrections retain priority.
 
-Tests cover session parsing, Chinese language mapping, invalid responses, offline cache, fallback, and budgets. All 56 automated tests passed. Bing returned live Chinese, Japanese, Korean, French, German, and Spanish translations. Offline cache reuse and preservation of `{0}` were also checked. Connection errors and timeouts occurred during testing, so the adapter remains experimental.
+Tests cover session parsing, Chinese language mapping, invalid responses, offline cache, fallback, and budgets. All 63 automated tests passed. Bing returned live Chinese, Japanese, Korean, French, German, and Spanish translations. Offline cache reuse and preservation of `{0}` were also checked. Connection errors and timeouts occurred during testing, so the adapter remains experimental.
 
 ## Editing and uninstalling
 
@@ -74,7 +74,7 @@ The page listens only on the local computer and protects write operations with a
 
 ## Verification and limitations
 
-The game plugin compiled against ModLoader 0.7.3, BepInEx 5.4.23.5, and Unity 6000.3.4f1. Eleven translation-core tests passed. MyMemory returned Chinese, Japanese, Korean, and French translations in live requests. Interface and guide localization are additional features of 0.1.4.
+The game plugin compiled against ModLoader 0.7.3, BepInEx 5.4.23.5, and Unity 6000.3.4f1. Eleven translation-core tests passed. MyMemory returned Chinese, Japanese, Korean, and French translations in live requests. Interface and guide localization are additional features of 0.1.5.
 
 **Integration inside the game has not been tested.** Text coverage, layout, Japanese/Korean font rendering, and third-party fabric names still require in-game verification; no content packs were installed on this computer during development.
 
@@ -130,3 +130,7 @@ Search matches both the source and saved translation. Results update as you type
 Filters and page changes preserve unsaved edits and show their count. Save each row before closing or reloading the page; unsaved drafts are lost on reload. A saved row may disappear from the current filter. Searching and filtering do not contact translation services or spend the translation budget.
 
 Filters affect the list only; “Translate missing text” still processes the collected queue.
+
+Missing counts now separate game display text, mod content, manager candidates and dictionary/cache-only entries. Program scans can collect internal formats, errors and unused text; candidate counts do not represent visible missing translations. Automatic translation handles displayed text and mod content. Filter Untranslated + Game display text to check collected visible text; unvisited screens still need to be opened in game.
+
+A service failure pauses the batch and leaves the rest unprocessed, not translated or processed. After cooldown, unfinished tasks retry with the same language and scope, including manually started candidates. Clicking again does not bypass cooldown or reset progress. Changed settings cancel the old retry. Missing counts decrease only when translations are successfully saved; “No translation produced” is not completion.

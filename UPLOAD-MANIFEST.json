@@ -1,5 +1,5 @@
 {
-  "version": "0.1.4",
+  "version": "0.1.5",
   "archive_kind": "source",
   "files": [
     {
@@ -24,38 +24,38 @@
     },
     {
       "path": "README.de.md",
-      "bytes": 9351,
-      "sha256": "47295ed917a1f361e8a29b0724df54696f79cddaa563e5f93aaa86100e07ceca"
+      "bytes": 10230,
+      "sha256": "8300c8614b7d344a27e45076bb640627d83bfcee562c3fa1ad3f052eb165c07e"
     },
     {
       "path": "README.es.md",
-      "bytes": 8834,
-      "sha256": "6b8a2fe4cf430dcb6117ba137188355a46b10cbcf1c3bd113efcd44d78d10116"
+      "bytes": 9643,
+      "sha256": "50952e34d3bf99b1e311234eb58ac9575976c7ff3dc06b5df311c8eb6907d10e"
     },
     {
       "path": "README.fr.md",
-      "bytes": 9546,
-      "sha256": "a08f74e9ccb43201b1df3ee03c266fd26f452eff0d21bed878cc7a63d75ad55d"
+      "bytes": 10446,
+      "sha256": "53266245e9a31a73521d51316d9f2f6df7ed30c5c53463457bd977fcb7d63f9c"
     },
     {
       "path": "README.ja.md",
-      "bytes": 10160,
-      "sha256": "8abfc3ba2ceb9c2b5867289aaef4876238c85ab1a2b0d556f5ae331f105a47ab"
+      "bytes": 11140,
+      "sha256": "8f426e77417c30d0664701c8d07530306d16602720c13b90df1a48a55c006181"
     },
     {
       "path": "README.ko.md",
-      "bytes": 9695,
-      "sha256": "47686c0d596274ff6aaf3ab6702eb5aef203bac749a53f3ac0e2484afb5e743c"
+      "bytes": 10662,
+      "sha256": "dc183c797950dac0800de5ae22fd1f5e2ce2e811057a0df413961db0a2b938ba"
     },
     {
       "path": "README.md",
-      "bytes": 8904,
-      "sha256": "4b659187a206453870363e0426d4d2406c428b54350eca4cd6292d5a1478610f"
+      "bytes": 9765,
+      "sha256": "bee5096cb4012472d9f54d028a748c3cc625486dc76cac0acb7cc0a58f5783ff"
     },
     {
       "path": "README.zh-CN.md",
-      "bytes": 8166,
-      "sha256": "0b5ca12ee2de33926b62b3e1b01833c5abb382cfd177dee48b5750e1e218bc0c"
+      "bytes": 9086,
+      "sha256": "ab42f32442843e2e65930ac536588dfa068b7c89c6592d08bb52b697a6a5c513"
     },
     {
       "path": "Start.command",
@@ -65,12 +65,12 @@
     {
       "path": "VERSION",
       "bytes": 6,
-      "sha256": "8a3dad16d348c163566a456fcf650d85d7aeeda5e53d01ee1fa8dc15212915a7"
+      "sha256": "800cf1c0392b24de7c0a1c6ea6778ecb433dec71c49a150bce96a98477527b2f"
     },
     {
       "path": "assistant/core.py",
-      "bytes": 34045,
-      "sha256": "39718f75b7d548a11fd39d0322282efc6b7316a437061a9dc05d9dac113252e2"
+      "bytes": 35753,
+      "sha256": "17556fd31f64723a9180f161d14b746429165eb85fc30dca95347442e003a08d"
     },
     {
       "path": "assistant/dictionary.json",
@@ -84,8 +84,8 @@
     },
     {
       "path": "assistant/index.html",
-      "bytes": 24565,
-      "sha256": "dda9264466384837b29aa39d9b5de47058402a2ad4936e8802f770665c768331"
+      "bytes": 24959,
+      "sha256": "925ee162de7b5177c6c5a21e66669cd7a8b9e394e366cda432b16ceb1619c8b4"
     },
     {
       "path": "assistant/install_model.py",
@@ -94,13 +94,13 @@
     },
     {
       "path": "assistant/locales.json",
-      "bytes": 90626,
-      "sha256": "84e7ced0ac17768507cb9f8babe39ab522ce4a2a55fed9250bfe9dc191286ec5"
+      "bytes": 94335,
+      "sha256": "b1dc9d30b0c853a035b606d5d0f9dde25fe74a28b2ecd55c38ac885250c9d141"
     },
     {
       "path": "assistant/progress.py",
-      "bytes": 3200,
-      "sha256": "9c2ec56df927c33a833527fb3936332ef314aceb8b74bd9ab469d3b07807d501"
+      "bytes": 3398,
+      "sha256": "f9682ed122a72eecdc9cd998b276f689ca67ab37ea14da3d21c754e53930dae7"
     },
     {
       "path": "assistant/providers.py",
@@ -114,33 +114,33 @@
     },
     {
       "path": "docs/de.md",
-      "bytes": 14649,
-      "sha256": "8e49950df0c4caa47ed3f1f4e76a1b02f91f816639518b743254de2040588a65"
+      "bytes": 15528,
+      "sha256": "73ee12aee4032b60531aa4feeba752d4237d11077b5e5fa0b57a5ebe81d44003"
     },
     {
       "path": "docs/en.md",
-      "bytes": 13036,
-      "sha256": "293359ec1087943f4798aac3c9ed7a4d036f3d90bfac92bef10bfbd783be3b3e"
+      "bytes": 13897,
+      "sha256": "c50220853e773ff149bb8e3af9c21fe1bdd4e2355502dbc0ed7f2f69e442d65b"
     },
     {
       "path": "docs/es.md",
-      "bytes": 14186,
-      "sha256": "eee5c8ae43767aed1ff26fbeb36b65412c324f711fdeabe8e8de2ee32cbf8a54"
+      "bytes": 14995,
+      "sha256": "5f6a2ca3553d3ad97d14ca41f432a20b88b6123f3f9d53654f163f47f93d5d6e"
     },
     {
       "path": "docs/fr.md",
-      "bytes": 15258,
-      "sha256": "8609e54e607cdecfce688a9a9f1ccde1ccdaa7c4d350839403f2fb6782d0191a"
+      "bytes": 16158,
+      "sha256": "faae0f74e1dfa1c57d280aa67839edd82d6ca9993de16b1a085e8c402d11dc0d"
     },
     {
       "path": "docs/ja.md",
-      "bytes": 15423,
-      "sha256": "ab24d5f130eff02a22e9f8765cb2ee72f8181128e90287d8604921fd3cb77189"
+      "bytes": 16403,
+      "sha256": "d81fa2fb5dd0964202a341da844a52194b991a02ed2cb7646c8944616432959a"
     },
     {
       "path": "docs/ko.md",
-      "bytes": 14758,
-      "sha256": "ff7e298e4e9a85ae6ccfb27a3a96be602ee8c5931a447c88ed032b85c27f541a"
+      "bytes": 15725,
+      "sha256": "5a9ebc85562132633328d1c559bac67541a86268d3c0a11954332e27e537abbe"
     },
     {
       "path": "docs/manual-de.md",
@@ -179,8 +179,8 @@
     },
     {
       "path": "docs/zh-CN.md",
-      "bytes": 12530,
-      "sha256": "ebbce2e593253b7e20480d2b2836407e79b953cf86694c2b9a2cab2361782c75"
+      "bytes": 13450,
+      "sha256": "77ce291172d455fd81e0f639b754bf838a504c437ce8ceeab07f46872eefb263"
     },
     {
       "path": "scripts/package.py",
@@ -199,8 +199,8 @@
     },
     {
       "path": "tests/test_entries.py",
-      "bytes": 6607,
-      "sha256": "b782022d93677c0a8af0241ad37571db122a47716ae4432d6b55b7ad104d71fb"
+      "bytes": 7064,
+      "sha256": "cb4ef73429cb7b21991d5da6e8bb7262173eacdd094d5eb86b6bcf81c8365621"
     },
     {
       "path": "tests/test_google.py",
@@ -214,8 +214,8 @@
     },
     {
       "path": "tests/test_progress.py",
-      "bytes": 8973,
-      "sha256": "fafeb950ac7ab4bd36a940c588826bed54071130aa11166d7e8cabfcc6c4b213"
+      "bytes": 13275,
+      "sha256": "c77c18212b6ea66d7f98819ebb0aa52c7b3566bf6c207a01bc199997a99b39f5"
     },
     {
       "path": "tests/test_providers.py",
@@ -229,8 +229,8 @@
     },
     {
       "path": "使用说明.md",
-      "bytes": 12488,
-      "sha256": "9c6f763cb68b75642809f84aefcb5a7ae755c1c3ff913aabfed2b2007640b6fd"
+      "bytes": 13408,
+      "sha256": "05a1c6dd55ef4929076d15d2a41cedbbfb000e85e87e29a4aa3ed21701b32734"
     },
     {
       "path": "启动翻译助手.command",

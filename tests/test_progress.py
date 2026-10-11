@@ -174,6 +174,78 @@ class ProgressTests(unittest.TestCase):
         self.assertFalse(self.worker.progress.snapshot()['active'])
         self.assertEqual(self.worker.progress.snapshot()['total'], 0)
 
+    def test_network_failure_keeps_remaining_batch_unprocessed_and_remembers_manual_scope(self):
+        for source in ['Quux Alpha', 'Quux Bravo', 'Quux Charlie']:
+            self.store.add_pending(source, 'loader')
+        self.store.save_config({'online': True})
+        with patch.object(self.store, 'translate', side_effect=TimeoutError('timed out')) as translate:
+            self.worker.process_batch(self.store.config.copy(), all_candidates=True)
+        result = self.worker.progress.snapshot()
+        self.assertEqual(translate.call_count, 1)
+        self.assertEqual((result['total'], result['processed'], result['remaining']), (3, 1, 2))
+        self.assertEqual((result['translated'], result['untranslated'], result['failed']), (0, 0, 1))
+        self.assertTrue(self.worker.deferred_batch[1])
+        self.assertTrue(result['retry'])
+
+    def test_repeated_start_during_cooldown_does_not_reset_counters_or_call_service(self):
+        self.store.save_config({'online': True})
+        self.add('Quux Alpha', 'Quux Bravo')
+        with patch.object(self.store, 'translate', side_effect=TimeoutError('timed out')):
+            self.worker.process_batch(self.store.config.copy())
+        cooldown = self.worker.cooldown
+        with patch.object(self.store, 'translate', side_effect=AssertionError('cooldown request')):
+            self.worker.request_translation()
+            self.worker.process_batch(self.store.config.copy(), all_candidates=True)
+        self.assertEqual(self.worker.cooldown, cooldown)
+        self.assertEqual((self.worker.progress.snapshot()['processed'], self.worker.progress.snapshot()['remaining']), (1, 1))
+
+    def test_expired_resumable_cooldown_is_queued_not_finished(self):
+        progress = TranslationProgress()
+        progress.begin('zh-CN', 3)
+        progress.record('Quux Alpha', '', 'google', 'failed', TimeoutError('timed out'))
+        progress.finish('cooldown', time.time() - 1, retry=True)
+        result = progress.snapshot()
+        self.assertEqual((result['state'], result['active'], result['remaining']), ('queued', True, 2))
+
+    def test_manual_batch_resumes_after_cooldown_without_auto_enabled(self):
+        self.store.add_pending('Quux Alpha', 'loader')
+        self.store.add_pending('Quux Bravo', 'loader')
+        self.store.save_config({'online': True, 'auto': False})
+        with patch.object(self.store, 'translate', side_effect=TimeoutError('timed out')):
+            self.worker.process_batch(self.store.config.copy(), all_candidates=True)
+        self.worker.cooldown = 0
+        self.worker.last_model_attempt.clear()
+        attempts = []
+        def translate(source, config, on_progress=None):
+            attempts.append(source)
+            self.store.cache_put(source, config['language'], '本机模型译文', 'argos-offline')
+            if len(attempts) == 2:
+                self.worker.stop.set()
+            return '本机模型译文', 'argos-offline'
+        with patch.object(self.store, 'translate', side_effect=translate):
+            self.worker.run()
+        self.assertEqual(attempts, ['Quux Alpha', 'Quux Bravo'])
+        self.assertEqual(self.worker.progress.snapshot()['translated'], 2)
+
+    def test_changed_settings_cancel_old_deferred_batch(self):
+        self.store.add_pending('Quux Alpha', 'loader')
+        self.store.save_config({'online': True})
+        with patch.object(self.store, 'translate', side_effect=TimeoutError('timed out')):
+            self.worker.process_batch(self.store.config.copy(), all_candidates=True)
+        self.store.save_config({'language': 'fr'})
+        def stop_wait(seconds):
+            self.worker.stop.set()
+        with patch.object(self.store, 'translate', side_effect=AssertionError('old language retry')), patch.object(self.worker.stop, 'wait', side_effect=stop_wait):
+            self.worker.run()
+        self.assertIsNone(self.worker.deferred_batch)
+        self.assertEqual(self.worker.progress.snapshot()['state'], 'interrupted')
+
+    def test_identity_result_does_not_count_as_translated(self):
+        self.add('512 MiB')
+        self.worker.process_batch(self.store.config.copy())
+        self.assertEqual(self.worker.progress.snapshot()['translated'], 0)
+        self.assertEqual(self.store.cache_get('512 MiB', 'zh-CN'), ('512 MiB', 'original'))
+
 
 if __name__ == '__main__':
     unittest.main()

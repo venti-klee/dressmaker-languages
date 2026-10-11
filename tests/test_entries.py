@@ -52,6 +52,13 @@ class DictionaryBrowserTests(unittest.TestCase):
         self.assertEqual(self.sources(provider=""), ["Aurora"])
         self.assertEqual(self.sources(provider="dictionary"), ["Brocade", "Glossary"])
 
+    def test_missing_breakdown_separates_display_content_and_program_candidates(self):
+        self.store.add_pending("Untranslated mod description", "content")
+        self.store.add_pending("Untranslated program candidate", "loader")
+        result = self.store.browse_entries(query="Cloud", provider="google")
+        self.assertEqual(result["matching"], 1)
+        self.assertEqual(result["missing_by_kind"], {"display": 1, "content": 1, "loader": 1})
+
     def test_filters_combine_search_status_provider_and_kind(self):
         self.assertEqual(self.sources(query="云", state="translated", provider="google", kind="content"), ["Cloud"])
         self.assertEqual(self.sources(query="云", state="missing", provider="google", kind="content"), [])

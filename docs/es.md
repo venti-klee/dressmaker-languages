@@ -1,4 +1,4 @@
-# Asistente multilingüe de Dressmaker 0.1.4
+# Asistente multilingüe de Dressmaker 0.1.5
 
 [简体中文](zh-CN.md) · [English](en.md) · [日本語](ja.md) · [한국어](ko.md) · [Français](fr.md) · [Deutsch](de.md) · **Español**
 
@@ -51,7 +51,7 @@ La opción de recurrir a MyMemory está desactivada por defecto. Hace un único 
 
 La sesión de Bing permanece en memoria. No se inicia sesión, no se guardan cuentas, no se rotan proxies ni se evitan CAPTCHA. Los resultados válidos se guardan por idioma de destino y las correcciones manuales tienen prioridad.
 
-Pasaron las 56 pruebas automatizadas: sesión, código del chino, respuestas inválidas, caché sin conexión, alternativa y presupuesto. Bing devolvió traducciones reales en chino, japonés, coreano, francés, alemán y español. Se comprobaron la caché sin conexión y la conservación de `{0}`. También hubo errores de conexión y tiempos de espera agotados; el adaptador sigue siendo experimental.
+Pasaron las 63 pruebas automatizadas: sesión, código del chino, respuestas inválidas, caché sin conexión, alternativa y presupuesto. Bing devolvió traducciones reales en chino, japonés, coreano, francés, alemán y español. Se comprobaron la caché sin conexión y la conservación de `{0}`. También hubo errores de conexión y tiempos de espera agotados; el adaptador sigue siendo experimental.
 
 ## Corrección y desinstalación
 
@@ -74,7 +74,7 @@ La página solo escucha en el ordenador local y protege las operaciones de escri
 
 ## Verificación y limitaciones
 
-El plugin se compiló con ModLoader 0.7.3, BepInEx 5.4.23.5 y Unity 6000.3.4f1. Pasaron once pruebas del núcleo de traducción. Las solicitudes reales a MyMemory devolvieron traducciones en chino, japonés, coreano y francés. La localización de la interfaz y las guías se añadió en 0.1.4.
+El plugin se compiló con ModLoader 0.7.3, BepInEx 5.4.23.5 y Unity 6000.3.4f1. Pasaron once pruebas del núcleo de traducción. Las solicitudes reales a MyMemory devolvieron traducciones en chino, japonés, coreano y francés. La localización de la interfaz y las guías se añadió en 0.1.5.
 
 **La integración dentro del juego aún no se ha probado.** Quedan por comprobar la cobertura, la disposición, las fuentes japonesas y coreanas y los nombres de telas de terceros. No había paquetes de contenido instalados en este ordenador durante el desarrollo.
 
@@ -130,3 +130,7 @@ La búsqueda incluye el original y la traducción guardada. Los resultados se ac
 Los filtros y las páginas conservan los cambios sin guardar y muestran su número. Guarda cada fila antes de cerrar o recargar la página: los borradores sin guardar se pierden al recargar. Una fila guardada puede salir del filtro actual. La búsqueda y los filtros no contactan con servicios de traducción ni consumen presupuesto.
 
 Los filtros solo afectan a la lista; la traducción de textos pendientes procesa la cola recopilada.
+
+El recuento separa textos visibles del juego, contenido de mods, candidatos del gestor y entradas solo del diccionario/caché. El análisis puede recoger formatos internos, errores y textos sin usar; los candidatos no son un recuento de omisiones visibles. El modo automático procesa textos visibles y mods. Filtra Sin traducir + Textos visibles en el juego para revisar lo recopilado; abre las pantallas no visitadas para recogerlas.
+
+Un fallo del servicio pausa el lote y deja el resto sin procesar. Tras la espera se reintentan las tareas incompletas con el mismo idioma y alcance, incluidos candidatos iniciados manualmente. Volver a pulsar no evita la espera ni reinicia el progreso. Cambiar los ajustes cancela el reintento anterior. Solo las traducciones guardadas correctamente reducen el recuento.
